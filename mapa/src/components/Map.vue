@@ -1,7 +1,7 @@
 <template>
   <GMapMap
     :center="center"
-    :zoom="10"
+    :zoom="18"
     map-type-id="terrain"
     style="width: 100%; height: 100%;"
 
@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      center: { lat: 51.093048, lng: 6.84212 },
+      center: { lat: -35.002688, lng: -71.229645 },
       markers: [
         {
           position: {
@@ -53,6 +53,7 @@ export default {
     };
   },
 };
+
 </script>
 
 <style>
