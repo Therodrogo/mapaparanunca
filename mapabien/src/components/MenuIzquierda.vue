@@ -1,5 +1,7 @@
 <template>
-  <div id="menuIzquierda" align="center">sadsad</div>
+  <div class="menuIzquierda" >sadsad
+    
+  </div>
 
 
 </template>
@@ -12,27 +14,29 @@ export default {
 
            
         }
-        
-
-    }
+    },
 
 }
 </script>
 
 <style scoped>
 
- #menuIzquierda{
+  .menuIzquierda{
     background-color: rgb(62, 0, 149);
-     
+    cursor: pointer;
     height: 100vh;
-    width: 10%;
+    width: 5%;
     position: relative;
     color: aliceblue;
-
+    transition: 0.5s;
     border-radius: 1%;
     
     z-index: 5;
  }
+  .menuIzquierda:hover{
+
+    width: 50px;
+  }
 
 
 </style>
