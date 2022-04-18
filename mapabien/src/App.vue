@@ -1,8 +1,11 @@
 <template>
 
   <div id="contenedor">
+
+    <MenuSuperior/>
+    <MenuIzquierda/>
+    <MapaMapBox/>
     
-    <MenuParaPagina/>
     
 
   </div>
@@ -11,13 +14,17 @@
 
 <script>
 
-import MenuParaPagina from "./components/MenuParaPagina.vue";
+import MenuIzquierda from "./components/MenuIzquierda.vue";
+import MapaMapBox from "./components/MapaMapBox.vue";
+import MenuSuperior from "./components/MenuSuperior.vue";
 
 
 export default {
   name: "App",
   components: {
-    MenuParaPagina,
+    MenuIzquierda,
+    MapaMapBox,
+    MenuSuperior
 },
 };
 
@@ -29,7 +36,7 @@ export default {
     font-family: Avenir, Helvetica, Arial, sans-serif;
 
     color: #2c3e50;
-
+    
     
   }
 

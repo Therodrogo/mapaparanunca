@@ -12,13 +12,13 @@ export default {
 
 .superior{
     position: relative;
-    z-index: 1;
+    z-index: 4;
     background-color: rgb(16, 34, 95);
     text-align: center;
     height: 50px;
     color: aliceblue ;
     
-    box-shadow: 10px 0 0 rgb(56, 67, 165);
+    box-shadow: 0 10px 0 rgb(56, 67, 165);
     border-top: 10px solid rgb(16, 34, 95);
 }
 

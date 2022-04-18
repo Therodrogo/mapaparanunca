@@ -52,19 +52,6 @@ export default {
 }
 </script>
 
-<script setup>
-  /*
-    const list = document.querySelectorAll('.list');
-      function activeLink(){
-      list.forEach((item)=>
-      item.classList.remove('active'));
-      this.classList.add('active');
-      list.forEach((item)=>
-      item.addEventListener('click',activeLink));
-      }
-  */
-</script>
-
 <style scoped>
 
    .navegacion{
@@ -75,19 +62,24 @@ export default {
     position: relative;
     color: rgb(38, 64, 87);
     
-    z-index: 10;
+    z-index: 2;
 
     width: 70px;
     height: 100vh;
     background: rgb(16, 34, 95);
     box-shadow: 10px 0 0 rgb(56, 67, 165);
-    border-left: 10px solid rgb(16, 34, 95);
+   
     overflow-x: hidden ;
     transition: width 0.5s;
   }
 
   .navegacion:hover{
-    width: 300px;
+    width: 200px;
+  }
+
+  .list:hover{
+    background: rgb(56, 67, 165);
+
   }
 
   .navegacion ul{
@@ -106,10 +98,13 @@ export default {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
   }
+
+  /*
    .navegacion ul li.active{
     background: rgb(56, 67, 165);
   }
-  
+  */
+
   .navegacion ul li a{
     position: relative;
     display: block;
@@ -118,7 +113,9 @@ export default {
     text-decoration: none;
     color: aliceblue;
   }
-  .navegacion ul li.active a::before{
+
+  
+  .navegacion ul li:hover a::before{
     content: '';
     position: absolute;
     top: -30px;
@@ -130,7 +127,7 @@ export default {
     box-shadow: 15px 15px 0 rgb(56, 67, 165);
 
   }
-  .navegacion ul li.active a::after{
+  .navegacion ul li:hover  a::after{
     content: '';
     position: absolute;
     bottom: -30px;
