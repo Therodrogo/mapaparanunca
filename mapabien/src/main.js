@@ -1,13 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import VueGoogleMaps from '@fawmi/vue-google-maps'
+import vuetify from './plugins/vuetify'
+import { loadFonts } from './plugins/webfontloader'
 
-const app = createApp(App);
+loadFonts()
 
-app.use(VueGoogleMaps, {
-    
-    load: {
-        key: 'AIzaSyBWLUcztq2pKseTSqJVjqLWRMMtKihD4-U',
-    },
-}).mount('#app')
-
+createApp(App)
+  .use(vuetify)
+  .mount('#app')
