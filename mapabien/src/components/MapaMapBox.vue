@@ -41,7 +41,10 @@ export default {
         marker1.setDraggable(true);
         //marker1.style.backgroundImage = ''
         
+        //map.setZoom(map.getZoom()+1);
 
+        map.setMinZoom(16.39);
+        map.setMaxZoom(17);
         
 
         const popup = new mapboxgl.Popup({ closeOnClick: false })
