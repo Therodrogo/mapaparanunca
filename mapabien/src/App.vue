@@ -3,7 +3,10 @@
   <div id="contenedor">
 
     <MenuSuperior/>
-    <MenuIzquierda/>
+    <MenuIzquierda 
+
+      nombre="Yo"
+    />
     <MapaMapBox/>
     
     

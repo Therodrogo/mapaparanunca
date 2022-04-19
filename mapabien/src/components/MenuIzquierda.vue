@@ -6,28 +6,28 @@
   <div class="navegacion">
     <ul>
       <li class="list active" >
-        <a href="" >
+        <a  >
           <span class="icon"><ion-icon name="person"></ion-icon></span>
           <span class="titulo">Iniciar Sesion</span>
         </a>
       </li>
       <li class="list">
-        <a href="">
+        <a >
           <span class="icon"><ion-icon name="list-box"></ion-icon></span>
           <span class="titulo">Cursos</span>
         </a>
       </li>
       <li class="list">
-        <a href="">
+        <a >
           <span class="icon"><ion-icon name="funnel"></ion-icon></span>
           <span class="titulo">Salas</span>
         </a>
       </li>
       <li class="list">
-        <a href="">
+        <a>
           <span class="icon"><ion-icon name="funnel"></ion-icon></span>
-          <span class="titulo">Salas</span>
-        </a>
+          <span class="titulo"> {{nombre}}</span>
+        </a>  
       </li>
     </ul>
 
@@ -39,11 +39,10 @@
 export default {
 
 
-    data(){
-        return{
-          
+    props:{
+          nombre : String,
            
-        }
+        
     },
     setup(){
       
@@ -79,6 +78,8 @@ export default {
 
   .list:hover{
     background: rgb(56, 67, 165);
+    color: aliceblue;
+    cursor: pointer;
 
   }
 
