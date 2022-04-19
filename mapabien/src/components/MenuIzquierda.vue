@@ -8,7 +8,7 @@
       <li class="list active" >
         <a  >
           <span class="icon"><ion-icon name="person"></ion-icon></span>
-          <span class="titulo">Iniciar Sesion</span>
+          <span class="titulo">Perfil</span>
         </a>
       </li>
       <li class="list">
@@ -25,7 +25,7 @@
       </li>
       <li class="list">
         <a>
-          <span class="icon"><ion-icon name="funnel"></ion-icon></span>
+          <span class="icon"><ion-icon name="add-circle-outline"></ion-icon></span>
           <span class="titulo"> {{nombre}}</span>
         </a>  
       </li>
@@ -65,11 +65,10 @@ export default {
 
     width: 70px;
     height: 100vh;
-    background: rgb(16, 34, 95);
-    box-shadow: 10px 0 0 rgb(56, 67, 165);
+    background: #313C75;
    
     overflow-x: hidden ;
-    transition: width 0.5s;
+    transition: 0.5s;
   }
 
   .navegacion:hover{
@@ -77,7 +76,7 @@ export default {
   }
 
   .list:hover{
-    background: rgb(56, 67, 165);
+    background: #677EF5;
     color: aliceblue;
     cursor: pointer;
 
@@ -117,27 +116,11 @@ export default {
 
   
   .navegacion ul li:hover a::before{
-    content: '';
-    position: absolute;
-    top: -30px;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    background: rgb(16, 34, 95);
-    border-radius: 50%;
-    box-shadow: 15px 15px 0 rgb(56, 67, 165);
+    
 
   }
   .navegacion ul li:hover  a::after{
-    content: '';
-    position: absolute;
-    bottom: -30px;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    background: rgb(16, 34, 95);
-    border-radius: 50%;
-    box-shadow: 15px -15px 0 rgb(56, 67, 165);
+    
   }
 
 
