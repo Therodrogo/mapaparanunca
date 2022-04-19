@@ -23,20 +23,39 @@ export default {
         //scrollZoom: false
 
       })
-
+    
     
       
-      map.on('load', () => {
-       
+     map.on('load', () => {
+        map.addSource('route', {
+        'type': 'geojson',
+        'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+        'type': 'LineString',
+        'coordinates': [
+        [-71.230,-35.003],
+        [-71.22929, -35.001566]
+        ]
+        }
+        }
+        });
+      map.addLayer({
+      'id': 'route',
+      'type': 'line',
+      'source': 'route',
+      'layout': {
+      'line-join': 'round',
+      'line-cap': 'round'
+      },
+      'paint': {
+      'line-color': '#FFFF00',
+      'line-width': 8
+      }
       });
-      // function e(() => {
-      //   map.zoomTo(16.67,[-71.230,-35.003 ] );
+});
 
-      // });
-      // function e()
-      // {
-      // 	map.zoomTo(16.67,[-71.230,-35.003 ] );
-      // }
         var el = document.createElement('div');
         el.className = 'marker';
         el.style.backgroundImage = `url(https://img.icons8.com/fluency/344/assassins-creed-logo.png)`;
@@ -49,45 +68,34 @@ export default {
         marker1.getElement().addEventListener('click', () => {
           
           map.zoomTo(20.01,[-71.230,-35.003] );
-          marker1.fire();
+          
         });
         marker1.setLngLat([-71.230,-35.003]);
         marker1.addTo(map);
         marker1.setDraggable(true);
         //marker1.style.backgroundImage = ''
-        
-<<<<<<< HEAD
-        //map.setZoom(map.getZoom()+1);
 
+      const marker2 = new mapboxgl.Marker()
+             
+
+      marker2.setLngLat([-71.22929, -35.001566]);
+      //EL ADDTO MAP DEBE ESTAR AL FINAL O NO CORRE XD
+      marker2.addTo(map);
+
+     
+
+        //map.setZoom(map.getZoom()+1);
+        const navegacionControl = new mapboxgl.NavigationControl();
+        map.addControl(navegacionControl,'bottom-right'); 
         map.setMinZoom(16.39);
-        map.setMaxZoom(17);
-=======
-    // popup.on('close', function(e) {
-    // alert()
-    //   })
->>>>>>> zoomClick
-        
+        map.setMaxZoom(18);
+      
 
         const popup = new mapboxgl.Popup({ closeOnClick: false })
         popup.setLngLat([-71.230,-35.003])
         popup.setHTML('<h1>hola</h1>')
         marker1.setPopup(popup);
-//         popup.on('close', function(e) {
-//     alert()
-// })
-
-        // popup.addEventListener('close', () => {
-        //   marker1.remove();
-        //   map.zoomTo(16.67,[-71.230,-35.003]);
-         
-        // })
-        
-        
-        //popup.addTo(map);
-
-       
-        
-      
+  
     });
     return {};
   },
