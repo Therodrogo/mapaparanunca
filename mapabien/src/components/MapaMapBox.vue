@@ -9,6 +9,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted } from "vue";
 
+
 export default {
   setup() {
     onMounted(() => {
@@ -20,13 +21,22 @@ export default {
         center: [-71.230,-35.003 ], 
         zoom: 16.67,
         //scrollZoom: false
-    
+
       })
+
+    
       
       map.on('load', () => {
        
       });
+      // function e(() => {
+      //   map.zoomTo(16.67,[-71.230,-35.003 ] );
 
+      // });
+      // function e()
+      // {
+      // 	map.zoomTo(16.67,[-71.230,-35.003 ] );
+      // }
         var el = document.createElement('div');
         el.className = 'marker';
         el.style.backgroundImage = `url(https://img.icons8.com/fluency/344/assassins-creed-logo.png)`;
@@ -36,21 +46,40 @@ export default {
 
 
         const marker1 = new mapboxgl.Marker(el)
+        marker1.getElement().addEventListener('click', () => {
+          
+          map.zoomTo(20.01,[-71.230,-35.003] );
+          marker1.fire();
+        });
         marker1.setLngLat([-71.230,-35.003]);
         marker1.addTo(map);
         marker1.setDraggable(true);
         //marker1.style.backgroundImage = ''
         
-
+    // popup.on('close', function(e) {
+    // alert()
+    //   })
         
 
         const popup = new mapboxgl.Popup({ closeOnClick: false })
         popup.setLngLat([-71.230,-35.003])
         popup.setHTML('<h1>hola</h1>')
+        marker1.setPopup(popup);
+//         popup.on('close', function(e) {
+//     alert()
+// })
+
+        // popup.addEventListener('close', () => {
+        //   marker1.remove();
+        //   map.zoomTo(16.67,[-71.230,-35.003]);
+         
+        // })
+        
         
         //popup.addTo(map);
 
-        marker1.setPopup(popup);
+       
+        
       
     });
     return {};
