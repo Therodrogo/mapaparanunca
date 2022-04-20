@@ -71,6 +71,7 @@ export default {
         
 //Gimnasio
         const marker1 = new mapboxgl.Marker(el)
+        /*
         marker1.getElement().addEventListener('click', () => {
           
          // map.zoomTo(20.01,[-71.230,-35.003] );
@@ -105,7 +106,7 @@ export default {
               });
          
         });
-
+      */
       // BORRAR LINEA
       //  map.removeLayer('route2');
       //    map.removeSource('route2');
@@ -147,9 +148,12 @@ export default {
       //PopUp
 
       // create the popup
-    const popup_Entrada = new mapboxgl.Popup({ offset: 25 }).setText(
+    const popup_Entrada = new mapboxgl.Popup({ closeOnClick: false }).setText(
     'Entrada'
     );
+
+    
+
       var entrada_el = document.createElement('div');
       entrada_el.className = 'marker';
       entrada_el.style.backgroundImage = `url(https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-entrance-usa-flatarticons-blue-flatarticons-2.png)`;
@@ -164,6 +168,8 @@ export default {
       marker3.setPopup(popup_Entrada);
       marker3.addTo(map);
 
+      
+
       var minas_el = document.createElement('div');
       minas_el.className = 'marker';
       minas_el.style.backgroundImage = `url(https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/4a90e2/external-mine-investment-kiranshastry-solid-kiranshastry.png)`;
@@ -173,7 +179,7 @@ export default {
      const marker4 = new mapboxgl.Marker(minas_el)
       marker4.setLngLat([ -71.23095415504667, -35.00135123097902]);
       marker4.addTo(map);
-
+      marker4.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
 
  
     //mecatro y meca
@@ -185,6 +191,8 @@ export default {
       mecat_el.style.backgroundSize = '100%';
      const marker5 = new mapboxgl.Marker(mecat_el)
       marker5.setLngLat([ -71.2290760294051, -35.00188500863207]);
+      
+      marker5.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
       marker5.addTo(map);
 
       var meca_el = document.createElement('div');
@@ -195,8 +203,9 @@ export default {
       meca_el.style.backgroundSize = '100%';
      const marker6 = new mapboxgl.Marker(meca_el)
       marker6.setLngLat([ -71.22886378003142, -35.002003009634954]);
+      
+      marker6.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
       marker6.addTo(map);
-     
      //contru y obras
       var contru_el = document.createElement('div');
       contru_el.className = 'marker';
@@ -206,8 +215,9 @@ export default {
       contru_el.style.backgroundSize = '100%';
      const markercontru = new mapboxgl.Marker(contru_el)
       markercontru.setLngLat([   -71.2291604784214, -35.003168465316016]);
-      markercontru.addTo(map);
-   
+      
+      markercontru.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+   markercontru.addTo(map);
         var obra_el = document.createElement('div');
        obra_el .className = 'marker';
        obra_el .style.backgroundImage = `url(https://img.icons8.com/ultraviolet/344/workers-male.png)`;
@@ -216,8 +226,9 @@ export default {
        obra_el .style.backgroundSize = '100%';
      const markerobra = new mapboxgl.Marker( obra_el )
       markerobra.setLngLat([-71.22907482062429, -35.00336695439614]);
-      markerobra.addTo(map);
-
+      
+      markerobra.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+markerobra.addTo(map);
       //Auditorio??????????????
       var auditorio_el = document.createElement('div');
        auditorio_el .className = 'marker';
@@ -227,8 +238,9 @@ export default {
        auditorio_el .style.backgroundSize = '100%';
      const markeraudi = new mapboxgl.Marker( auditorio_el )
       markeraudi.setLngLat([-71.22915475374442, -35.00365484351161]);
-      markeraudi.addTo(map);
-
+      
+      markeraudi.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+markeraudi.addTo(map);
       //edificio azul???????????
       var azul_el = document.createElement('div');
        azul_el .className = 'marker';
@@ -239,6 +251,7 @@ export default {
      const markeedazul = new mapboxgl.Marker( azul_el )
       markeedazul.setLngLat([-71.22979433407157, -35.0017047386893]);
       markeedazul.addTo(map);
+      markeedazul.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'))
       
         //edificio verde???????????
       var verde_el = document.createElement('div');
@@ -251,6 +264,8 @@ export default {
       markeedverde.setLngLat([-71.22999896811982, -35.002471304966534]);
       markeedverde.addTo(map);
 
+      markeedverde.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+
            //servicio estudiantil???????????
       var servicio_el = document.createElement('div');
        servicio_el .className = 'marker';
@@ -261,6 +276,8 @@ export default {
      const marketservi = new mapboxgl.Marker( servicio_el )
       marketservi.setLngLat([-71.22980662330485, -35.0020445830408]);
       marketservi.addTo(map);
+      marketservi.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+
 
       //library??????????
       var libra_el = document.createElement('div');
@@ -272,6 +289,7 @@ export default {
      const marketlibra = new mapboxgl.Marker( libra_el )
       marketlibra.setLngLat([-71.22892109676758, -35.00283153433725]);
       marketlibra.addTo(map);
+      marketlibra.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
 
 
 
@@ -285,6 +303,7 @@ export default {
      const marketelec = new mapboxgl.Marker( electro_el )
       marketelec.setLngLat([-71.23129613592188, -35.0020916923508]);
       marketelec.addTo(map);
+      marketelec.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
 
 
       //CABAÑA MADERA 
@@ -297,6 +316,7 @@ export default {
        const markermade = new mapboxgl.Marker( madera_el )
       markermade.setLngLat([-71.22897841350172, -35.002423278615076]);
       markermade.addTo(map);
+      markermade.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
 
       //SERVICIOS MULTIPLES Y COE
         var sm_el = document.createElement('div');
@@ -308,6 +328,8 @@ export default {
        const markersm = new mapboxgl.Marker( sm_el );
       markersm.setLngLat([-71.2302405610473, -35.00213003797558]);
       markersm.addTo(map);
+      markersm.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+
 
   
  var coe_el = document.createElement('div');
@@ -319,6 +341,7 @@ export default {
        const markercoe = new mapboxgl.Marker( coe_el )
       markercoe.setLngLat([-71.22955876785723, -35.00311601562916]);
       markercoe.addTo(map);
+      markercoe.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
 
         const navegacionControl = new mapboxgl.NavigationControl();
         map.addControl(navegacionControl,'bottom-right'); 
