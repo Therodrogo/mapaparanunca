@@ -63,46 +63,46 @@ export default {
 
         var el = document.createElement('div');
         el.className = 'marker';
-        el.style.backgroundImage = `url(https://img.icons8.com/fluency/344/assassins-creed-logo.png)`;
-        el.style.width = '50px';
-        el.style.height = '50px';
+        el.style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/4a90e2/gum-.png)`;
+        el.style.width = '30px';
+        el.style.height = '30px';
         el.style.backgroundSize = '100%';
     //  const algo = map.getSource('route2');
         
-
+//Gimnasio
         const marker1 = new mapboxgl.Marker(el)
         marker1.getElement().addEventListener('click', () => {
           
          // map.zoomTo(20.01,[-71.230,-35.003] );
-
-            map.addSource('gimnasio', {
-                'type': 'geojson',
-                'data': {
-                'type': 'Feature',
-                'properties': {},
-                'geometry': {
-                'type': 'LineString',
-                'coordinates': [
-                [-71.230,-35.003],
-                [-71.229743, -35.001366]
-                ]
-                }
-               }
-              });
+//AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+            // map.addSource('gimnasio', {
+            //     'type': 'geojson',
+            //     'data': {
+            //     'type': 'Feature',
+            //     'properties': {},
+            //     'geometry': {
+            //     'type': 'LineString',
+            //     'coordinates': [
+            //     [-71.230,-35.003],
+            //     [-71.229743, -35.001366]
+            //     ]
+            //     }
+            //    }
+            //   });
                 
-                map.addLayer({
-                'id': 'gimnasio',
-                'type': 'line',
-                'source': 'gimnasio',
-                'layout': {
-                'line-join': 'round',
-                'line-cap': 'round'
-                },
-                'paint': {
-                'line-color': '#FFFF00',
-                'line-width': 7
-                }
-              });
+            //     map.addLayer({
+            //     'id': 'gimnasio',
+            //     'type': 'line',
+            //     'source': 'gimnasio',
+            //     'layout': {
+            //     'line-join': 'round',
+            //     'line-cap': 'round'
+            //     },
+            //     'paint': {
+            //     'line-color': '#FFFF00',
+            //     'line-width': 7
+            //     }
+            //   });
          
         });
 
@@ -110,23 +110,22 @@ export default {
       //  map.removeLayer('route2');
       //    map.removeSource('route2');
        
-        marker1.setLngLat([-71.230,-35.003]);
+        marker1.setLngLat([-71.23020173932005, -35.00298450172138]);
         marker1.addTo(map);
-        marker1.setDraggable(true);
-        //marker1.style.backgroundImage = ''
+
 
 
       //Marker 2 usado para determinar coordenadas
       const marker2 = new mapboxgl.Marker()
       marker2.setLngLat([-71.22929, -35.001566]);
       //EL ADDTO MAP DEBE ESTAR AL FINAL O NO CORRE XD
-
-      const popup = new mapboxgl.Popup({ closeOnClick: false })
-          .setLngLat([-71.22929, -35.001566])
-          .setMaxWidth('100px')
-          .setHTML(marker2.getLngLat())
+//popup del marker usado para sacar posiciones
+     // const popup = new mapboxgl.Popup({ closeOnClick: false })
+          // .setLngLat([-71.22929, -35.001566])
+          // .setMaxWidth('100px')
+          // .setHTML(marker2.getLngLat())
          
-      popup.addTo(map);
+    //  popup.addTo(map);
 
       //MARKER DE ENTRADA MALA
       marker2.getElement().addEventListener('click', () => {
@@ -135,12 +134,13 @@ export default {
           //Zoom a una posición especifica 
           //map.zoomTo(20.01,[-71.230,-35.003] );
 
-          popup.setHTML(marker2.getLngLat())
+       //   Para saber la posicion del marker 2
+        //  popup.setHTML(marker2.getLngLat())
        
         
         });
         marker2.setDraggable(true);
-      marker2.addTo(map);
+     // marker2.addTo(map);
 
       //Entrada
       var entrada_el = document.createElement('div');
@@ -157,12 +157,12 @@ export default {
 
       var minas_el = document.createElement('div');
       minas_el.className = 'marker';
-      minas_el.style.backgroundImage = `url(https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/344/external-mine-investment-kiranshastry-lineal-color-kiranshastry.png)`;
+      minas_el.style.backgroundImage = `url(https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/4a90e2/external-mine-investment-kiranshastry-solid-kiranshastry.png)`;
       minas_el.style.width = '40px';
       minas_el.style.height = '40px';
       minas_el.style.backgroundSize = '100%';
      const marker4 = new mapboxgl.Marker(minas_el)
-      marker4.setLngLat([ -71.23097261593509, -35.00156755626604]);
+      marker4.setLngLat([ -71.23095415504667, -35.00135123097902]);
       marker4.addTo(map);
 
 
@@ -212,7 +212,7 @@ export default {
       //Auditorio??????????????
       var auditorio_el = document.createElement('div');
        auditorio_el .className = 'marker';
-       auditorio_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/coliseum.png)`;
+       auditorio_el .style.backgroundImage = `url(https://img.icons8.com/fluency-systems-filled/344/4a90e2/coliseum.png)`;
        auditorio_el .style.width = '30px';
        auditorio_el .style.height = '30px';
        auditorio_el .style.backgroundSize = '100%';
@@ -234,7 +234,7 @@ export default {
         //edificio verde???????????
       var verde_el = document.createElement('div');
        verde_el .className = 'marker';
-       verde_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/26e07f/company.png)`;
+       verde_el .style.backgroundImage = `url(https://img.icons8.com/external-phatplus-solid-phatplus/344/4a90e2/external-laboratory-virus-transmission-phatplus-solid-phatplus.png)`;
        verde_el .style.width = '30px';
        verde_el .style.height = '30px';
        verde_el .style.backgroundSize = '100%';
@@ -245,7 +245,7 @@ export default {
            //servicio estudiantil???????????
       var servicio_el = document.createElement('div');
        servicio_el .className = 'marker';
-       servicio_el .style.backgroundImage = `url(https://img.icons8.com/color/344/real-estate.png)`;
+       servicio_el .style.backgroundImage = `url(https://img.icons8.com/ios-glyphs/344/4a90e2/education.png)`;
        servicio_el .style.width = '30px';
        servicio_el .style.height = '30px';
        servicio_el .style.backgroundSize = '100%';
@@ -256,12 +256,12 @@ export default {
       //library??????????
       var libra_el = document.createElement('div');
        libra_el .className = 'marker';
-       libra_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/library.png)`;
+       libra_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/4a90e2/library.png)`;
        libra_el .style.width = '30px';
        libra_el .style.height = '30px';
        libra_el .style.backgroundSize = '100%';
      const marketlibra = new mapboxgl.Marker( libra_el )
-      marketlibra.setLngLat([-71.2290611946907, -35.002890761054786]);
+      marketlibra.setLngLat([-71.22892109676758, -35.00283153433725]);
       marketlibra.addTo(map);
 
 
@@ -281,14 +281,35 @@ export default {
       //CABAÑA MADERA 
        var madera_el = document.createElement('div');
        madera_el .className = 'marker';
-       madera_el .style.backgroundImage = `url(https://img.icons8.com/external-tulpahn-outline-color-tulpahn/344/4a90e2/external-cabin-building-tulpahn-outline-color-tulpahn.png)`;
+       madera_el .style.backgroundImage = `url(https://img.icons8.com/external-icongeek26-glyph-icongeek26/344/4a90e2/external-cabin-russia-icongeek26-glyph-icongeek26.png)`;
        madera_el .style.width = '30px';
        madera_el .style.height = '30px';
        madera_el .style.backgroundSize = '100%';
        const markermade = new mapboxgl.Marker( madera_el )
-      markermade.setLngLat([-71.22898463865126, -35.00248240121124]);
+      markermade.setLngLat([-71.22897841350172, -35.002423278615076]);
       markermade.addTo(map);
 
+      //SERVICIOS MULTIPLES Y COE
+        var sm_el = document.createElement('div');
+       sm_el .className = 'marker';
+       sm_el .style.backgroundImage = `url(https://img.icons8.com/external-glyph-wichaiwi/344/4a90e2/external-mathematics-statistical-analysis-glyph-wichaiwi.png)`;
+       sm_el .style.width = '30px';
+       sm_el .style.height = '30px';
+       sm_el .style.backgroundSize = '100%';
+       const markersm = new mapboxgl.Marker( sm_el );
+      markersm.setLngLat([-71.2302405610473, -35.00213003797558]);
+      markersm.addTo(map);
+
+  
+ var coe_el = document.createElement('div');
+       coe_el .className = 'marker';
+       coe_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/4a90e2/book.png)`;
+       coe_el .style.width = '30px';
+       coe_el .style.height = '30px';
+       coe_el .style.backgroundSize = '100%';
+       const markercoe = new mapboxgl.Marker( coe_el )
+      markercoe.setLngLat([-71.22955876785723, -35.00311601562916]);
+      markercoe.addTo(map);
 
         const navegacionControl = new mapboxgl.NavigationControl();
         map.addControl(navegacionControl,'bottom-right'); 
