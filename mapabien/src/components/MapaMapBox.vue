@@ -17,7 +17,7 @@ export default {
         "pk.eyJ1IjoidGhlcm9kcm9nbyIsImEiOiJjbDIxYTNlMG4xNGlyM2puM3JuemU5ZThvIn0.JNkviaRn-Zb2qdTue-L4VQ";
       const map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/therodrogo/cl21eq4i2000d14o62ytfatjq",
+        style: "mapbox://styles/therodrogo/cl26vlm2v001o15nkk0ouo4j1",
         center: [-71.230,-35.003 ], 
         zoom: 16.67,
         //scrollZoom: false
@@ -73,7 +73,7 @@ export default {
         const marker1 = new mapboxgl.Marker(el)
         marker1.getElement().addEventListener('click', () => {
           
-          map.zoomTo(20.01,[-71.230,-35.003] );
+         // map.zoomTo(20.01,[-71.230,-35.003] );
 
             map.addSource('gimnasio', {
                 'type': 'geojson',
@@ -277,33 +277,6 @@ export default {
       marketelec.setLngLat([-71.23129613592188, -35.0020916923508]);
       marketelec.addTo(map);
 
-//circulo electro
-map.addSource("polygon", {
-                'type': 'geojson',
-                'data': {
-                'type': 'Feature',
-                'properties': {},
-                'geometry': {
-                'type': 'Circle',
-                'coordinates': [
-                [-71.23129613592188, -35.0020916923508]
-                ],
-                'radious': 0.5
-                }
-               }
-              });
-            
-map.addLayer({
-    "id": "polygon",
-    "type": "fill",
-    "source": "polygon",
-    "layout": {},
-    "paint": {
-        "fill-color": "blue",
-        "fill-opacity": 0.6
-    }
-});
-
 
       //CABAÑA MADERA 
        var madera_el = document.createElement('div');
@@ -312,8 +285,8 @@ map.addLayer({
        madera_el .style.width = '30px';
        madera_el .style.height = '30px';
        madera_el .style.backgroundSize = '100%';
-     const markermade = new mapboxgl.Marker( madera_el )
-      markermade.setLngLat([-71.22898891291244, -35.00247903585794]);
+       const markermade = new mapboxgl.Marker( madera_el )
+      markermade.setLngLat([-71.22898463865126, -35.00248240121124]);
       markermade.addTo(map);
 
 
@@ -321,6 +294,7 @@ map.addLayer({
         map.addControl(navegacionControl,'bottom-right'); 
         map.setMinZoom(16.39);
         map.setMaxZoom(18);
+
       
 
 
