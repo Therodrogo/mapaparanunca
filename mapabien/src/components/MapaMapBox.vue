@@ -75,34 +75,34 @@ export default {
           
          // map.zoomTo(20.01,[-71.230,-35.003] );
 //AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
-            // map.addSource('gimnasio', {
-            //     'type': 'geojson',
-            //     'data': {
-            //     'type': 'Feature',
-            //     'properties': {},
-            //     'geometry': {
-            //     'type': 'LineString',
-            //     'coordinates': [
-            //     [-71.230,-35.003],
-            //     [-71.229743, -35.001366]
-            //     ]
-            //     }
-            //    }
-            //   });
+            map.addSource('gimnasio', {
+                'type': 'geojson',
+                'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                'type': 'LineString',
+                'coordinates': [
+                [-71.230,-35.003],
+                [-71.229743, -35.001366]
+                ]
+                }
+               }
+              });
                 
-            //     map.addLayer({
-            //     'id': 'gimnasio',
-            //     'type': 'line',
-            //     'source': 'gimnasio',
-            //     'layout': {
-            //     'line-join': 'round',
-            //     'line-cap': 'round'
-            //     },
-            //     'paint': {
-            //     'line-color': '#FFFF00',
-            //     'line-width': 7
-            //     }
-            //   });
+                map.addLayer({
+                'id': 'gimnasio',
+                'type': 'line',
+                'source': 'gimnasio',
+                'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+                },
+                'paint': {
+                'line-color': '#FFFF00',
+                'line-width': 7
+                }
+              });
          
         });
 
@@ -143,6 +143,13 @@ export default {
      // marker2.addTo(map);
 
       //Entrada
+
+      //PopUp
+
+      // create the popup
+    const popup_Entrada = new mapboxgl.Popup({ offset: 25 }).setText(
+    'Entrada'
+    );
       var entrada_el = document.createElement('div');
       entrada_el.className = 'marker';
       entrada_el.style.backgroundImage = `url(https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-entrance-usa-flatarticons-blue-flatarticons-2.png)`;
@@ -153,6 +160,8 @@ export default {
       marker3.setLngLat([-71.229743, -35.001366]);
       //marker3.setHTML("ENTRADA"); 
       //EL ADDTO MAP DEBE ESTAR AL FINAL O NO CORRE XD
+
+      marker3.setPopup(popup_Entrada);
       marker3.addTo(map);
 
       var minas_el = document.createElement('div');
