@@ -1,58 +1,67 @@
 <template>
   <div class="menuIzquierda" >
-  
+    
   </div>
 
+  
+  
   <div class="navegacion">
     <ul>
-      <li class="list active" >
-        <a  >
-          <span class="icon"><ion-icon name="person"></ion-icon></span>
-          <span class="titulo">Perfil</span>
-        </a>
+      
+      <li  class="selectMenu" >
+        
+        <SelectMenu/> 
       </li>
       <li class="list">
         <a >
           <span class="icon"><ion-icon name="list-box"></ion-icon></span>
-          <span class="titulo">Cursos</span>
+          <span class="titulo">Espacio vacio</span>
         </a>
       </li>
       <li class="list">
         <a >
           <span class="icon"><ion-icon name="funnel"></ion-icon></span>
-          <span class="titulo">Salas</span>
+          <span class="titulo">Espacio vacio</span>
         </a>
       </li>
       <li class="list">
         <a>
           <span class="icon"><ion-icon name="add-circle-outline"></ion-icon></span>
-          <span class="titulo"> {{nombre}}</span>
+          <span class="titulo"> Espacio vacio</span>
         </a>  
       </li>
     </ul>
 
   </div>
 
+  
+
 </template>
 
 <script >
+import SelectMenu from "./SelectMenu.vue";
 export default {
-
-
-    props:{
-          nombre : String,
-           
-        
+    data() {
+        return {
+            salas: ["C1", "C2"]
+        };
     },
-    setup(){
-      
-      
-    }
+    props: {
+        nombre: String,
+    },
+    setup() {
+    },
+    methods: {
+        escribir() {
+            alert("hola");
+        }
+    },
+    components: { SelectMenu }
 }
 </script>
 
 <style scoped>
-
+  
    .navegacion{
     margin: 0;
     padding: 0;
@@ -71,14 +80,31 @@ export default {
     transition: 0.5s;
   }
 
-  .navegacion:hover{
-    width: 200px;
+  .navegacion:hover {
+    width: 250px;
+    transition: 0.5s;
+    
   }
 
+  .navegacion:hover .list{
+    
+    display: block;
+  }
+  .navegacion:hover .selectMenu{
+    display: block
+  }
+  .selectMenu{
+    display: none;
+  }
+
+  .list{
+    display: none;
+  }
   .list:hover{
-    background: #677EF5;
+    
     color: aliceblue;
     cursor: pointer;
+    background: #677EF5;
 
   }
 
@@ -94,16 +120,14 @@ export default {
   .navegacion ul li{
     position: relative;
     list-style: none;
-    width: 100%;
+    width: 98%;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 
-  /*
-   .navegacion ul li.active{
-    background: rgb(56, 67, 165);
-  }
-  */
+
 
   .navegacion ul li a{
     position: relative;
@@ -112,15 +136,6 @@ export default {
     display: flex;
     text-decoration: none;
     color: aliceblue;
-  }
-
-  
-  .navegacion ul li:hover a::before{
-    
-
-  }
-  .navegacion ul li:hover  a::after{
-    
   }
 
 
