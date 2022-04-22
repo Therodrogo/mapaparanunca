@@ -67,6 +67,18 @@ export default {
         marker.setLngLat(coordenada);
         marker.setPopup(popup);
         marker.addTo(map);
+
+        //Eventos Marker
+        //Evento de pasar el mouse por encima
+        marker.getElement().addEventListener("mouseover", () => {
+          marker.getElement().style.width = "40px";
+          marker.getElement().style.height = "40px";
+        });
+        //Evento de quitar el mouse de encima
+        marker.getElement().addEventListener("mouseleave", () => {
+          marker.getElement().style.width = "30px";
+          marker.getElement().style.height = "30px";
+        });
         return marker;
       }
 
@@ -132,10 +144,21 @@ export default {
         });
       });
       //Evento al cerrar el PopUp del Gim
-     popUpGim.on('close', () => {
-      // BORRAR LINEA
-       map.removeLayer('gimnasio');
-       map.removeSource('gimnasio');
+      popUpGim.on("close", () => {
+        // BORRAR LINEA
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+      //Evento de pasar el mouse por encima
+      gimnasio.getElement().addEventListener("mouseover", () => {
+        gimnasio.getElement().style.width = "40px";
+        gimnasio.getElement().style.height = "40px";
+      });
+      //Evento de quitar el mouse de encima
+      gimnasio.getElement().addEventListener("mouseleave", () => {
+        gimnasio.getElement().style.width = "30px";
+        gimnasio.getElement().style.height = "30px";
       });
 
       //Marker 2 usado para determinar coordenadas
