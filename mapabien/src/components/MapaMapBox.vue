@@ -98,50 +98,29 @@ export default {
         coordenada,
         popUpGim
       );
+      //Array de puntos para crear la ruta
+      var rutaGim = [
+        [-71.229743, -35.001366],
+        [-71.22994865395084, -35.00156334164443],
+        [-71.23051187712394, -35.0019471982832],
+        [-71.23052528816918, -35.00195818370616],
+        [-71.23055479246803, -35.00207462909723],
+        [-71.23054942805044, -35.00217789185287],
+        [-71.23053869921357, -35.00222622756549],
+        [-71.23034858114417, -35.002421101025526],
+        [-71.23018757073696, -35.00266818850676],
+        [-71.23005813231264, -35.00274708842888],
+        [-71.22996781644146, -35.002752625461746],
+        [-71.22996030542906, -35.00281670990734],
+        [-71.22994108857104, -35.00287023559107],
+        [-71.23001279480857, -35.00292253568179],
+      ];
 
       gimnasio.getElement().addEventListener("click", () => {
         // map.zoomTo(20.01,[-71.230,-35.003] );
-
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
-        map.addSource("gimnasio", {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            properties: {},
-            geometry: {
-              type: "LineString",
-              coordinates: [
-                [-71.229743, -35.001366],
-                [-71.22994865395084, -35.00156334164443],
-                [-71.23051187712394, -35.0019471982832],
-                [-71.23052528816918, -35.00195818370616],
-                [-71.23055479246803, -35.00207462909723],
-                [-71.23054942805044, -35.00217789185287],
-                [-71.23053869921357, -35.00222622756549],
-                [-71.23034858114417, -35.002421101025526],
-                [-71.23018757073696, -35.00266818850676],
-                [-71.23005813231264, -35.00274708842888],
-                [-71.22996781644146, -35.002752625461746],
-                [-71.22996030542906, -35.00281670990734],
-                [-71.22994108857104, -35.00287023559107],
-                [-71.23001279480857, -35.00292253568179],
-              ],
-            },
-          },
-        });
-        map.addLayer({
-          id: "gimnasio",
-          type: "line",
-          source: "gimnasio",
-          layout: {
-            "line-join": "round",
-            "line-cap": "round",
-          },
-          paint: {
-            "line-color": "#FFFF00",
-            "line-width": 4,
-          },
-        });
+
+        crearRuta(rutaGim);
       });
       //Evento al cerrar el PopUp del Gim
       popUpGim.on("close", () => {
@@ -154,11 +133,14 @@ export default {
       gimnasio.getElement().addEventListener("mouseover", () => {
         gimnasio.getElement().style.width = "40px";
         gimnasio.getElement().style.height = "40px";
+        crearRuta(rutaGim);
       });
       //Evento de quitar el mouse de encima
       gimnasio.getElement().addEventListener("mouseleave", () => {
         gimnasio.getElement().style.width = "30px";
         gimnasio.getElement().style.height = "30px";
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
       });
 
       //Marker 2 usado para determinar coordenadas
@@ -313,6 +295,33 @@ export default {
         map.addControl(navegacionControl, "bottom-right");
         map.setMinZoom(16.39);
         map.setMaxZoom(18);
+      }
+
+      function crearRuta(coordenadas) {
+        map.addSource("gimnasio", {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: coordenadas,
+            },
+          },
+        });
+        map.addLayer({
+          id: "gimnasio",
+          type: "line",
+          source: "gimnasio",
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#FFFF00",
+            "line-width": 4,
+          },
+        });
       }
     });
     return {};
