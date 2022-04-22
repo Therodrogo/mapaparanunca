@@ -23,7 +23,9 @@ moongoose.connect(process.env.DB_URI,{
 .catch(err=> console.log(err))
 
 //routes prefix
-app.use("/api",require("./routes/user"))
+app.use("/api",require("./routes/Estudiante"))
+app.use("/api",require("./routes/Sala"))
+app.use("/api",require("./routes/Edificio"))
 
 
 

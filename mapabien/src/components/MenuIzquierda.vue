@@ -1,7 +1,7 @@
 <template>
   <div class="menuIzquierda" >
     
-  </div>
+  
 
   
   
@@ -12,10 +12,12 @@
         
         <SelectMenu/> 
       </li>
-      <li class="list">
+      <li class="list" @click="created">
         <a >
           <span class="icon"><ion-icon name="list-box"></ion-icon></span>
-          <span class="titulo">Espacio vacio</span>
+          <span class="titulo">{{
+            
+        }}</span>
         </a>
       </li>
       <li class="list">
@@ -33,17 +35,22 @@
     </ul>
 
   </div>
-
+</div>
   
 
 </template>
 
 <script >
+import API from "@/api";
 import SelectMenu from "./SelectMenu.vue";
+
 export default {
     data() {
         return {
-            salas: ["C1", "C2"]
+          datosusuario:{
+            nombreusuario:12312,
+            contraseña:"123123"
+          }
         };
     },
     props: {
@@ -54,6 +61,10 @@ export default {
     methods: {
         escribir() {
             alert("hola");
+        },
+        async login(){
+          const res = await API.validarusuario(this.datosusuario)
+          console.log(res)  
         }
     },
     components: { SelectMenu }
