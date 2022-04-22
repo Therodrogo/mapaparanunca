@@ -1,14 +1,11 @@
 <template>
-
   <div id="map" />
-
 </template>
 
 <script>
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted } from "vue";
-
 
 export default {
   setup() {
@@ -18,341 +15,282 @@ export default {
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/therodrogo/cl26vlm2v001o15nkk0ouo4j1",
-        center: [-71.230,-35.003 ], 
+        center: [-71.23, -35.003],
         zoom: 16.67,
         //scrollZoom: false
-
-      })
-    
-    
-      
-     map.on('load', () => {
-       
-        //Ruta desde la entrada al camino principal, 
-        //COMPLETA EL MAPA UN POCO
-         map.addSource('route2', {
-        'type': 'geojson',
-        'data': {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-        'type': 'LineString',
-        'coordinates': [
-        [-71.229743, -35.001366],
-        [-71.22994511197385, -35.00155877796714]
-        ]
-        }
-        }
-        });
-                
-        map.addLayer({
-        'id': 'route2',
-        'type': 'line',
-        'source': 'route2',
-        'layout': {
-        'line-join': 'round',
-        'line-cap': 'round'
-        },
-        'paint': {
-        'line-color': '#FFFFFF',
-        'line-width': 3
-        }
       });
 
-});
-
-        var el = document.createElement('div');
-        el.className = 'marker';
-        el.style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/4a90e2/gum-.png)`;
-        el.style.width = '30px';
-        el.style.height = '30px';
-        el.style.backgroundSize = '100%';
-    //  const algo = map.getSource('route2');
-        
-//Gimnasio
-        const marker1 = new mapboxgl.Marker(el)
-        /*
-        marker1.getElement().addEventListener('click', () => {
-          
-         // map.zoomTo(20.01,[-71.230,-35.003] );
-//AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
-            map.addSource('gimnasio', {
-                'type': 'geojson',
-                'data': {
-                'type': 'Feature',
-                'properties': {},
-                'geometry': {
-                'type': 'LineString',
-                'coordinates': [
-                [-71.230,-35.003],
-                [-71.229743, -35.001366]
-                ]
-                }
-               }
-              });
-                
-                map.addLayer({
-                'id': 'gimnasio',
-                'type': 'line',
-                'source': 'gimnasio',
-                'layout': {
-                'line-join': 'round',
-                'line-cap': 'round'
-                },
-                'paint': {
-                'line-color': '#FFFF00',
-                'line-width': 7
-                }
-              });
-         
+      map.on("load", () => {
+        //Ruta desde la entrada al camino principal,
+        //COMPLETA EL MAPA UN POCO
+        map.addSource("route2", {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: [
+                [-71.229743, -35.001366],
+                [-71.22994511197385, -35.00155877796714],
+              ],
+            },
+          },
         });
-      */
+
+        map.addLayer({
+          id: "route2",
+          type: "line",
+          source: "route2",
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#FFFFFF",
+            "line-width": 3,
+          },
+        });
+      });
+      // Funcion que agrega un Marker al mapa, se le entrega el icono, la coordenada y un popup.
+      function agregarMarker(icono, coordenada, popup) {
+        //Elemento
+        var el = document.createElement("div");
+        el.className = "marker";
+        el.style.backgroundImage = `url(` + icono + `)`;
+        el.style.width = "30px";
+        el.style.height = "30px";
+        el.style.backgroundSize = "100%";
+
+        //Marker
+        const marker = new mapboxgl.Marker(el);
+        marker.setLngLat(coordenada);
+        marker.setPopup(popup);
+        marker.addTo(map);
+        return marker;
+      }
+
+      // Funcion que crea y devuelve un Popup, la uso para enviar Popups a la funcion agregarMarker. Se le entrega el texto que se quiere usar.
+      function crearPopUp(texto) {
+        const popup = new mapboxgl.Popup({ closeOnClick: false }).setText(
+          "" + texto
+        );
+        return popup;
+      }
+
+      //Gimnasio (Está separado de los demas porque tiene la linea)
+      var coordenada = [-71.23020173932005, -35.00298450172138];
+      var popUpGim = crearPopUp("Gimnasio");
+      var gimnasio = agregarMarker(
+        "https://img.icons8.com/ios-filled/344/4a90e2/gum-.png",
+        coordenada,
+        popUpGim
+      );
+
+      gimnasio.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        map.addSource("gimnasio", {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: [
+                [-71.229743, -35.001366],
+                [-71.22994865395084, -35.00156334164443],
+                [-71.23051187712394, -35.0019471982832],
+                [-71.23052528816918, -35.00195818370616],
+                [-71.23055479246803, -35.00207462909723],
+                [-71.23054942805044, -35.00217789185287],
+                [-71.23053869921357, -35.00222622756549],
+                [-71.23034858114417, -35.002421101025526],
+                [-71.23018757073696, -35.00266818850676],
+                [-71.23005813231264, -35.00274708842888],
+                [-71.22996781644146, -35.002752625461746],
+                [-71.22996030542906, -35.00281670990734],
+                [-71.22994108857104, -35.00287023559107],
+                [-71.23001279480857, -35.00292253568179],
+              ],
+            },
+          },
+        });
+        map.addLayer({
+          id: "gimnasio",
+          type: "line",
+          source: "gimnasio",
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#FFFF00",
+            "line-width": 4,
+          },
+        });
+      });
+      //Evento al cerrar el PopUp del Gim
+     popUpGim.on('close', () => {
       // BORRAR LINEA
-      //  map.removeLayer('route2');
-      //    map.removeSource('route2');
-       
-        marker1.setLngLat([-71.23020173932005, -35.00298450172138]);
-        marker1.addTo(map);
-
-
+       map.removeLayer('gimnasio');
+       map.removeSource('gimnasio');
+      });
 
       //Marker 2 usado para determinar coordenadas
-      const marker2 = new mapboxgl.Marker()
-      marker2.setLngLat([-71.22929, -35.001566]);
-      //EL ADDTO MAP DEBE ESTAR AL FINAL O NO CORRE XD
-//popup del marker usado para sacar posiciones
-     // const popup = new mapboxgl.Popup({ closeOnClick: false })
-          // .setLngLat([-71.22929, -35.001566])
-          // .setMaxWidth('100px')
-          // .setHTML(marker2.getLngLat())
-         
-    //  popup.addTo(map);
+      // const marker2 = new mapboxgl.Marker();
+      // marker2.setLngLat([-71.22929, -35.001566]);
+      // //EL ADDTO MAP DEBE ESTAR AL FINAL O NO CORRE XD
+      // //popup del marker usado para sacar posiciones
+      // const popup = new mapboxgl.Popup({ closeOnClick: false })
+      //   .setLngLat([-71.22929, -35.001566])
+      //   .setMaxWidth("100px")
+      //   .setHTML(marker2.getLngLat());
 
-      //MARKER DE ENTRADA MALA
-      marker2.getElement().addEventListener('click', () => {
+      // popup.addTo(map);
 
-        //CREAR LINEA AMARILLA DENUEVO
-          //Zoom a una posición especifica 
-          //map.zoomTo(20.01,[-71.230,-35.003] );
+      // //MARKER DE ENTRADA MALA
+      // marker2.getElement().addEventListener("click", () => {
+      //   //CREAR LINEA AMARILLA DENUEVO
+      //   //Zoom a una posición especifica
+      //   //map.zoomTo(20.01,[-71.230,-35.003] );
+      //   //   Para saber la posicion del marker 2
+      //   popup.setHTML(marker2.getLngLat());
+      // });
+      // marker2.setDraggable(true);
+      // marker2.addTo(map);
 
-       //   Para saber la posicion del marker 2
-        //  popup.setHTML(marker2.getLngLat())
-       
-        
-        });
-        marker2.setDraggable(true);
-     // marker2.addTo(map);
+      //Crea todos los edificios, la cree para podere minimizar el codigo de abajo :9
+      crearMarkersEdificios();
 
-      //Entrada
+      function crearMarkersEdificios() {
+        //Creación de Markers
 
-      //PopUp
+        //ENTRADA
+        var coordenada = [-71.229743, -35.001366];
+        agregarMarker(
+          "https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-entrance-usa-flatarticons-blue-flatarticons-2.png",
+          coordenada,
+          crearPopUp("Entrada")
+        );
 
-      // create the popup
-    const popup_Entrada = new mapboxgl.Popup({ closeOnClick: false }).setText(
-    'Entrada'
-    );
+        //MINAS
+        coordenada = [-71.23095415504667, -35.00135123097902];
+        agregarMarker(
+          "https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/4a90e2/external-mine-investment-kiranshastry-solid-kiranshastry.png",
+          coordenada,
+          crearPopUp("Minas")
+        );
 
-    
+        //MECATRONICA
+        coordenada = [-71.2290760294051, -35.00188500863207];
+        agregarMarker(
+          "https://img.icons8.com/ultraviolet/344/robot--v1.png",
+          coordenada,
+          crearPopUp("Mecatronica")
+        );
 
-      var entrada_el = document.createElement('div');
-      entrada_el.className = 'marker';
-      entrada_el.style.backgroundImage = `url(https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-entrance-usa-flatarticons-blue-flatarticons-2.png)`;
-      entrada_el.style.width = '40px';
-      entrada_el.style.height = '40px';
-      entrada_el.style.backgroundSize = '100%';
-      const marker3 = new mapboxgl.Marker(entrada_el)
-      marker3.setLngLat([-71.229743, -35.001366]);
-      //marker3.setHTML("ENTRADA"); 
-      //EL ADDTO MAP DEBE ESTAR AL FINAL O NO CORRE XD
+        //MECANICA
+        coordenada = [-71.22886378003142, -35.002003009634954];
+        agregarMarker(
+          "https://img.icons8.com/office/344/car.png",
+          coordenada,
+          crearPopUp("Mecanica")
+        );
 
-      marker3.setPopup(popup_Entrada);
-      marker3.addTo(map);
+        //CONSTRUCCION
+        coordenada = [-71.2291604784214, -35.003168465316016];
+        agregarMarker(
+          "https://img.icons8.com/ultraviolet/344/hammer.png",
+          coordenada,
+          crearPopUp("Construccion")
+        );
 
-      
+        //OBRAS
+        coordenada = [-71.22907482062429, -35.00336695439614];
+        agregarMarker(
+          "https://img.icons8.com/ultraviolet/344/workers-male.png",
+          coordenada,
+          crearPopUp("Obras")
+        );
 
-      var minas_el = document.createElement('div');
-      minas_el.className = 'marker';
-      minas_el.style.backgroundImage = `url(https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/4a90e2/external-mine-investment-kiranshastry-solid-kiranshastry.png)`;
-      minas_el.style.width = '40px';
-      minas_el.style.height = '40px';
-      minas_el.style.backgroundSize = '100%';
-     const marker4 = new mapboxgl.Marker(minas_el)
-      marker4.setLngLat([ -71.23095415504667, -35.00135123097902]);
-      marker4.addTo(map);
-      marker4.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+        //AUDITORIO
+        coordenada = [-71.22915475374442, -35.00365484351161];
+        agregarMarker(
+          "https://img.icons8.com/fluency-systems-filled/344/4a90e2/coliseum.png",
+          coordenada,
+          crearPopUp("Auditorio")
+        );
 
- 
-    //mecatro y meca
-      var mecat_el = document.createElement('div');
-      mecat_el.className = 'marker';
-      mecat_el.style.backgroundImage = `url(https://img.icons8.com/ultraviolet/344/robot--v1.png)`;
-      mecat_el.style.width = '40px';
-      mecat_el.style.height = '40px';
-      mecat_el.style.backgroundSize = '100%';
-     const marker5 = new mapboxgl.Marker(mecat_el)
-      marker5.setLngLat([ -71.2290760294051, -35.00188500863207]);
-      
-      marker5.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-      marker5.addTo(map);
+        //EDIFICIO AZUL
+        coordenada = [-71.22979433407157, -35.0017047386893];
+        agregarMarker(
+          "https://img.icons8.com/color/344/link-company-child.png",
+          coordenada,
+          crearPopUp("Edificio Azul")
+        );
 
-      var meca_el = document.createElement('div');
-      meca_el.className = 'marker';
-      meca_el.style.backgroundImage = `url(https://img.icons8.com/office/344/car.png)`;
-      meca_el.style.width = '30px';
-      meca_el.style.height = '30px';
-      meca_el.style.backgroundSize = '100%';
-     const marker6 = new mapboxgl.Marker(meca_el)
-      marker6.setLngLat([ -71.22886378003142, -35.002003009634954]);
-      
-      marker6.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-      marker6.addTo(map);
-     //contru y obras
-      var contru_el = document.createElement('div');
-      contru_el.className = 'marker';
-      contru_el.style.backgroundImage = `url(https://img.icons8.com/ultraviolet/344/hammer.png)`;
-      contru_el.style.width = '30px';
-      contru_el.style.height = '30px';
-      contru_el.style.backgroundSize = '100%';
-     const markercontru = new mapboxgl.Marker(contru_el)
-      markercontru.setLngLat([   -71.2291604784214, -35.003168465316016]);
-      
-      markercontru.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-   markercontru.addTo(map);
-        var obra_el = document.createElement('div');
-       obra_el .className = 'marker';
-       obra_el .style.backgroundImage = `url(https://img.icons8.com/ultraviolet/344/workers-male.png)`;
-       obra_el .style.width = '30px';
-       obra_el .style.height = '30px';
-       obra_el .style.backgroundSize = '100%';
-     const markerobra = new mapboxgl.Marker( obra_el )
-      markerobra.setLngLat([-71.22907482062429, -35.00336695439614]);
-      
-      markerobra.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-markerobra.addTo(map);
-      //Auditorio??????????????
-      var auditorio_el = document.createElement('div');
-       auditorio_el .className = 'marker';
-       auditorio_el .style.backgroundImage = `url(https://img.icons8.com/fluency-systems-filled/344/4a90e2/coliseum.png)`;
-       auditorio_el .style.width = '30px';
-       auditorio_el .style.height = '30px';
-       auditorio_el .style.backgroundSize = '100%';
-     const markeraudi = new mapboxgl.Marker( auditorio_el )
-      markeraudi.setLngLat([-71.22915475374442, -35.00365484351161]);
-      
-      markeraudi.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-markeraudi.addTo(map);
-      //edificio azul???????????
-      var azul_el = document.createElement('div');
-       azul_el .className = 'marker';
-       azul_el .style.backgroundImage = `url(https://img.icons8.com/color/344/link-company-child.png)`;
-       azul_el .style.width = '30px';
-       azul_el .style.height = '30px';
-       azul_el .style.backgroundSize = '100%';
-     const markeedazul = new mapboxgl.Marker( azul_el )
-      markeedazul.setLngLat([-71.22979433407157, -35.0017047386893]);
-      markeedazul.addTo(map);
-      markeedazul.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'))
-      
-        //edificio verde???????????
-      var verde_el = document.createElement('div');
-       verde_el .className = 'marker';
-       verde_el .style.backgroundImage = `url(https://img.icons8.com/external-phatplus-solid-phatplus/344/4a90e2/external-laboratory-virus-transmission-phatplus-solid-phatplus.png)`;
-       verde_el .style.width = '30px';
-       verde_el .style.height = '30px';
-       verde_el .style.backgroundSize = '100%';
-     const markeedverde = new mapboxgl.Marker( verde_el )
-      markeedverde.setLngLat([-71.22999896811982, -35.002471304966534]);
-      markeedverde.addTo(map);
+        //EDIFICIO VERDE
+        coordenada = [-71.22999896811982, -35.002471304966534];
+        agregarMarker(
+          "https://img.icons8.com/external-phatplus-solid-phatplus/344/4a90e2/external-laboratory-virus-transmission-phatplus-solid-phatplus.png",
+          coordenada,
+          crearPopUp("Edificio Verde")
+        );
 
-      markeedverde.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+        //Servicio Estudiantil
+        coordenada = [-71.22980662330485, -35.0020445830408];
+        agregarMarker(
+          "https://img.icons8.com/ios-glyphs/344/4a90e2/education.png",
+          coordenada,
+          crearPopUp("Servicio Estudiantil")
+        );
 
-           //servicio estudiantil???????????
-      var servicio_el = document.createElement('div');
-       servicio_el .className = 'marker';
-       servicio_el .style.backgroundImage = `url(https://img.icons8.com/ios-glyphs/344/4a90e2/education.png)`;
-       servicio_el .style.width = '30px';
-       servicio_el .style.height = '30px';
-       servicio_el .style.backgroundSize = '100%';
-     const marketservi = new mapboxgl.Marker( servicio_el )
-      marketservi.setLngLat([-71.22980662330485, -35.0020445830408]);
-      marketservi.addTo(map);
-      marketservi.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+        //Biblioteca
+        coordenada = [-71.22892109676758, -35.00283153433725];
+        agregarMarker(
+          "https://img.icons8.com/ios-filled/344/4a90e2/library.png",
+          coordenada,
+          crearPopUp("Biblioteca")
+        );
 
+        //Electrica
+        coordenada = [-71.23129613592188, -35.0020916923508];
+        agregarMarker(
+          "https://img.icons8.com/ios-filled/344/4a90e2/electrical.png",
+          coordenada,
+          crearPopUp("Electrica")
+        );
 
-      //library??????????
-      var libra_el = document.createElement('div');
-       libra_el .className = 'marker';
-       libra_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/4a90e2/library.png)`;
-       libra_el .style.width = '30px';
-       libra_el .style.height = '30px';
-       libra_el .style.backgroundSize = '100%';
-     const marketlibra = new mapboxgl.Marker( libra_el )
-      marketlibra.setLngLat([-71.22892109676758, -35.00283153433725]);
-      marketlibra.addTo(map);
-      marketlibra.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+        //CABAÑA MADERA
+        coordenada = [-71.22897841350172, -35.002423278615076];
+        agregarMarker(
+          "https://img.icons8.com/external-icongeek26-glyph-icongeek26/344/4a90e2/external-cabin-russia-icongeek26-glyph-icongeek26.png",
+          coordenada,
+          crearPopUp("Cabaña Madera")
+        );
 
-
-
-      //electro??????????
-      var electro_el = document.createElement('div');
-       electro_el .className = 'marker';
-       electro_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/4a90e2/electrical.png)`;
-       electro_el .style.width = '30px';
-       electro_el .style.height = '30px';
-       electro_el .style.backgroundSize = '100%';
-     const marketelec = new mapboxgl.Marker( electro_el )
-      marketelec.setLngLat([-71.23129613592188, -35.0020916923508]);
-      marketelec.addTo(map);
-      marketelec.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-
-
-      //CABAÑA MADERA 
-       var madera_el = document.createElement('div');
-       madera_el .className = 'marker';
-       madera_el .style.backgroundImage = `url(https://img.icons8.com/external-icongeek26-glyph-icongeek26/344/4a90e2/external-cabin-russia-icongeek26-glyph-icongeek26.png)`;
-       madera_el .style.width = '30px';
-       madera_el .style.height = '30px';
-       madera_el .style.backgroundSize = '100%';
-       const markermade = new mapboxgl.Marker( madera_el )
-      markermade.setLngLat([-71.22897841350172, -35.002423278615076]);
-      markermade.addTo(map);
-      markermade.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-
-      //SERVICIOS MULTIPLES Y COE
-        var sm_el = document.createElement('div');
-       sm_el .className = 'marker';
-       sm_el .style.backgroundImage = `url(https://img.icons8.com/external-glyph-wichaiwi/344/4a90e2/external-mathematics-statistical-analysis-glyph-wichaiwi.png)`;
-       sm_el .style.width = '30px';
-       sm_el .style.height = '30px';
-       sm_el .style.backgroundSize = '100%';
-       const markersm = new mapboxgl.Marker( sm_el );
-      markersm.setLngLat([-71.2302405610473, -35.00213003797558]);
-      markersm.addTo(map);
-      markersm.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
-
-
-  
- var coe_el = document.createElement('div');
-       coe_el .className = 'marker';
-       coe_el .style.backgroundImage = `url(https://img.icons8.com/ios-filled/344/4a90e2/book.png)`;
-       coe_el .style.width = '30px';
-       coe_el .style.height = '30px';
-       coe_el .style.backgroundSize = '100%';
-       const markercoe = new mapboxgl.Marker( coe_el )
-      markercoe.setLngLat([-71.22955876785723, -35.00311601562916]);
-      markercoe.addTo(map);
-      markercoe.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setText('Edificio'));
+        //SERVICIOS MULTIPLES
+        coordenada = [-71.2302405610473, -35.00213003797558];
+        agregarMarker(
+          "https://img.icons8.com/external-glyph-wichaiwi/344/4a90e2/external-mathematics-statistical-analysis-glyph-wichaiwi.png",
+          coordenada,
+          crearPopUp("Cabaña Madera")
+        );
+        //COE
+        coordenada = [-71.22955876785723, -35.00311601562916];
+        agregarMarker(
+          "https://img.icons8.com/ios-filled/344/4a90e2/book.png",
+          coordenada,
+          crearPopUp("COE")
+        );
 
         const navegacionControl = new mapboxgl.NavigationControl();
-        map.addControl(navegacionControl,'bottom-right'); 
+        map.addControl(navegacionControl, "bottom-right");
         map.setMinZoom(16.39);
         map.setMaxZoom(18);
-
-      
-
-
-        
-  
+      }
     });
     return {};
   },
@@ -360,14 +298,11 @@ markeraudi.addTo(map);
 </script>
 
 <style>
-
 #map {
   position: absolute;
   width: 100%;
   height: 100%;
-  bottom:  1px;
+  bottom: 1px;
   z-index: 1;
 }
-
-
 </style>
