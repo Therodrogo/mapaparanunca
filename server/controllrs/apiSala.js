@@ -21,9 +21,9 @@ module.exports = class API{
     //Obtener usuario
     static async getSala( req,res){
         
-        const userdni = req.params.dni
+        const id_sala = req.params.id
         SalaSchema
-        .find({dni:userdni})    
+        .find({_id:id_sala})    
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }

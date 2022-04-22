@@ -26,8 +26,8 @@ moongoose.connect(process.env.DB_URI,{
 app.use("/api",require("./routes/Estudiante"))
 app.use("/api",require("./routes/Sala"))
 app.use("/api",require("./routes/Edificio"))
-
-
+app.use("/api",require("./routes/Curso"))
+app.use("/api",require("./routes/Asiste"))
 
 //start server
 app.listen(port,()=> console.log('server running at http://localhost:'+port))
