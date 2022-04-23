@@ -2,7 +2,7 @@ const express = require('express')
 const API = require('../controllrs/apiCurso')
 const router = express.Router();
 
-//create user
+
 router.post('/Curso', API.createCurso)
 router.get('/Curso', API.getAllCursos)
 router.get('/Curso/:id', API.getCurso)

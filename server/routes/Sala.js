@@ -2,7 +2,7 @@ const express = require('express')
 const API = require('../controllrs/apiSala')
 const router = express.Router();
 
-//create user
+
 router.post('/Sala', API.createSala)
 router.get('/Sala', API.getAllSalas)
 router.get('/Sala/:id', API.getSala)

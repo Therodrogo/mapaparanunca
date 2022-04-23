@@ -1,10 +1,25 @@
 //ESQUEMAS DE MONGOSEE
 const { Int32, ObjectId } = require('bson')
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const AsisteSchema =mongoose.Schema({
-    id_estudiante: ObjectId,
-    id_sala: ObjectId,
-    id_curso: ObjectId,
+    estudiantes: 
+    [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "estudiantes"
+        }
+    ],
+    id_sala: 
+        {
+            type: Schema.Types.ObjectId, 
+            ref: "salas"
+        },
+    id_curso: 
+    {
+        type: Schema.Types.ObjectId,
+        ref: "cursos"
+    },
     seccion: String,
     hora_inicio: String,
     hora_final: String,

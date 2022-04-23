@@ -2,7 +2,9 @@ const CursoSchema = require('../models/Curso')
 
 
 module.exports = class API{
-    //Create 
+    //Descripcion: Crea una instancia de Asiste y la agrega a la DB
+    //Entradas: JSON con la informacion de asiste.
+    //Salidas: JSON con la informacion ingresada.
     static async createCurso( req,res){
         const Curso = CursoSchema(req.body)
         Curso.save()
@@ -11,23 +13,29 @@ module.exports = class API{
         
     }
 
-    //Obtener todos
+    //Descripcion: Crea una instancia de Asiste y la agrega a la DB
+    //Entradas: JSON con la informacion de asiste.
+    //Salidas: JSON con la informacion ingresada.
     static async getAllCursos( req,res){
         CursoSchema
         .find()    
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
-    //Obtener usuario
+    //Descripcion: Crea una instancia de Asiste y la agrega a la DB
+    //Entradas: JSON con la informacion de asiste.
+    //Salidas: JSON con la informacion ingresada.
     static async getCurso( req,res){
         
         const id = req.params.id
         CursoSchema
-        .find({_id:id})    
+        .findById()
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
-    //Actualizar usario mediante ID
+    //Descripcion: Crea una instancia de Asiste y la agrega a la DB
+    //Entradas: JSON con la informacion de asiste.
+    //Salidas: JSON con la informacion ingresada.
     static async putCurso( req,res){
         const {id} =req.params;
         const{nombre} = req.body
@@ -36,7 +44,9 @@ module.exports = class API{
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
-    //Eliminar usario mediante ID
+    //Descripcion: Crea una instancia de Asiste y la agrega a la DB
+    //Entradas: JSON con la informacion de asiste.
+    //Salidas: JSON con la informacion ingresada.
     static async deleteCurso( req,res){
         const {id} = req.params;
         CursoSchema

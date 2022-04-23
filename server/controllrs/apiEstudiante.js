@@ -2,7 +2,9 @@ const EstudianteSchema = require('../models/Estudiante')
 const bcrypt = require('Bcrypt')
 
 module.exports = class API{
-    //Create 
+    // Descripcion:Crea usuario y encripta su contraseña, para asi poder tener un poco mas de seguridad.
+    //Entradas:Resive un json con nombre, dni,contraseña y carrera. En resumen resive El esquema completa definido para un estudiante. 
+    //Salida:Guarda al usuario en la DB
     static async createEstudiante( req,res){
         const {body} =req
         const {nombre,dni,contraseña,carrera} = body
@@ -17,6 +19,11 @@ module.exports = class API{
         const usuarioGuardado = await estudiante.save()
         res.json(usuarioGuardado)
     } 
+    // Descripcion: Ayuda a validar el usuario. Busca si existe el usuario , si existe desencripta la contraseña enviada y valida si es correcta.
+    // Entrada:Resive un Json con la contraseña y usuario a validar.
+    //Saldias: SI el usuario y contraseña son Validos: Devuelve un JSON con un mensaje de acceso valido
+            //Si el usuario no existe : JSON con mensaje de que el usuario no se encontro.
+            //Si el usuario es correcto y la contraseña invalida: JSON con un mensaje de que la contraseña
     static async validarUsuario(req,res){
         const userdni = req.body.nombreusuario
         const contra = req.body.contraseña

@@ -2,7 +2,7 @@ const EdificioSchema = require('../models/Edificio')
 
 
 module.exports = class API{
-    //Create 
+    //Crear
     static async createEdificio( req,res){
         const edificio = EdificioSchema(req.body)
         edificio.save()
@@ -11,23 +11,31 @@ module.exports = class API{
         
     }
 
-    //Obtener todos
+    //Obtener todos con datos.
     static async getAllEdificios( req,res){
         EdificioSchema
-        .find()    
+        .find().populate("salasID")      
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
-    //Obtener usuario
     static async getEdificio( req,res){
         
         const id = req.params.id
         EdificioSchema
-        .find({_id:id})    
+        .find({_id:id})
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
-    //Actualizar usario mediante ID
+    //Obtener edificio mediante ID de sala 
+    static async getEdificioBySalaID( req,res){
+        
+        const id = req.params.id
+        EdificioSchema
+        .findOne({_id:id}).populate("salasID") 
+        .then((data)=>res.json(data))
+        .catch((err)=>res.json({message:err}))
+    }
+    //Actualizar  mediante ID
     static async putEdificio( req,res){
         const {id} =req.params;
         const{nombre} = req.body
@@ -36,7 +44,7 @@ module.exports = class API{
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
-    //Eliminar usario mediante ID
+    //Eliminar  mediante ID
     static async deleteEdificio( req,res){
         const {id} = req.params;
         EdificioSchema

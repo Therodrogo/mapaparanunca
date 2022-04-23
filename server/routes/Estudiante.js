@@ -2,7 +2,7 @@ const express = require('express')
 const API = require('../controllrs/apiEstudiante')
 const router = express.Router();
 
-//create user
+
 router.post('/Estudiante', API.createEstudiante)
 router.post('/Estudiante/login', API.validarUsuario)
 router.get('/Estudiante', API.getAllEstudiantes)
