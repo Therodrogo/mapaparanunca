@@ -1,30 +1,27 @@
 <template>
   <div class="menuIzquierda" >
-    
-  
-
-  
   
   <div class="navegacion">
     <ul>
-      
       <li  class="selectMenu" >
         
-        <SelectMenu/> 
-      </li>
-      <li class="list" @click="created">
-        <a >
-          <span class="icon"><ion-icon name="list-box"></ion-icon></span>
-          <span class="titulo">{{
-            
-        }}</span>
-        </a>
+        <SelectMenu/>
       </li>
       <li class="list">
+        <router-link to="/">
+        <a >
+          <span class="icon"><ion-icon name="list-box"></ion-icon></span>
+          <span class="titulo">Inicio</span>
+        </a>
+        </router-link>
+      </li>
+      <li class="list">
+        <router-link to="/about">
         <a >
           <span class="icon"><ion-icon name="funnel"></ion-icon></span>
-          <span class="titulo">Espacio vacio</span>
+          <span class="titulo">Mapa</span>
         </a>
+        </router-link>
       </li>
       <li class="list">
         <a>
@@ -35,13 +32,19 @@
     </ul>
 
   </div>
+
+
+  <div class="Vista">
+
+      <router-view/>
+
+  </div>
 </div>
   
 
 </template>
 
 <script >
-import API from "@/api";
 import SelectMenu from "./SelectMenu.vue";
 
 export default {
@@ -62,16 +65,26 @@ export default {
         escribir() {
             alert("hola");
         },
-        async login(){
-          const res = await API.validarusuario(this.datosusuario)
-          console.log(res)  
-        }
+        
     },
-    components: { SelectMenu }
+    components: { 
+      SelectMenu 
+    }
 }
 </script>
 
 <style scoped>
+    .Vista{
+
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      position: absolute;
+
+      top: 0;
+      bottom: 0;
+      display: block;
+    }
   
    .navegacion{
     margin: 0;
@@ -81,10 +94,10 @@ export default {
     position: relative;
     color: rgb(38, 64, 87);
     
-    z-index: 2;
+    z-index: 20;
 
     width: 70px;
-    height: 100vh;
+    height: 93vh;
     background: #313C75;
    
     overflow-x: hidden ;

@@ -1,6 +1,5 @@
 <template>
     <div class="superior">
-
         <v-img
             lazy-src=""
             max-height="55"
@@ -10,30 +9,63 @@
         >
         </v-img>
         
-       
-
-        <button class="botoniniciar" small elevation="" color="">
+        <button class="botoniniciar" small elevation="" @click="mostrar" >
+            
             <ion-icon id="iconSesionSuperios" name="contact"></ion-icon>
+            
         </button>
         
-        
-        
+    </div>
+
+    <div class="login" v-if="estado">
+        <FormularioLogin/>
     </div>
          
      
 </template>
 
 <script>
+import FormularioLogin from "./MenuArriba/FormularioLogin.vue";
 export default {
+    components: { 
+        FormularioLogin 
+    },
+    data(){
+        return{
+            estado: false
+        }
+    },
+    methods:{
+        mostrar(){
 
+            if(this.estado){
+
+                this.estado = false;
+            }
+            else{
+                this.estado = true;
+            }
+            
+        }
+    }
 }
 </script>
 
 <style>
 
+button .login{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #313C75;
+    z-index: 3000;
+    transition: 0.5s;
+}
+
 .superior{
     position: relative;
-    z-index: 4;
+    z-index: 10;
     background-color: #313C75;
     text-align: center;
     height: 50px;
@@ -51,7 +83,7 @@ export default {
 
     top: 5px;
     border-radius: 50%;
-    transition: 0.1s;
+    transition: 0.5s;
     z-index: 6;
 }
 
