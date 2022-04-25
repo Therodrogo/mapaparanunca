@@ -87,6 +87,8 @@ export default {
         const popup = new mapboxgl.Popup({ closeOnClick: false }).setText(
           "" + texto
         );
+        popup.setMaxWidth("relative")
+    
         return popup;
       }
 
@@ -115,7 +117,8 @@ export default {
         [-71.22994108857104, -35.00287023559107],
         [-71.23001279480857, -35.00292253568179],
       ];
-
+      
+ 
       gimnasio.getElement().addEventListener("click", () => {
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
@@ -128,17 +131,24 @@ export default {
         map.removeLayer("gimnasio");
         map.removeSource("gimnasio");
       });
-
+      gimnasio.getPopup().setHTML('<img src="https://sc2.elpais.com.uy/files/article_main/uploads/2020/08/28/5f4938ee1cef1.jpeg" >')
       //Evento de pasar el mouse por encima
       gimnasio.getElement().addEventListener("mouseover", () => {
         gimnasio.getElement().style.width = "40px";
         gimnasio.getElement().style.height = "40px";
+        map.removeLayer()
+        
         crearRuta(rutaGim);
       });
       //Evento de quitar el mouse de encima
       gimnasio.getElement().addEventListener("mouseleave", () => {
         gimnasio.getElement().style.width = "30px";
         gimnasio.getElement().style.height = "30px";
+        map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat")
+        
+
         map.removeLayer("gimnasio");
         map.removeSource("gimnasio");
       });
@@ -168,7 +178,7 @@ export default {
 
       //Crea todos los edificios, la cree para podere minimizar el codigo de abajo :9
       crearMarkersEdificios();
-
+    
       function crearMarkersEdificios() {
         //Creación de Markers
 
@@ -296,7 +306,42 @@ export default {
         map.setMinZoom(16.39);
         map.setMaxZoom(18);
       }
-
+      /* function CargarImagen(url,coords){
+        map.loadImage(url,
+        (error, image) => {
+          if (error) throw error;
+ 
+            // Add the image to the map style.
+            map.addImage('cat', image);
+ 
+          // Add a data source containing one point feature.
+            map.addSource('point', {
+              'type': 'geojson',
+              'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                  {
+                    'type': 'Feature',
+                    'geometry': {
+                      'type': 'Point',
+                      'coordinates': coords
+                    }
+                  }
+                ]
+              }
+            });
+            map.addLayer({
+              'id': 'points',
+              'type': 'symbol',
+              'source': 'point', // reference the data source
+              'layout': {
+                'icon-image': 'cat', // reference the image
+                'icon-size': 0.25
+              }
+            });
+        }       
+      );
+      } */
       function crearRuta(coordenadas) {
         map.addSource("gimnasio", {
           type: "geojson",
@@ -323,10 +368,13 @@ export default {
           },
         });
       }
+      
     });
     return {};
   },
+  
 };
+
 </script>
 
 <style>
