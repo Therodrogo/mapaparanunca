@@ -23,9 +23,11 @@ moongoose.connect(process.env.DB_URI,{
 .catch(err=> console.log(err))
 
 //routes prefix
-app.use("/api",require("./routes/user"))
-
-
+app.use("/api",require("./routes/Estudiante"))
+app.use("/api",require("./routes/Edificio"))
+app.use("/api",require("./routes/Curso"))
+app.use("/api",require("./routes/Asiste"))
+app.use("/api",require("./routes/Sala"))
 
 //start server
 app.listen(port,()=> console.log('server running at http://localhost:'+port))
