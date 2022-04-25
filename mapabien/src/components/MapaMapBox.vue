@@ -118,7 +118,7 @@ export default {
         [-71.23001279480857, -35.00292253568179],
       ];
       
- 
+      
       gimnasio.getElement().addEventListener("click", () => {
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
@@ -131,7 +131,7 @@ export default {
         map.removeLayer("gimnasio");
         map.removeSource("gimnasio");
       });
-      gimnasio.getPopup().setHTML('<img src="https://sc2.elpais.com.uy/files/article_main/uploads/2020/08/28/5f4938ee1cef1.jpeg" >')
+     
       //Evento de pasar el mouse por encima
       gimnasio.getElement().addEventListener("mouseover", () => {
         gimnasio.getElement().style.width = "40px";
@@ -144,9 +144,9 @@ export default {
       gimnasio.getElement().addEventListener("mouseleave", () => {
         gimnasio.getElement().style.width = "30px";
         gimnasio.getElement().style.height = "30px";
-        map.removeLayer('points')
+        /* map.removeLayer('points')
         map.removeSource('point')
-        map.removeImage("cat")
+        map.removeImage("cat") */
         
 
         map.removeLayer("gimnasio");
