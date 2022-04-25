@@ -1,4 +1,5 @@
 <template>
+<div>
   <div v-if="muestrate">
 
     <InformacionEdifcio 
@@ -11,7 +12,7 @@
   </div>
   
   <div id="map" />
-
+</div>
 
 </template>
 

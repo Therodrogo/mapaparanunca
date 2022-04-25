@@ -8,13 +8,22 @@
             class="logo"
         >
         </v-img>
-        
+        <div class="panelIniciar">
+            
+        </div>
         <button class="botoniniciar" small elevation="" @click="mostrar" >
+            <v-img
+            lazy-src=""
+            max-height="40"
+            max-width="40'"
+            src="https://i.ibb.co/VLJ6CsC/user.png"
+            class="user"
+            >
+            </v-img>
             
-            <ion-icon id="iconSesionSuperios" name="contact"></ion-icon>
-            
+            <div  class="textIniciar">Iniciar Sesion</div>
         </button>
-        
+       
     </div>
 
     <div class="login" v-if="estado">
@@ -63,6 +72,22 @@ button .login{
     transition: 0.5s;
 }
 
+.panelIniciar{
+    position: relative;
+    bottom: 75%;
+    left: 87.5%;
+    
+}
+
+.textIniciar{
+    
+    top: 15%;
+    width: 100px;
+    right: 120%;
+    position: absolute;
+    transition: 0.5s;
+}
+
 .superior{
     position: relative;
     z-index: 10;
@@ -74,10 +99,11 @@ button .login{
 }
 
 .botoniniciar{
-    position: absolute;
-    left: 97%;
     
-    background: #B1BDF7;
+    position: absolute;
+    left: 95%;
+    
+    background: #313C75;
     width: 40px;
     height: 40px;
 
@@ -87,9 +113,16 @@ button .login{
     z-index: 6;
 }
 
-.botoniniciar:active{
+.botoniniciar:hover {
 
-    background: cadetblue;
+    background: #677EF5;
+    transition: 0.5s;
+
+}
+
+.botoniniciar:hover .textIniciar{
+    transition: 0.5s;
+    display: block;
 }
 
 #iconSesionSuperios{

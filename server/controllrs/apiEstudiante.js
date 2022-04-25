@@ -7,14 +7,14 @@ module.exports = class API{
     //Salida:Guarda al usuario en la DB
     static async createEstudiante( req,res){
         const {body} =req
-        const {nombre,dni,contraseña,carrera} = body
+        const {nombre,usuario,contraseña,carrera} = body
         const contra = await bcrypt.hash(contraseña,3)
         
         const estudiante = new EstudianteSchema({
-           nombre,
-            dni,
+            nombre,
             contraseña:contra,
             carrera,
+            usuario,
         })
         const usuarioGuardado = await estudiante.save()
         res.json(usuarioGuardado)
@@ -25,20 +25,20 @@ module.exports = class API{
             //Si el usuario no existe : JSON con mensaje de que el usuario no se encontro.
             //Si el usuario es correcto y la contraseña invalida: JSON con un mensaje de que la contraseña
     static async validarUsuario(req,res){
-        const userdni = req.body.nombreusuario
+        const user = req.body.nombreusuario
         const contra = req.body.contraseña
 
-        const datos = await EstudianteSchema.find({dni:userdni})
+        const datos = await EstudianteSchema.find({usuario:user})
         if(datos.length>0){
             const match = await bcrypt.compare(contra,datos[0].contraseña)
             if(match){
-                res.json({"msg":"ACCESO VALIDO"})   
+                res.json({"msg":true})   
             }else{
-                res.json({"msg":"CONTRASEÑA INVALIDA"})
+                res.json({"msg":false})
             }
                
         }else{
-            res.json({"msg":"NO SE ENCONTRO EL USUARIO"})
+            res.json({"msg":false})
         }
     }
 

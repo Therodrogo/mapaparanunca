@@ -3,9 +3,9 @@ const { Int32 } = require('bson')
 const mongoose = require('mongoose')
 const EstudianteSchema =mongoose.Schema({
     nombre:String,
-    dni:Number,
     contraseña:String,
-    carrera:String
+    carrera:String,
+    usuario:String
 
 },{
     versionKey:false

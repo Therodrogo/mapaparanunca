@@ -12,6 +12,8 @@
                     <button class="iniciar" @click="validar"> Validar</button>
                 </form>
             </div>
+            <div class="mensaje" v-if="estadoMensaje"></div>
+            <div class="mensaje" v-else></div>
         </div>
     </div>
   
@@ -24,10 +26,11 @@ export default {
     data(){
 
         return {
-        datosusuario:{
+            datosusuario:{
                 nombreusuario: null,
                 contraseña:""
-          }
+            },
+            estadoMensaje:null
             
         }
     },
@@ -37,11 +40,11 @@ export default {
     methods:{
         
         async validar(){
-        console.log("HOsdsadsad")  
         
         const res = await API.validarusuario(this.datosusuario)
+        this.estadoMensaje = res;
+        console.log(res)  
         
-        alert(res)
     }
        
     },
@@ -67,7 +70,11 @@ export default {
     transition: 0.5s;
 }
 
+.mensaje{
+    position: absolute;
+    color:#313C75;
 
+}
 .formBx{
     position: absolute;
     top: 0;
