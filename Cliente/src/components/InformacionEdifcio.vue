@@ -1,4 +1,3 @@
-
 <template>
 <div class="contenedor" >
   <v-card
@@ -27,36 +26,13 @@
     <v-card-title>Salas</v-card-title>
     <div class="infoSala">
 
-    
-      <v-chip-group
-        v-model="selection"
-        active-class="deep-purple accent-4 white--text"
-        column
-      >
-      
-        <v-chip>*Sala</v-chip>
-
-        <v-chip>*Sala</v-chip>
-
-        <v-chip>*Sala</v-chip>
-
-        <v-chip>*Sala</v-chip>
-
-      </v-chip-group>
-    </div>
-    <v-card-actions>
-      <div class="botonCerrar">
-        <button
-          color="deep-green lighten-2"
-          text
-          @click="reserve"
-          
-        >
-          Cerrar
-        </button>
+      <div class="contButton" v-for="item in salas" :key="item.id">
+        <button>{{ item }}</button>
       </div>
 
-    </v-card-actions>
+    </div>
+    <br>
+  
   </v-card>
   </div>
 </template>
@@ -87,6 +63,7 @@
       texto: String,
       urlFoto:String,
       descripcion:String,
+      salas:Array,
       
     }
     
@@ -127,9 +104,30 @@
   color: aliceblue;
 }
 button{
-  padding: 10% 20% 10% 20%;
-  border-radius: 10%;
+  
+  position: relative;
+  justify-content: center;
+  padding: 7%;
+  right: 10px;
+  margin: 0 0 0 10px;
+  border-radius: 50%;
+  font-size: 14px;
   transition: 0.5s;
+  width: 55px;
+  background-color: #313C75;
+  color: aliceblue;
+}
+button:hover{
+  background: #677EF5;
+
+}
+
+h2{
+  color: #313C75;
+}
+.contButton{
+  display: inline-block;
+  position: relative;
 }
 </style>
 

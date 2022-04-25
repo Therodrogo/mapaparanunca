@@ -5,11 +5,14 @@
       :texto="palabra"
       :urlFoto="urlFoto"
       :descripcion="descripcion"
+      :salas="salasEdificio"
       
     />
   </div>
   
   <div id="map" />
+
+
 </template>
 
 <script>
@@ -37,6 +40,7 @@ export default {
     var palabra = ref('hola');
     var urlFoto = ref('');
     var descripcion = ref('')
+    var salasEdificio = ref([])
     onMounted(() => {
       mapboxgl.accessToken =
         "pk.eyJ1IjoidGhlcm9kcm9nbyIsImEiOiJjbDIxYTNlMG4xNGlyM2puM3JuemU5ZThvIn0.JNkviaRn-Zb2qdTue-L4VQ";
@@ -152,9 +156,12 @@ export default {
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
         //crearRuta(rutaGim);
+
+
         palabra.value = 'Gimnasio';
         urlFoto.value = 'https://i.ibb.co/Pms6TPr/gimnacio.png'
         descripcion.value ="Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.  una galería de textos y de . "
+        salasEdificio.value = ['Sala 1','Sala 2','Sala 3'];
 
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
@@ -408,7 +415,8 @@ export default {
       muestrate,
       palabra,
       urlFoto,
-      descripcion
+      descripcion,
+      salasEdificio
     };
   },
 };
