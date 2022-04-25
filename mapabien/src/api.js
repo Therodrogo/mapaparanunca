@@ -14,5 +14,6 @@ export default class API{
         const res = await axios.post(url+'/login',datos)
         return res.data.msg
     }
+
     
 }

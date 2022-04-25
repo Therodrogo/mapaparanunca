@@ -1,14 +1,21 @@
 <template>
+  <InformacionEdifcio v-if="muestrate" />
   <div id="map" />
 </template>
 
 <script>
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
+import InformacionEdifcio from "./InformacionEdifcio.vue";
 
 export default {
+  components: {
+    InformacionEdifcio,
+  },
+
   setup() {
+    var muestrate = ref(true);
     onMounted(() => {
       mapboxgl.accessToken =
         "pk.eyJ1IjoidGhlcm9kcm9nbyIsImEiOiJjbDIxYTNlMG4xNGlyM2puM3JuemU5ZThvIn0.JNkviaRn-Zb2qdTue-L4VQ";
@@ -79,6 +86,7 @@ export default {
           marker.getElement().style.width = "30px";
           marker.getElement().style.height = "30px";
         });
+
         return marker;
       }
 
@@ -87,8 +95,8 @@ export default {
         const popup = new mapboxgl.Popup({ closeOnClick: false }).setText(
           "" + texto
         );
-        popup.setMaxWidth("relative")
-    
+        popup.setMaxWidth("relative");
+
         return popup;
       }
 
@@ -117,13 +125,16 @@ export default {
         [-71.22994108857104, -35.00287023559107],
         [-71.23001279480857, -35.00292253568179],
       ];
-      
-      
+
       gimnasio.getElement().addEventListener("click", () => {
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
-
+        muestrate.value = !muestrate.value;
         crearRuta(rutaGim);
+       
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
       });
       //Evento al cerrar el PopUp del Gim
       popUpGim.on("close", () => {
@@ -131,13 +142,14 @@ export default {
         map.removeLayer("gimnasio");
         map.removeSource("gimnasio");
       });
-     
+
       //Evento de pasar el mouse por encima
       gimnasio.getElement().addEventListener("mouseover", () => {
         gimnasio.getElement().style.width = "40px";
         gimnasio.getElement().style.height = "40px";
-        map.removeLayer()
-        
+        map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
         crearRuta(rutaGim);
       });
       //Evento de quitar el mouse de encima
@@ -147,7 +159,6 @@ export default {
         /* map.removeLayer('points')
         map.removeSource('point')
         map.removeImage("cat") */
-        
 
         map.removeLayer("gimnasio");
         map.removeSource("gimnasio");
@@ -178,7 +189,7 @@ export default {
 
       //Crea todos los edificios, la cree para podere minimizar el codigo de abajo :9
       crearMarkersEdificios();
-    
+
       function crearMarkersEdificios() {
         //Creación de Markers
 
@@ -342,6 +353,7 @@ export default {
         }       
       );
       } */
+
       function crearRuta(coordenadas) {
         map.addSource("gimnasio", {
           type: "geojson",
@@ -368,13 +380,10 @@ export default {
           },
         });
       }
-      
     });
-    return {};
+    return { muestrate };
   },
-  
 };
-
 </script>
 
 <style>

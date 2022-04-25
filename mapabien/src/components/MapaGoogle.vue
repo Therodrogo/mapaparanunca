@@ -1,5 +1,4 @@
 <template>
-
   <GMapMap 
     :center="center"
     :zoom="18"

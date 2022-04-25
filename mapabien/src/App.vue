@@ -1,7 +1,7 @@
 <template>
 
   <div id="contenedor">
-    <InformacionEdifcio/>
+   
     <MenuSuperior/>
     <MenuIzquierda 
 
@@ -20,7 +20,7 @@
 import MenuIzquierda from "./components/MenuIzquierda.vue";
 import MapaMapBox from "./components/MapaMapBox.vue";
 import MenuSuperior from "./components/MenuSuperior.vue";
-import InformacionEdifcio from "./components/InformacionEdifcio.vue";
+//import InformacionEdifcio from "./components/InformacionEdifcio.vue";
 
 
 export default {
@@ -29,7 +29,7 @@ export default {
     MenuIzquierda,
     MapaMapBox,
     MenuSuperior,
-    InformacionEdifcio
+    //InformacionEdifcio
 },
 };
 
