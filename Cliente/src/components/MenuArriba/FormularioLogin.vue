@@ -51,7 +51,6 @@ export default {
             swal ( "Oops" ,  "Datos invalidos." ,  "error" )
         }
         
-        
     }
        
     },

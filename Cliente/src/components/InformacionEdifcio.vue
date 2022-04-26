@@ -95,7 +95,7 @@ button {
   border-radius: 50%;
   font-size: 14px;
   transition: 0.5s;
-  width: 55px;
+  width: 70px;
   background-color: #313c75;
   color: aliceblue;
 }
