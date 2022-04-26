@@ -12,8 +12,7 @@
                     <button class="iniciar" @click="validar"> Validar</button>
                 </form>
             </div>
-            <div class="mensaje" v-if="estadoMensaje"></div>
-            <div class="mensaje" v-else></div>
+            
         </div>
     </div>
   
@@ -21,6 +20,7 @@
 
 <script>
 import API from "@/api"
+import swal from 'sweetalert';
 export default {
 
     data(){
@@ -43,7 +43,14 @@ export default {
         
         const res = await API.validarusuario(this.datosusuario)
         this.estadoMensaje = res;
-        console.log(res)  
+        if(this.estadoMensaje){
+            swal ( "Listo" ,  "Validacion exitosa." ,  "success" );
+
+        }
+        else{
+            swal ( "Oops" ,  "Datos invalidos." ,  "error" )
+        }
+        
         
     }
        

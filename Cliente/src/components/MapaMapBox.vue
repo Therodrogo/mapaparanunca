@@ -225,123 +225,357 @@ export default {
         //Creación de Markers
 
         //ENTRADA
+        
         var coordenada = [-71.229743, -35.001366];
-        agregarMarker(
+
+        var entrada = agregarMarker(
+
           "https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-entrance-usa-flatarticons-blue-flatarticons-2.png",
           coordenada,
-          crearPopUp("Entrada")
+          
         );
+
+       entrada.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+        palabra.value = 'Entrada';
+        urlFoto.value = ''
+        descripcion.value ="Entrada Principal Paradero"
+        salasEdificio.value = [''];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      }); 
+
+
 
         //MINAS
         coordenada = [-71.23095415504667, -35.00135123097902];
-        agregarMarker(
+       var minas = agregarMarker(
           "https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/4a90e2/external-mine-investment-kiranshastry-solid-kiranshastry.png",
           coordenada,
-          crearPopUp("Minas")
+        
         );
+
+       minas.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Minas';
+        urlFoto.value = ''
+        descripcion.value =""
+        salasEdificio.value = ['101','102','103','104','105','Lab 202','Lab 203'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
+
+
+
 
         //MECATRONICA
         coordenada = [-71.2290760294051, -35.00188500863207];
-        agregarMarker(
+        var mecatronica = agregarMarker(
           "https://img.icons8.com/ultraviolet/344/robot--v1.png",
           coordenada,
-          crearPopUp("Mecatronica")
+          
         );
+
+
+         mecatronica.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Mecatronica';
+        urlFoto.value = ''
+        descripcion.value =""
+        salasEdificio.value = ['T1','T2'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
+
 
         //MECANICA
         coordenada = [-71.22886378003142, -35.002003009634954];
-        agregarMarker(
+        var mecanica = agregarMarker(
           "https://img.icons8.com/office/344/car.png",
           coordenada,
-          crearPopUp("Mecanica")
+       
         );
+
+
+
+       mecanica.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Edificio de Mecanica';
+        urlFoto.value = 'https://i.ibb.co/NWgCrcv/mecanica.jpg'
+        descripcion.value =""
+        salasEdificio.value = ['T1','T2'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
+
+
+
 
         //CONSTRUCCION
-        coordenada = [-71.2291604784214, -35.003168465316016];
-        agregarMarker(
+          coordenada = [-71.2291604784214, -35.003168465316016];
+       var construccion = agregarMarker(
           "https://img.icons8.com/ultraviolet/344/hammer.png",
           coordenada,
-          crearPopUp("Construccion")
+    
         );
 
-        //OBRAS
-        coordenada = [-71.22907482062429, -35.00336695439614];
-        agregarMarker(
-          "https://img.icons8.com/ultraviolet/344/workers-male.png",
-          coordenada,
-          crearPopUp("Obras")
-        );
+
+       construccion.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Construccion';
+        urlFoto.value = 'https://i.ibb.co/6twvLCs/contruccion.jpg'
+        descripcion.value =""
+        salasEdificio.value = ['C-1','C-2','C-3','C-4','C-5','C-6'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
 
         //AUDITORIO
         coordenada = [-71.22915475374442, -35.00365484351161];
-        agregarMarker(
+        var auditorio = agregarMarker(
           "https://img.icons8.com/fluency-systems-filled/344/4a90e2/coliseum.png",
           coordenada,
-          crearPopUp("Auditorio")
+   
         );
 
-        //EDIFICIO AZUL
-        coordenada = [-71.22979433407157, -35.0017047386893];
-        agregarMarker(
+       auditorio.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+        palabra.value = 'Edificio I+D';
+        urlFoto.value = ''
+        descripcion.value =""
+        salasEdificio.value = ["7","Auditorio I+D"];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
+      //EDIFICIO AZUL
+         coordenada = [-71.22979433407157, -35.0017047386893];
+        var facultad = agregarMarker(
           "https://img.icons8.com/color/344/link-company-child.png",
           coordenada,
-          crearPopUp("Edificio Azul")
+         
         );
+
+       facultad.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Facultad';
+        urlFoto.value = 'https://i.ibb.co/d5bTFYw/facultad.jpg'
+        descripcion.value =""
+        salasEdificio.value = [''];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
 
         //EDIFICIO VERDE
         coordenada = [-71.22999896811982, -35.002471304966534];
-        agregarMarker(
+        var laboratorio = agregarMarker(
           "https://img.icons8.com/external-phatplus-solid-phatplus/344/4a90e2/external-laboratory-virus-transmission-phatplus-solid-phatplus.png",
           coordenada,
-          crearPopUp("Edificio Verde")
+        
         );
+
+      
+       laboratorio.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+        palabra.value = 'Edificio Verde';
+        urlFoto.value = 'https://i.ibb.co/zRDsdqN/laboratorios.jpg'
+        descripcion.value =""
+        salasEdificio.value = ['26','Lab 2','Lab 3'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
 
         //Servicio Estudiantil
         coordenada = [-71.22980662330485, -35.0020445830408];
-        agregarMarker(
+        var servicio = agregarMarker(
           "https://img.icons8.com/ios-glyphs/344/4a90e2/education.png",
           coordenada,
-          crearPopUp("Servicio Estudiantil")
+          
         );
+
+       servicio.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Servicio Estudiantil';
+        urlFoto.value = ''
+        descripcion.value =""
+        salasEdificio.value = ['S-1','S-2'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
 
         //Biblioteca
         coordenada = [-71.22892109676758, -35.00283153433725];
-        agregarMarker(
+        var biblioteca = agregarMarker(
           "https://img.icons8.com/ios-filled/344/4a90e2/library.png",
           coordenada,
-          crearPopUp("Biblioteca")
+       
         );
+
+       biblioteca.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+        palabra.value = 'Biblioteca';
+        urlFoto.value = 'https://i.ibb.co/ZgB8nWB/biblioteca.jpg'
+        descripcion.value =""
+        salasEdificio.value = ['Lab Universia'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
 
         //Electrica
         coordenada = [-71.23129613592188, -35.0020916923508];
-        agregarMarker(
+        var electrica = agregarMarker(
           "https://img.icons8.com/ios-filled/344/4a90e2/electrical.png",
           coordenada,
-          crearPopUp("Electrica")
+      
         );
+      
+       electrica.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+        palabra.value = 'Electrica';
+        urlFoto.value = 'https://i.ibb.co/Ld076dv/electrica.jpg'
+        descripcion.value =""
+        salasEdificio.value = [''];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
 
         //CABAÑA MADERA
         coordenada = [-71.22897841350172, -35.002423278615076];
-        agregarMarker(
+        var cabaña = agregarMarker(
           "https://img.icons8.com/external-icongeek26-glyph-icongeek26/344/4a90e2/external-cabin-russia-icongeek26-glyph-icongeek26.png",
           coordenada,
-          crearPopUp("Cabaña Madera")
+   
         );
 
+      
+       cabaña.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+        palabra.value = 'Cabaña Madera';
+        urlFoto.value = 'https://i.ibb.co/fYrzN2B/maderas.jpg'
+        descripcion.value =""
+        salasEdificio.value = ['E-1','E-2'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
         //SERVICIOS MULTIPLES
         coordenada = [-71.2302405610473, -35.00213003797558];
-        agregarMarker(
+        var multiples = agregarMarker(
           "https://img.icons8.com/external-glyph-wichaiwi/344/4a90e2/external-mathematics-statistical-analysis-glyph-wichaiwi.png",
           coordenada,
-          crearPopUp("Cabaña Madera")
+         
         );
+       multiples.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Servicios Multiples';
+        urlFoto.value = 'https://i.ibb.co/Nrq7VY0/multiples.jpg'
+        descripcion.value =""
+        salasEdificio.value = ['11','12','13','14','21','22','23','24'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
+
         //COE
         coordenada = [-71.22955876785723, -35.00311601562916];
-        agregarMarker(
+        var coe = agregarMarker(
           "https://img.icons8.com/ios-filled/344/4a90e2/book.png",
           coordenada,
-          crearPopUp("COE")
+        
         );
+
+      
+       coe.getElement().addEventListener("click", () => {
+        // map.zoomTo(20.01,[-71.230,-35.003] );
+        // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
+        muestrate.value = !muestrate.value;
+        //crearRuta(rutaGim);
+
+
+        palabra.value = 'Salas S';
+        urlFoto.value = 'https://i.ibb.co/Qj4pPQX/salasS.jpg'
+        descripcion.value =""
+        salasEdificio.value = ['S-3','S-4','S-5'];
+
+        // this.ahoraSi= API.cambiar(this.ahoraSi);
+        // this.borrar();
+      });
+
 
         const navegacionControl = new mapboxgl.NavigationControl();
         map.addControl(navegacionControl, "bottom-right");
