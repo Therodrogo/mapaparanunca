@@ -1,15 +1,19 @@
 <template>
     <div class="superior">
-        <v-img
-            lazy-src=""
-            max-height="55"
-            max-width="55"
-            src="https://i.ibb.co/rGZ37tq/logomapablanco.png"
-            class="logo"
-        >
-        </v-img>
-        <div class="panelIniciar">
-            
+        <div class="menuIzquierda">
+            <v-img
+                lazy-src=""
+                max-height="55"
+                max-width="55"
+                src="https://i.ibb.co/rGZ37tq/logomapablanco.png"
+                class="logo"
+                @click="mostrarIzquierda" 
+            >
+            </v-img>
+            <div class="izquierda" v-if="estadoIzquierda" >
+            <MenuIzquierda/>
+            </div>
+
         </div>
         <button class="botoniniciar" small elevation="" @click="mostrar" >
             <v-img
@@ -35,13 +39,17 @@
 
 <script>
 import FormularioLogin from "./MenuArriba/FormularioLogin.vue";
+import MenuIzquierda from "./MenuIzquierda.vue";
 export default {
-    components: { 
-        FormularioLogin 
-    },
+    components: {
+    FormularioLogin,
+    MenuIzquierda
+},
     data(){
         return{
-            estado: false
+            estado: false,
+            estadoIzquierda: false
+
         }
     },
     methods:{
@@ -55,12 +63,23 @@ export default {
                 this.estado = true;
             }
             
+        },
+        mostrarIzquierda(){
+
+            if(this.estadoIzquierda){
+
+                this.estadoIzquierda = false;
+            }
+            else{
+                this.estadoIzquierda = true;
+            }
+            
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 
 button .login{
     display: none;
@@ -81,33 +100,37 @@ button .login{
 
 .textIniciar{
     
-    top: 15%;
     width: 100px;
-    right: 120%;
+    top: 15%;
+    right: 100%;
     position: absolute;
     transition: 0.5s;
 }
 
 .superior{
+    
     position: relative;
     z-index: 10;
     background-color: #313C75;
     text-align: center;
     height: 50px;
+    width: 100%;
     color: aliceblue ;
     
 }
 
 .botoniniciar{
     
-    position: absolute;
-    left: 95%;
+    float: right;
+    display: flex;
+    justify-content: right;
+    position: relative;
+    bottom: 85%;
+    right: 6%;
     
     background: #313C75;
     width: 40px;
     height: 40px;
-
-    top: 5px;
     border-radius: 50%;
     transition: 0.5s;
     z-index: 6;
@@ -126,20 +149,22 @@ button .login{
 }
 
 #iconSesionSuperios{
-    position: absolute;
     width: 30px;
     height: 30px;
 
-    bottom: 15%;
-    right: 14%;
 
 }
 
+.menuIzquierda{
+    
+}
+
 .logo{
-    top: 15%;
+    padding: 10px 0 0 0;
     left: 0.6%;
     position: relative;
     z-index: 7;
+    cursor: pointer;
 }
 
 </style>
