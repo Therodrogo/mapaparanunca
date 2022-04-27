@@ -55,8 +55,6 @@ export default {
        
     },
 
-   
-
 }
 
 
@@ -65,32 +63,24 @@ export default {
 <style scoped>
 
 .container{
-    position: absolute;
-    top: 7.5%;
-    left: 74.5%;
-    justify-content: center;
-    z-index: 40;
-    transition: 0.5s;
-    width: 50%;
-    height: 50%;
+    float: right;
+    display: flex;
+    justify-content: right;
+    max-width: 50vh;
+    width: 50vh;
+    height: 350px;
+    right: 90%;
+
+    z-index: 50;
     transition: 0.5s;
 }
 
-.mensaje{
-    position: absolute;
-    color:#313C75;
-
-}
 .formBx{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
+ 
     background: rgba(255, 255, 255, 0.7);
-    z-index: 11;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    right: 3%;
+    z-index: 32;
     transition: 0.5s;
 
     border-radius: 3%;
@@ -100,21 +90,18 @@ export default {
 }
 
 .formBx .form{
-    position: absolute;
-    left: 0;
-    width: 100%;
+
     padding: 50px;
     transition: 0.5s;
 }
 
 .formBx .form form{
-    width: 100%;
+    float: center;
     display: flex;
     flex-direction: column;
 }
 
 .formBx .form form h3{
-
     font-size: 1.5em;
     color: #313C75;
     margin-bottom: 20px;
@@ -122,7 +109,6 @@ export default {
 }
 
 .formBx .form form input{
-    width: 100%;
     margin-bottom: 20px;
     padding: 10px;
     outline: none;
@@ -132,12 +118,13 @@ export default {
     
 }
 .iniciar{
+
     background: #313C75;
     border: none;
     max-height: 100px;
     cursor: pointer;
     max-width: 50%;
-     width: 100%;
+    width: 100%;
     margin-bottom: 20px;
     padding: 10px;
     outline: none;

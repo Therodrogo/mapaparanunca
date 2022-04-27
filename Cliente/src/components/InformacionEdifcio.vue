@@ -1,17 +1,19 @@
 <template>
  <div class="contenedor" >
-    <v-responsive min-width="100" >
-   
-      <v-card max-width="374" v-if="visibleTarjeta">
-        <v-img height="150" :src="urlFoto"></v-img>
+    
+      <div class="carta">
+        
+      <v-card v-if="visibleTarjeta">
+        <button @click="reserve" class="botonCerrar">X</button>
 
+        <v-img height="150" :src="urlFoto"></v-img>
+        
         <div class="infoSuperior">
           <h2>{{ texto }}</h2>
           <div>• {{ texto }}. Curico, los Niches</div>
           <br />
           <div>Descripcion: {{ descripcion }}</div>
         </div>
-
         <v-divider class="mx-4"></v-divider>
 
         <v-card-title>Salas</v-card-title>
@@ -22,8 +24,8 @@
         </div>
         <br />
       </v-card>
+      </div>
      
-    </v-responsive>
      </div>
 
 </template>
@@ -57,13 +59,25 @@ export default {
 
 <style scoped>
 .contenedor {
-  position: absolute;
-  top: 10%;
-  left: 81%;
+  
+  float: right;
+  display: flex;
+  justify-content: right;
+  margin: 10px 0 0 0;
+  position: relative;
+  width: 40vh;
+  height: 60%;
   z-index: 30;
-  justify-content: center;
   transition: 0.5s;
 }
+.carta{
+
+  width: 50vh;
+  height: 60%;
+  position: relative;
+  left: 3%;
+}
+
 .imagenCard {
   top: 10%;
   margin-top: 10px;
@@ -78,18 +92,27 @@ export default {
 }
 
 .botonCerrar {
+  transition: 0.5s;
+  float: right;
   text-align: center;
-  padding: 0 0 0 37%;
-  border-radius: 5%;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 90%;
+  background: #ffffff;
+  color: #313c75;
+  
+  padding: 0 0 0 0;
+  border-radius: 50%;
+  z-index: 60;
 }
-.botonCerrar button:hover {
-  background: crimson;
-  color: aliceblue;
-}
-button {
+
+.contButton {
   position: relative;
+  text-align: center;
   justify-content: center;
-  padding: 7%;
+  
+  padding:2.5%;
   right: 10px;
   margin: 0 0 0 10px;
   border-radius: 50%;
@@ -99,7 +122,7 @@ button {
   background-color: #313c75;
   color: aliceblue;
 }
-button:hover {
+.contButton:hover {
   background: #677ef5;
 }
 

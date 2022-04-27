@@ -4,7 +4,6 @@
   <div class="navegacion">
     <ul>
       <li  class="selectMenu" >
-        
         <SelectMenu/>
       </li>
       <li class="list">
@@ -87,6 +86,8 @@ export default {
     }
   
    .navegacion{
+    float: left;
+    display: flex;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
