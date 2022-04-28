@@ -604,6 +604,6 @@ export default {
   width: 100%;
   height: 100%;
   bottom: 1px;
-  z-index: 5;
+  z-index: 9;
 }
 </style>

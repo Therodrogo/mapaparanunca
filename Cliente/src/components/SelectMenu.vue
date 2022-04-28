@@ -2,14 +2,25 @@
   <div @click="select" class="select">
       <input type="text" class="textBox" placeholder="Seleccionar edificio" readonly>
       <div class="option">
-      <div @click="show('Edificio de mina')">Edificio de mina</div>
-      <div @click="show('Edificio de bienestar')">Edificio de bienestar</div>
+
+          <div v-for="nombreEdificio in items" :key="nombreEdificio.id">
+              <div @click="show(nombreEdificio)">{{nombreEdificio}}</div>
+          </div>
+         
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
+
+    data(){
+        return{
+            nombreEdificio:"Edificio de mina",
+            items:["1","2"]
+        }
+    },
 
     methods:{
         show(anything){
@@ -19,7 +30,7 @@ export default {
             var dropdown = document.querySelector('.select');
             dropdown.onclick = function (){
                 dropdown.classList.toggle('active');
-            }
+            }            
         }
 
     }
@@ -28,12 +39,6 @@ export default {
 </script>
 
 <style scoped>
-body{
-
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
 
 .select{
     position: relative;

@@ -9,7 +9,8 @@
                     <input type="password" placeholder="Contraseña" v-model="datosusuario.contraseña">
                     <h4>¿Olvidate tu contraseña?</h4>
                     <br>
-                    <button class="iniciar" @click="validar"> Validar</button>
+                    <button class="iniciar" @click="notifica"> Validar</button>
+                                  
                 </form>
             </div>
             
@@ -21,40 +22,40 @@
 <script>
 import API from "@/api"
 import swal from 'sweetalert';
+
 export default {
-
-    data(){
-
+    data() {
         return {
-            datosusuario:{
+            datosusuario: {
                 nombreusuario: null,
-                contraseña:""
+                contraseña: ""
             },
-            estadoMensaje:null
+            estadoMensaje: null
+        };
+    },
+    props: {
+        estado: Boolean,
+    },
+    methods: {
+        async validar() {
+            const res = await API.validarusuario(this.datosusuario);
+            this.estadoMensaje = res;
+            if (this.estadoMensaje) {
+                swal("Listo", "Validacion exitosa.", "success");
+            }
+            else {
+                swal("Oops", "Datos invalidos.", "error");
+            }
+        },
+        notifica(){
+            const message = "hola";
             
+            return{message}
         }
+        
     },
-    props:{
-        estado:Boolean,
-    },
-    methods:{
-        
-        async validar(){
-        
-        const res = await API.validarusuario(this.datosusuario)
-        this.estadoMensaje = res;
-        if(this.estadoMensaje){
-            swal ( "Listo" ,  "Validacion exitosa." ,  "success" );
-
-        }
-        else{
-            swal ( "Oops" ,  "Datos invalidos." ,  "error" )
-        }
-        
+    components: {
     }
-       
-    },
-
 }
 
 
@@ -64,28 +65,23 @@ export default {
 
 .container{
     float: right;
-    display: flex;
-    justify-content: right;
-    max-width: 50vh;
-    width: 50vh;
+    display: inline-block;
+    box-sizing: border-box;
+    width: auto;
     height: 350px;
-    right: 90%;
-
     z-index: 50;
     transition: 0.5s;
 }
 
 .formBx{
- 
+    display: inline-block;
     background: rgba(255, 255, 255, 0.7);
     position: relative;
-    right: 3%;
+    margin: 10px;
     z-index: 32;
     transition: 0.5s;
 
-    border-radius: 3%;
-    border-color: #313C75;
-    border: 10px;
+    border-radius: 5%;
     
 }
 
@@ -118,14 +114,11 @@ export default {
     
 }
 .iniciar{
-
     background: #313C75;
     border: none;
-    max-height: 100px;
     cursor: pointer;
-    max-width: 50%;
-    width: 100%;
-    margin-bottom: 20px;
+    margin: 0 50px 0 50px;
+    width: 150px;
     padding: 10px;
     outline: none;
     font-size:16px;

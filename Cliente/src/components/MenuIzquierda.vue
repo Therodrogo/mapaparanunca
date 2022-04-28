@@ -1,6 +1,5 @@
 <template>
-  <div class="menuIzquierda" >
-  
+
   <div class="navegacion">
     <ul>
       <li  class="selectMenu" >
@@ -15,10 +14,10 @@
         </router-link>
       </li>
       <li class="list">
-        <router-link to="/about">
+        <router-link to="/menuEstudiante">
         <a >
           <span class="icon"><ion-icon name="funnel"></ion-icon></span>
-          <span class="titulo">Mapa</span>
+          <span class="titulo">Menu Estudiante</span>
         </a>
         </router-link>
       </li>
@@ -32,13 +31,6 @@
 
   </div>
 
-
-  <div class="Vista">
-
-      <router-view/>
-
-  </div>
-</div>
   
 
 </template>
@@ -61,9 +53,6 @@ export default {
     setup() {
     },
     methods: {
-        escribir() {
-            alert("hola");
-        },
         
     },
     components: { 
@@ -73,36 +62,20 @@ export default {
 </script>
 
 <style scoped>
-    .Vista{
 
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      position: absolute;
-
-      top: 0;
-      bottom: 0;
-      display: block;
-    }
-  
    .navegacion{
-    float: left;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-    color: rgb(38, 64, 87);
+  
     
-    z-index: 20;
-
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    color: rgb(38, 64, 87);
     width: 70px;
-    height: 93vh;
+    height: 93.7vh;
     background: #313C75;
-   
     overflow-x: hidden ;
     transition: 0.5s;
+
+    
   }
 
   .navegacion:hover {

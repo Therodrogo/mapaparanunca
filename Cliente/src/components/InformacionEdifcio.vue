@@ -1,12 +1,12 @@
 <template>
  <div class="contenedor" >
-    
-      <div class="carta">
+    <div class="carta">
         
-      <v-card v-if="visibleTarjeta">
+      <div v-if="visibleTarjeta">
+
         <button @click="reserve" class="botonCerrar">X</button>
 
-        <v-img height="150" :src="urlFoto"></v-img>
+        <img height="150" :src="urlFoto">
         
         <div class="infoSuperior">
           <h2>{{ texto }}</h2>
@@ -14,19 +14,21 @@
           <br />
           <div>Descripcion: {{ descripcion }}</div>
         </div>
-        <v-divider class="mx-4"></v-divider>
 
-        <v-card-title>Salas</v-card-title>
-        <div class="infoSala">
+        <div v-if="salas != '---'" class="infoSala">
+          <h3>Salas</h3>
           <div class="contButton" v-for="item in salas" :key="item.id">
             <button>{{ item }}</button>
           </div>
         </div>
+
         <br />
-      </v-card>
+
       </div>
+
+    </div>
      
-     </div>
+  </div>
 
 </template>
 
@@ -58,79 +60,60 @@ export default {
 
 
 <style scoped>
-.contenedor {
-  
+
+.carta{
   float: right;
-  display: flex;
-  justify-content: right;
-  margin: 10px 0 0 0;
   position: relative;
-  width: 40vh;
-  height: 60%;
+  max-width: 300px;
+  margin: 5px 50px 0 0;
   z-index: 30;
   transition: 0.5s;
-}
-.carta{
-
-  width: 50vh;
-  height: 60%;
-  position: relative;
-  left: 3%;
-}
-
-.imagenCard {
-  top: 10%;
-  margin-top: 10px;
-}
-
-.infoSuperior {
-  padding: 20px;
-}
-
-.infoSala {
-  padding: 0 0 0 20px;
+  background: rgb(255, 255, 255);
 }
 
 .botonCerrar {
   transition: 0.5s;
-  float: right;
-  text-align: center;
   position: absolute;
+
+  margin: 0 0 0 90%;
   width: 30px;
   height: 30px;
-  left: 90%;
-  background: #ffffff;
-  color: #313c75;
-  
-  padding: 0 0 0 0;
+  background: #313c75;
+  color: white;
   border-radius: 50%;
   z-index: 60;
 }
 
+
 .contButton {
   position: relative;
   text-align: center;
-  justify-content: center;
+  display: inline-block;
   
-  padding:2.5%;
-  right: 10px;
-  margin: 0 0 0 10px;
+  
+  padding: 10px;
+  margin: 0 2px 0 5px ;
+  
   border-radius: 50%;
   font-size: 14px;
   transition: 0.5s;
-  width: 70px;
+  width: auto;
   background-color: #313c75;
   color: aliceblue;
 }
+
 .contButton:hover {
   background: #677ef5;
 }
 
-h2 {
+.infoSuperior {
+  padding: 10px;
   color: #313c75;
 }
-.contButton {
-  display: inline-block;
-  position: relative;
+
+h3{
+  padding: 10px;
+  color: #313c75;
 }
+
 </style>
