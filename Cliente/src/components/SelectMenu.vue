@@ -1,37 +1,49 @@
 <template>
-  <div @click="select" class="select">
-      <input type="text" class="textBox" placeholder="Seleccionar edificio" readonly>
-      <div class="option">
-
-          <div v-for="nombreEdificio in items" :key="nombreEdificio.id">
-              <div @click="show(nombreEdificio)">{{nombreEdificio}}</div>
-          </div>
-         
-
+  <div class="contenedor">
+      <div @click="select" class="select">
+        <input type="text" class="textBox" placeholder="Seleccionar edificio" readonly>
+        <div class="option">
+            <div v-for="item in edificios" :key="item.id">
+                <div @click="show(item)">{{item}}</div>
+            </div> 
+        </div>
+        <div class="salas" v-for="item in salasEd" :key="item.id">
+            <div @click="show(item)">{{item}}</div>
+            123123
+        </div>
     </div>
+
   </div>
 </template>
 
 <script>
+import API from "@/api"
 export default {
-
     data(){
         return{
-            nombreEdificio:"Edificio de mina",
-            items:["1","2"]
+            edificios: [],
+            salasEd:[],
+      
+
         }
     },
-
     methods:{
-        show(anything){
-            document.querySelector('.textBox').value = anything;
+        async show(anything){
+            const EdificioSeleccionado=document.querySelector('.textBox').value = anything;
+            
+            this.salasEd= API.getSalasByName(EdificioSeleccionado)
         },
-        select(){
+        async select(){
+            this.edificios = await API.getEdificios()
+            
             var dropdown = document.querySelector('.select');
+            
             dropdown.onclick = function (){
                 dropdown.classList.toggle('active');
-            }            
-        }
+               
+            }
+        },
+        
 
     }
 
@@ -39,6 +51,14 @@ export default {
 </script>
 
 <style scoped>
+.salas{
+  position: absolute;
+  z-index: 1000;
+  display: block;
+  top: 0;
+  left: 0;
+}
+body{
 
 .select{
     position: relative;

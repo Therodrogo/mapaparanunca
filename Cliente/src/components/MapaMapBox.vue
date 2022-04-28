@@ -17,10 +17,16 @@
 </template>
 
 <script>
+var muestrate = ref(false);
+    var palabra = ref('hola');
+    var urlFoto = ref('');
+    var descripcion = ref('')
+    var salasEdificio = ref([])
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted, ref } from "vue";
 import InformacionEdifcio from "./InformacionEdifcio.vue";
+import API from "@/api"
 
 export default {
   components: {
@@ -28,20 +34,17 @@ export default {
   },
   data(){
     return{
-      estado: false
+      estado: false,
+      salas2: []
 
     }
   },
   methods:{
-    
+     
   },
-
+  
   setup() {
-    var muestrate = ref(false);
-    var palabra = ref('hola');
-    var urlFoto = ref('');
-    var descripcion = ref('')
-    var salasEdificio = ref([])
+    
     onMounted(() => {
       mapboxgl.accessToken =
         "pk.eyJ1IjoidGhlcm9kcm9nbyIsImEiOiJjbDIxYTNlMG4xNGlyM2puM3JuemU5ZThvIn0.JNkviaRn-Zb2qdTue-L4VQ";
@@ -125,7 +128,7 @@ export default {
 
         return popup;
       }
-
+     
       //Gimnasio (Está separado de los demas porque tiene la linea)
       var coordenada = [-71.23020173932005, -35.00298450172138];
       var popUpGim = crearPopUp("Gimnasio");
@@ -240,11 +243,11 @@ export default {
         muestrate.value = !muestrate.value;
         //crearRuta(rutaGim);
 
-        palabra.value = 'Minas';
+        palabra.value = 'Edificio Minas';
         urlFoto.value = 'https://i.ibb.co/zZC4j59/minas.png'
         descripcion.value =""
-        salasEdificio.value = ['101','102','103','104','105','Lab 202','Lab 203'];
-
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
@@ -266,10 +269,11 @@ export default {
         //crearRuta(rutaGim);
 
 
-        palabra.value = 'Mecánica';
+        palabra.value = 'Edificio de Mecanica';
         urlFoto.value = 'https://i.ibb.co/7tSm92s/mecanica.png'
         descripcion.value ="Incluye a Mecatrónica"
-        salasEdificio.value = ['T1','T2'];
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
 
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
@@ -280,7 +284,7 @@ export default {
 
 
         //CONSTRUCCION
-          coordenada = [-71.2291604784214, -35.003168465316016];
+        coordenada = [-71.2291604784214, -35.003168465316016];
        var construccion = agregarMarker(
           "https://img.icons8.com/ultraviolet/344/hammer.png",
           coordenada,
@@ -295,10 +299,15 @@ export default {
         //crearRuta(rutaGim);
 
 
-        palabra.value = 'Construcción';
+        palabra.value = 'Edificio Construccion';
         urlFoto.value = 'https://i.ibb.co/D9rc60t/construccion.png'
         descripcion.value ="Incluye a Obras Civiles"
-        salasEdificio.value = ['C-1','C-2','C-3','C-4','C-5','C-6'];
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
+
+
+       
+  
 
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
@@ -320,8 +329,8 @@ export default {
         palabra.value = 'Edificio I+D';
         urlFoto.value = 'https://i.ibb.co/Ct9530g/ID.png'
         descripcion.value ="Edificio de intercambio de idiomas"
-        salasEdificio.value = ["7","Auditorio I+D"];
-
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
@@ -344,7 +353,7 @@ export default {
         palabra.value = 'Facultad de Ingeniería';
         urlFoto.value = 'https://i.ibb.co/dKb7b8b/facultad.png'
         descripcion.value ="Solo administrativo"
-        //salasEdificio.value = [''];
+        salasEdificio.value = ['---'];
 
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
@@ -364,13 +373,13 @@ export default {
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
-        //crearRuta(rutaGim);
+        //crearRuta(rutaGim);C
 
-        palabra.value = 'Laboratorios';
+        palabra.value = 'Edificios Laboratorios';
         urlFoto.value = 'https://i.ibb.co/ZJjwCRx/laboratorio.png'
         descripcion.value =""
-        salasEdificio.value = ['26','Lab 2','Lab 3'];
-
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
@@ -391,11 +400,11 @@ export default {
         //crearRuta(rutaGim);
 
 
-        palabra.value = 'Bienestar Estudiantil';
+        palabra.value = 'Edificio Estudiantil';
         urlFoto.value = 'https://i.ibb.co/0YHF0hD/bienestar.png'
         descripcion.value =""
-        salasEdificio.value = ['S-1','S-2'];
-
+        API.getSalasByName(palabra.value)
+       salasEdificio.value =API.getSalas()
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
@@ -418,8 +427,8 @@ export default {
         palabra.value = 'Biblioteca';
         urlFoto.value = 'https://i.ibb.co/R6WsF6Z/biblioteca.png'
         descripcion.value ="Al lado de esta es el auditorio."
-        salasEdificio.value = ['Lab Universia',"Auditorio JO"];
-
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
@@ -463,8 +472,8 @@ export default {
         palabra.value = 'Salas de Madera';
         urlFoto.value = 'https://i.ibb.co/ZdrjXrt/maderas.png'
         descripcion.value =""
-        salasEdificio.value = ['E-1','E-2'];
-
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
@@ -482,10 +491,11 @@ export default {
         //crearRuta(rutaGim);
 
 
-        palabra.value = 'Servicios Múltiples';
+        palabra.value = 'Servicios Multiples';
         urlFoto.value = 'https://i.ibb.co/7C8VYBR/multiples.png'
         descripcion.value =""
-        salasEdificio.value = ['11','12','13','14','21','22','23','24'];
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
 
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
@@ -508,11 +518,11 @@ export default {
         //crearRuta(rutaGim);
 
 
-        palabra.value = 'Salas S';
+        palabra.value = 'Edificio Salas S';
         urlFoto.value = 'https://i.ibb.co/D4BCFSf/salasS.png'
         descripcion.value =""
-        salasEdificio.value = ['S-3','S-4','S-5'];
-
+        API.getSalasByName(palabra.value)
+        salasEdificio.value =API.getSalas()
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
