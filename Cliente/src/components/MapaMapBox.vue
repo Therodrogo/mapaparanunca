@@ -1,3 +1,7 @@
+
+
+
+
 <template>
 <div>
   <div v-if="muestrate">
@@ -119,6 +123,53 @@ export default {
         return marker;
       }
 
+
+function agregarMarker2(coordenada) {
+        //Elemento
+        var el = document.createElement("div");
+        el.className = "marker";
+        el.style.backgroundImage = `url(` + "https://img.icons8.com/fluency/344/marker-a.png" + `)`;
+        el.style.width = "100px";
+        el.style.height = "100px";
+        el.style.backgroundSize = "100%";
+
+        //Marker
+        const marker = new mapboxgl.Marker(el);
+        marker.setLngLat(coordenada);
+       marker.addTo(map);
+        
+
+        //Eventos Marker
+        //Evento de pasar el mouse por encima
+        marker.getElement().addEventListener("mouseover", () => {
+          marker.getElement().style.width = "40px";
+          marker.getElement().style.height = "40px";
+          
+         
+        });
+        //Evento de quitar el mouse de encima
+        marker.getElement().addEventListener("mouseleave", () => {
+          marker.getElement().style.width = "80px";
+          marker.getElement().style.height = "80px";
+           marker.remove();
+        });
+
+        return marker;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       // Funcion que crea y devuelve un Popup, la uso para enviar Popups a la funcion agregarMarker. Se le entrega el texto que se quiere usar.
       function crearPopUp(texto) {
         const popup = new mapboxgl.Popup({ closeOnClick: false }).setText(
@@ -131,6 +182,7 @@ export default {
      
       //Gimnasio (Está separado de los demas porque tiene la linea)
       var coordenada = [-71.23020173932005, -35.00298450172138];
+      var coordenada1 = coordenada
       var popUpGim = crearPopUp("Gimnasio");
       var gimnasio = agregarMarker(
         "https://img.icons8.com/ios-filled/344/4a90e2/gum-.png",
@@ -156,6 +208,11 @@ export default {
       ];
 
       gimnasio.getElement().addEventListener("click", () => {
+
+        gimnasio = agregarMarker2(
+          coordenada1,
+         );
+
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -205,7 +262,8 @@ export default {
         //ENTRADA
         
         var coordenada = [-71.229743, -35.001366];
-
+        var coordenada2 = coordenada
+        //var entrada2
         var entrada = agregarMarker(
 
           "https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-entrance-usa-flatarticons-blue-flatarticons-2.png",
@@ -214,10 +272,20 @@ export default {
         );
 
        entrada.getElement().addEventListener("click", () => {
+
+
+         entrada = agregarMarker2(
+            
+          coordenada2,
+         );
+     
+         
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
         //crearRuta(rutaGim);
+
+
         palabra.value = 'Entrada';
         urlFoto.value = ''
         descripcion.value ="Entrada Principal Paradero"
@@ -228,9 +296,16 @@ export default {
       }); 
 
 
+        
+
+
+
+
+
 
         //MINAS
         coordenada = [-71.23095415504667, -35.00135123097902];
+        var coordenada3 = coordenada
        var minas = agregarMarker(
           "https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/4a90e2/external-mine-investment-kiranshastry-solid-kiranshastry.png",
           coordenada,
@@ -238,6 +313,11 @@ export default {
         );
 
        minas.getElement().addEventListener("click", () => {
+
+
+      minas = agregarMarker2(
+          coordenada3,
+         );
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -254,22 +334,27 @@ export default {
 
         //MECANICA
         coordenada = [-71.22886378003142, -35.002003009634954];
+        var coordenada4 = coordenada
         var mecanica = agregarMarker(
           "https://img.icons8.com/ultraviolet/344/robot--v1.png",
           coordenada,
        
         );
 
-
-
        mecanica.getElement().addEventListener("click", () => {
+
+
+         mecanica = agregarMarker2(
+          coordenada4,
+         );
+
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
         //crearRuta(rutaGim);
 
 
-        palabra.value = 'Edificio de Mecanica';
+        palabra.value = 'Edificio de Mecánica';
         urlFoto.value = 'https://i.ibb.co/7tSm92s/mecanica.png'
         descripcion.value ="Incluye a Mecatrónica"
         API.getSalasByName(palabra.value)
@@ -285,6 +370,7 @@ export default {
 
         //CONSTRUCCION
         coordenada = [-71.2291604784214, -35.003168465316016];
+        var coordenada5 = coordenada
        var construccion = agregarMarker(
           "https://img.icons8.com/ultraviolet/344/hammer.png",
           coordenada,
@@ -293,6 +379,11 @@ export default {
 
 
        construccion.getElement().addEventListener("click", () => {
+        
+        construccion = agregarMarker2(
+          coordenada5,
+         );
+        
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -315,6 +406,7 @@ export default {
 
         //AUDITORIO
         coordenada = [-71.22915475374442, -35.00365484351161];
+        var coordenada6 = coordenada
         var auditorio = agregarMarker(
           "https://img.icons8.com/fluency-systems-filled/344/4a90e2/coliseum.png",
           coordenada,
@@ -322,6 +414,11 @@ export default {
         );
 
        auditorio.getElement().addEventListener("click", () => {
+        
+        auditorio = agregarMarker2(
+          coordenada6,
+         );
+        
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -337,6 +434,7 @@ export default {
 
       //EDIFICIO AZUL
          coordenada = [-71.22979433407157, -35.0017047386893];
+        var coordenada7 = coordenada
         var facultad = agregarMarker(
           "https://img.icons8.com/color/344/link-company-child.png",
           coordenada,
@@ -344,6 +442,9 @@ export default {
         );
 
        facultad.getElement().addEventListener("click", () => {
+         facultad = agregarMarker2(
+          coordenada7,
+         );
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -362,6 +463,7 @@ export default {
 
         //EDIFICIO VERDE
         coordenada = [-71.22999896811982, -35.002471304966534];
+        var coordenada8 = coordenada
         var laboratorio = agregarMarker(
           "https://img.icons8.com/external-phatplus-solid-phatplus/344/4a90e2/external-laboratory-virus-transmission-phatplus-solid-phatplus.png",
           coordenada,
@@ -370,6 +472,9 @@ export default {
 
       
        laboratorio.getElement().addEventListener("click", () => {
+         laboratorio = agregarMarker2(
+          coordenada8,
+         );
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -387,6 +492,7 @@ export default {
 
         //Bienestar Estudiantil
         coordenada = [-71.22980662330485, -35.0020445830408];
+        var coordenada9 = coordenada
         var bienestar = agregarMarker(
           "https://img.icons8.com/ios-glyphs/344/4a90e2/education.png",
           coordenada,
@@ -394,6 +500,10 @@ export default {
         );
 
        bienestar.getElement().addEventListener("click", () => {
+        
+        bienestar = agregarMarker2(
+          coordenada9,
+         );
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -412,6 +522,7 @@ export default {
 
         //Biblioteca
         coordenada = [-71.22892109676758, -35.00283153433725];
+        var coordenada10 = coordenada
         var biblioteca = agregarMarker(
           "https://img.icons8.com/ios-filled/344/4a90e2/library.png",
           coordenada,
@@ -419,6 +530,9 @@ export default {
         );
 
        biblioteca.getElement().addEventListener("click", () => {
+         biblioteca = agregarMarker2(
+          coordenada10,
+         );
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -436,6 +550,7 @@ export default {
 
         //Electrica
         coordenada = [-71.23129613592188, -35.0020916923508];
+        var coordenada11 = coordenada
         var electrica = agregarMarker(
           "https://img.icons8.com/ios-filled/344/4a90e2/electrical.png",
           coordenada,
@@ -443,6 +558,9 @@ export default {
         );
       
        electrica.getElement().addEventListener("click", () => {
+         electrica = agregarMarker2(
+          coordenada11,
+         );
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -459,12 +577,17 @@ export default {
 
         //CABAÑA MADERA
         coordenada = [-71.22897841350172, -35.002423278615076];
+        var coordenada12 = coordenada
         var cabaña = agregarMarker(
           "https://img.icons8.com/external-icongeek26-glyph-icongeek26/344/4a90e2/external-cabin-russia-icongeek26-glyph-icongeek26.png",
           coordenada,
         );
 
        cabaña.getElement().addEventListener("click", () => {
+        
+        cabaña = agregarMarker2(
+          coordenada12,
+         );
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
@@ -479,19 +602,25 @@ export default {
       });
         //SERVICIOS MULTIPLES
         coordenada = [-71.2302405610473, -35.00213003797558];
+        var coordenada13 = coordenada
         var multiples = agregarMarker(
           "https://img.icons8.com/external-glyph-wichaiwi/344/4a90e2/external-mathematics-statistical-analysis-glyph-wichaiwi.png",
           coordenada,
          
         );
        multiples.getElement().addEventListener("click", () => {
+        
+        multiples = agregarMarker2(
+          coordenada13,
+         );
+        
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
         //crearRuta(rutaGim);
 
 
-        palabra.value = 'Servicios Multiples';
+        palabra.value = 'Servicios Múltiples';
         urlFoto.value = 'https://i.ibb.co/7C8VYBR/multiples.png'
         descripcion.value =""
         API.getSalasByName(palabra.value)
@@ -504,6 +633,7 @@ export default {
 
         //COE
         coordenada = [-71.22955876785723, -35.00311601562916];
+        var coordenada14 = coordenada
         var coe = agregarMarker(
           "https://img.icons8.com/ios-filled/344/4a90e2/book.png",
           coordenada,
@@ -512,6 +642,11 @@ export default {
 
       
        coe.getElement().addEventListener("click", () => {
+
+         coe = agregarMarker2(
+          coordenada14,
+         );
+
         // map.zoomTo(20.01,[-71.230,-35.003] );
         // AÑADIR UNA LINEA DESDE LA ENTRADA AL GIMNASIO LETS GOOOOOOOO
         muestrate.value = !muestrate.value;
