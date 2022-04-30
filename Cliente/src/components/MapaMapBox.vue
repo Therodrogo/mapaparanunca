@@ -1,12 +1,9 @@
-
-
-
-
 <template>
 <div>
   <div v-if="muestrate">
 
     <InformacionEdifcio 
+      @reserve='porfaFunca'
       :texto="palabra"
       :urlFoto="urlFoto"
       :descripcion="descripcion"
@@ -44,7 +41,11 @@ export default {
     }
   },
   methods:{
-     
+     porfaFunca() {
+       muestrate.value = false;
+        
+
+    },
   },
   
   setup() {

@@ -2,9 +2,9 @@
  <div class="contenedor" >
     <div class="carta">
         
-      <div v-if="visibleTarjeta">
+      <div>
 
-        <button @click="reserve" class="botonCerrar">X</button>
+        <button @click="$emit('reserve')" class="botonCerrar">X</button>
 
         <img height="150" :src="urlFoto">
         
@@ -41,12 +41,7 @@ export default {
   },
   methods: {
     reserve() {
-      if (this.visibleTarjeta) {
-        this.visibleTarjeta = false;
-        return this.visibleTarjeta;
-      } else {
-        this.visibleTarjeta = true;
-      }
+        console.log("hola")
     },
   },
   props: {
