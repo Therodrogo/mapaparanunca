@@ -39,11 +39,15 @@ export default {
       visibleTarjeta: true,
     };
   },
+
+
   methods: {
     reserve() {
         console.log("hola")
     },
   },
+
+
   props: {
     texto: String,
     urlFoto: String,
@@ -55,6 +59,7 @@ export default {
 
 
 <style scoped>
+
 
 .carta{
   float: right;

@@ -5,13 +5,17 @@
       <li  class="selectMenu" >
         <div @click="select" class="select">
         <input type="text" class="textBox" placeholder="Seleccionar edificio" readonly>
+      
           <div class="option">
+      
               <div v-for="item in edificios" :key="item.id">
+      
                   <div @click="show(item)">{{item}}</div>
               </div> 
           </div>
         </div>
       </li>
+
       <div v-for="item in salasEd" :key="item.id">
         
           <li class="list">

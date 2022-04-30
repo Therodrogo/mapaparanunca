@@ -140,7 +140,6 @@ export default {
 
       ];
 
-
       var rutaServicios = [
 
       [-71.2298233007792, -35.00143899197872],
@@ -179,6 +178,105 @@ export default {
       [-71.2299648552229, -35.00215679416221],
       [-71.22987195863358, -35.0020941376216],
 
+      ];
+
+
+      var rutaMecanica = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.22966668399202, -35.00152555052829],
+      [-71.22957473963915, -35.00165948121822],
+      [-71.22953127853357, -35.00171203942961],
+      [-71.22957788179929, -35.00196723409351],
+      [-71.22930435440557, -35.00200224927064],
+
+      ];
+
+       var rutaMadera = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.22966668399202, -35.00152555052829],
+      [-71.22957473963915, -35.00165948121822],
+      [-71.22953127853357, -35.00171203942961],
+      [-71.22957788179929, -35.00196723409351],
+      [-71.22960524943633, -35.00227816243585],
+      [-71.22918303449315, -35.00229276353653],
+      [-71.22918285679283, -35.002432941780604],
+
+      ];
+
+      var rutaBiblioteca = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.22966668399202, -35.00152555052829],
+      [-71.22957473963915, -35.00165948121822],
+      [-71.22953127853357, -35.00171203942961],
+      [-71.22957788179929, -35.00196723409351],
+      [-71.22960524943633, -35.00227816243585],
+      [-71.22918303449315, -35.00229276353653],
+      [-71.22918285679283, -35.002432941780604],
+      [-71.22923422760054, -35.0026246840524],
+      [-71.22926874666773, -35.002786165078085],
+      [-71.22907345985259, -35.00277597906019],
+
+      ];
+
+    
+      var rutaConstruccion = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.22966668399202, -35.00152555052829],
+      [-71.22957473963915, -35.00165948121822],
+      [-71.22953127853357, -35.00171203942961],
+      [-71.22957788179929, -35.00196723409351],
+      [-71.22960524943633, -35.00227816243585],
+      [-71.22918303449315, -35.00229276353653],
+      [-71.22918285679283, -35.002432941780604],
+      [-71.22923422760054, -35.0026246840524],
+      [-71.22926874666773, -35.002786165078085],
+      [-71.22929745823224, -35.00309002393213],
+      [-71.22923676280632, -35.00309556924854],
+      ];
+
+    var rutaCoe = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.22966668399202, -35.00152555052829],
+      [-71.22957473963915, -35.00165948121822],
+      [-71.22953127853357, -35.00171203942961],
+      [-71.22957788179929, -35.00196723409351],
+      [-71.22960524943633, -35.00227816243585],
+      [-71.22918303449315, -35.00229276353653],
+      [-71.22918285679283, -35.002432941780604],
+      [-71.22923422760054, -35.0026246840524],
+      [-71.22926874666773, -35.002786165078085],
+      [-71.22929745823224, -35.00309002393213],
+      [-71.22945247939512, -35.003023665224916],
+      ];
+
+     
+
+        var rutaAuditorio = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.22966668399202, -35.00152555052829],
+      [-71.22957473963915, -35.00165948121822],
+      [-71.22953127853357, -35.00171203942961],
+      [-71.22957788179929, -35.00196723409351],
+      [-71.22960524943633, -35.00227816243585],
+      [-71.22918303449315, -35.00229276353653],
+      [-71.22918285679283, -35.002432941780604],
+      [-71.22923422760054, -35.0026246840524],
+      [-71.22926874666773, -35.002786165078085],
+      [-71.22929745823224, -35.00309002393213],
+      [-71.22937793942175, -35.00351024908504],
+      [-71.22926381368141, -35.003548230175646],
       ];
 
 
@@ -484,6 +582,32 @@ export default {
           // this.borrar();
         });
 
+
+      //Evento de pasar el mouse por encima
+      mecanica.getElement().addEventListener("mouseover", () => {
+        mecanica.getElement().style.width = "40px";
+        mecanica.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaMecanica);
+      });
+      //Evento de quitar el mouse de encima
+      mecanica.getElement().addEventListener("mouseleave", () => {
+        mecanica.getElement().style.width = "30px";
+        mecanica.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
+
         //CONSTRUCCION
         coordenada = [-71.2291604784214, -35.003168465316016];
         var coordenada5 = coordenada;
@@ -510,6 +634,30 @@ export default {
           // this.borrar();
         });
 
+
+      //Evento de pasar el mouse por encima
+      construccion.getElement().addEventListener("mouseover", () => {
+        construccion.getElement().style.width = "40px";
+        construccion.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaConstruccion);
+      });
+      //Evento de quitar el mouse de encima
+      construccion.getElement().addEventListener("mouseleave", () => {
+        construccion.getElement().style.width = "30px";
+        construccion.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
         //AUDITORIO
         coordenada = [-71.22915475374442, -35.00365484351161];
         var coordenada6 = coordenada;
@@ -533,6 +681,29 @@ export default {
           // this.ahoraSi= API.cambiar(this.ahoraSi);
           // this.borrar();
         });
+
+      //Evento de pasar el mouse por encima
+      auditorio.getElement().addEventListener("mouseover", () => {
+        auditorio.getElement().style.width = "40px";
+        auditorio.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaAuditorio);
+      });
+      //Evento de quitar el mouse de encima
+      auditorio.getElement().addEventListener("mouseleave", () => {
+        auditorio.getElement().style.width = "30px";
+        auditorio.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
 
         //EDIFICIO AZUL
         coordenada = [-71.22979433407157, -35.0017047386893];
@@ -710,6 +881,33 @@ export default {
           // this.borrar();
         });
 
+
+      
+      //Evento de pasar el mouse por encima
+      biblioteca.getElement().addEventListener("mouseover", () => {
+        biblioteca.getElement().style.width = "40px";
+        biblioteca.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaBiblioteca);
+      });
+      //Evento de quitar el mouse de encima
+      biblioteca.getElement().addEventListener("mouseleave", () => {
+        biblioteca.getElement().style.width = "30px";
+        biblioteca.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
+
         //Electrica
         coordenada = [-71.23129613592188, -35.0020916923508];
         var coordenada11 = coordenada;
@@ -783,6 +981,28 @@ export default {
         });
 
 
+      //Evento de pasar el mouse por encima
+      cabaña.getElement().addEventListener("mouseover", () => {
+        cabaña.getElement().style.width = "40px";
+        cabaña.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaMadera);
+      });
+      //Evento de quitar el mouse de encima
+      cabaña.getElement().addEventListener("mouseleave", () => {
+        cabaña.getElement().style.width = "30px";
+        cabaña.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
 
         //SERVICIOS MULTIPLES
         coordenada = [-71.2302405610473, -35.00213003797558];
@@ -833,11 +1053,6 @@ export default {
       });
 
 
-
-
-
-
-
         //COE
         coordenada = [-71.22955876785723, -35.00311601562916];
         var coordenada14 = coordenada;
@@ -862,6 +1077,28 @@ export default {
           // this.ahoraSi= API.cambiar(this.ahoraSi);
           // this.borrar();
         });
+
+        
+//Evento de pasar el mouse por encima
+      coe.getElement().addEventListener("mouseover", () => {
+        coe.getElement().style.width = "40px";
+        coe.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaCoe);
+      });
+      //Evento de quitar el mouse de encima
+      coe.getElement().addEventListener("mouseleave", () => {
+        coe.getElement().style.width = "30px";
+        coe.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
 
         const navegacionControl = new mapboxgl.NavigationControl();
         map.addControl(navegacionControl, "bottom-right");
