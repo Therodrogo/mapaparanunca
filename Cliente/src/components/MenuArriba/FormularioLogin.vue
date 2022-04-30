@@ -9,7 +9,7 @@
                     <input type="password" placeholder="Contraseña" v-model="datosusuario.contraseña">
                     <h4>¿Olvidate tu contraseña?</h4>
                     <br>
-                    <button class="iniciar" @click="notifica"> Validar</button>
+                    <button class="iniciar" @click="validar"> Validar</button>
                                   
                 </form>
             </div>
@@ -38,8 +38,11 @@ export default {
     },
     methods: {
         async validar() {
+            
             const res = await API.validarusuario(this.datosusuario);
-            this.estadoMensaje = res;
+         
+            this.estadoMensaje = res.msg;
+            
             if (this.estadoMensaje) {
                 swal("Listo", "Validacion exitosa.", "success");
             }
