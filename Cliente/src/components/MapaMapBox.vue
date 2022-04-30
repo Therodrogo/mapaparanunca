@@ -102,6 +102,8 @@ export default {
         el.style.width = "30px";
         el.style.height = "30px";
         el.style.backgroundSize = "100%";
+     //   el.style.display="inline-block";
+       // el.style.position="absolute";
 
         //Marker
         const marker = new mapboxgl.Marker(el);
@@ -112,13 +114,20 @@ export default {
         //Eventos Marker
         //Evento de pasar el mouse por encima
         marker.getElement().addEventListener("mouseover", () => {
-          marker.getElement().style.width = "40px";
-          marker.getElement().style.height = "40px";
+          marker.getElement().style.width = "60px";
+          marker.getElement().style.height = "60px";
+          marker.getElement().style.transition = "0.2s"
+          marker.getElement().style.borderRadius = "50%"
+          marker.getElement().style.border="2px solid #313C75"
+          
+
         });
         //Evento de quitar el mouse de encima
         marker.getElement().addEventListener("mouseleave", () => {
           marker.getElement().style.width = "30px";
           marker.getElement().style.height = "30px";
+          marker.getElement().style.backgroundColor = "transparent"
+          marker.getElement().style.border="none"
         });
 
         return marker;
@@ -171,20 +180,11 @@ function agregarMarker2(coordenada) {
 
 
 
-      // Funcion que crea y devuelve un Popup, la uso para enviar Popups a la funcion agregarMarker. Se le entrega el texto que se quiere usar.
-      function crearPopUp(texto) {
-        const popup = new mapboxgl.Popup({ closeOnClick: false }).setText(
-          "" + texto
-        );
-        popup.setMaxWidth("relative");
 
-        return popup;
-      }
      
       //Gimnasio (Está separado de los demas porque tiene la linea)
       var coordenada = [-71.23020173932005, -35.00298450172138];
       var coordenada1 = coordenada
-      var popUpGim = crearPopUp("Gimnasio");
       var gimnasio = agregarMarker(
         "https://img.icons8.com/ios-filled/344/4a90e2/gum-.png",
         coordenada,
@@ -226,12 +226,7 @@ function agregarMarker2(coordenada) {
         // this.ahoraSi= API.cambiar(this.ahoraSi);
         // this.borrar();
       });
-      //Evento al cerrar el PopUp del Gim
-      popUpGim.on("close", () => {
-        // BORRAR LINEA
-        map.removeLayer("gimnasio");
-        map.removeSource("gimnasio");
-      });
+
 
       //Evento de pasar el mouse por encima
       gimnasio.getElement().addEventListener("mouseover", () => {
@@ -252,6 +247,7 @@ function agregarMarker2(coordenada) {
 
         map.removeLayer("gimnasio");
         map.removeSource("gimnasio");
+        
       });
 
       //Crea todos los edificios, la cree para podere minimizar el codigo de abajo :9
@@ -273,7 +269,6 @@ function agregarMarker2(coordenada) {
         );
 
        entrada.getElement().addEventListener("click", () => {
-
 
          entrada = agregarMarker2(
             
