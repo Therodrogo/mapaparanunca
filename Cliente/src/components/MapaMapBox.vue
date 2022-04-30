@@ -105,6 +105,84 @@ export default {
         [-71.23001279480857, -35.00292253568179],
       ];
 
+
+
+
+
+
+    //Array de puntos para crear la ruta
+      var rutaMinas = [
+
+        
+      [-71.2298300759532, -35.0013672395454],
+      [-71.22993785239609, -35.00152739372958],
+      [-71.23006243802695, -35.001430297309],
+      [-71.2303289637145, -35.00139488507754],
+      [-71.23047723995217, -35.00166001149221],
+      [-71.2307324944172, -35.00156315777015],
+      ];
+
+      var rutaElectrica = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.23009917540944, -35.00164324115647],
+      [-71.23053724496587, -35.001930434655876],
+      [-71.23104345240009, -35.00199115120302],
+
+      ];
+
+
+      var rutaAzul = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.22987727263055, -35.00158265261711]
+
+      ];
+
+
+      var rutaServicios = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.23008826962283, -35.00164920839233],
+      [-71.23043132480845, -35.001853432266245],
+      [-71.23034916645962, -35.00198013767335],
+
+      ];
+      
+
+      var rutaVerde = [
+
+        [-71.229743, -35.001366],
+        [-71.22994865395084, -35.00156334164443],
+        [-71.23051187712394, -35.0019471982832],
+        [-71.23052528816918, -35.00195818370616],
+        [-71.23055479246803, -35.00207462909723],
+        [-71.23054942805044, -35.00217789185287],
+        [-71.23053869921357, -35.00222622756549],
+        [-71.23034858114417, -35.002421101025526],
+        [-71.23011324890498, -35.00226721921394],
+        [-71.23002644743381, -35.002313370382424],
+      ];
+
+
+    var rutaEstudiantil = [
+
+      [-71.2298233007792, -35.00143899197872],
+      [-71.22995130982964, -35.00156027207657],
+      [-71.23008622828011, -35.00166547090775],
+      [-71.22998514872054, -35.00175377913221],
+      [-71.22996423292022, -35.00185760047318],
+      [-71.2299239707236, -35.001853553565105],
+      [-71.22996783953576, -35.00212726375251],
+      [-71.2299648552229, -35.00215679416221],
+      [-71.22987195863358, -35.0020941376216],
+
+      ];
+
+
+
       // Funcion que agrega un Marker al mapa, se le entrega el icono, la coordenada y un popup.
       function agregarMarker(icono, coordenada, popup) {
         //Elemento
@@ -355,6 +433,31 @@ export default {
           // this.borrar();
         });
 
+
+    //Evento de pasar el mouse por encima
+      minas.getElement().addEventListener("mouseover", () => {
+        minas.getElement().style.width = "40px";
+        minas.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaMinas);
+      });
+      //Evento de quitar el mouse de encima
+      minas.getElement().addEventListener("mouseleave", () => {
+        minas.getElement().style.width = "30px";
+        minas.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
         //MECANICA
         coordenada = [-71.22886378003142, -35.002003009634954];
         var coordenada4 = coordenada;
@@ -455,6 +558,32 @@ export default {
           // this.borrar();
         });
 
+
+//Evento de pasar el mouse por encima
+      facultad.getElement().addEventListener("mouseover", () => {
+        facultad.getElement().style.width = "40px";
+        facultad.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaAzul);
+      });
+      //Evento de quitar el mouse de encima
+      facultad.getElement().addEventListener("mouseleave", () => {
+        facultad.getElement().style.width = "30px";
+        facultad.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
+
         //EDIFICIO VERDE
         coordenada = [-71.22999896811982, -35.002471304966534];
         var coordenada8 = coordenada;
@@ -479,6 +608,33 @@ export default {
           // this.borrar();
         });
 
+
+      
+//Evento de pasar el mouse por encima
+      laboratorio.getElement().addEventListener("mouseover", () => {
+        laboratorio.getElement().style.width = "40px";
+        laboratorio.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaVerde);
+      });
+      //Evento de quitar el mouse de encima
+      laboratorio.getElement().addEventListener("mouseleave", () => {
+        laboratorio.getElement().style.width = "30px";
+        laboratorio.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
+
         //Bienestar Estudiantil
         coordenada = [-71.22980662330485, -35.0020445830408];
         var coordenada9 = coordenada;
@@ -502,6 +658,33 @@ export default {
           // this.ahoraSi= API.cambiar(this.ahoraSi);
           // this.borrar();
         });
+
+
+      //Evento de pasar el mouse por encima
+      bienestar.getElement().addEventListener("mouseover", () => {
+        bienestar.getElement().style.width = "40px";
+        bienestar.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaEstudiantil);
+      });
+      //Evento de quitar el mouse de encima
+      bienestar.getElement().addEventListener("mouseleave", () => {
+        bienestar.getElement().style.width = "30px";
+        bienestar.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
+
 
         //Biblioteca
         coordenada = [-71.22892109676758, -35.00283153433725];
@@ -551,6 +734,31 @@ export default {
           // this.borrar();
         });
 
+
+      //Evento de pasar el mouse por encima
+      electrica.getElement().addEventListener("mouseover", () => {
+        electrica.getElement().style.width = "40px";
+        electrica.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaElectrica);
+      });
+      //Evento de quitar el mouse de encima
+      electrica.getElement().addEventListener("mouseleave", () => {
+        electrica.getElement().style.width = "30px";
+        electrica.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
         //CABAÑA MADERA
         coordenada = [-71.22897841350172, -35.002423278615076];
         var coordenada12 = coordenada;
@@ -573,6 +781,9 @@ export default {
           // this.ahoraSi= API.cambiar(this.ahoraSi);
           // this.borrar();
         });
+
+
+
         //SERVICIOS MULTIPLES
         coordenada = [-71.2302405610473, -35.00213003797558];
         var coordenada13 = coordenada;
@@ -597,6 +808,35 @@ export default {
           // this.ahoraSi= API.cambiar(this.ahoraSi);
           // this.borrar();
         });
+
+
+
+//Evento de pasar el mouse por encima
+      multiples.getElement().addEventListener("mouseover", () => {
+        multiples.getElement().style.width = "40px";
+        multiples.getElement().style.height = "40px";
+        //map.removeLayer();
+        //var a = new InformacionEdifcio();
+        //a.visibleTarjeta();
+        crearRuta(rutaServicios);
+      });
+      //Evento de quitar el mouse de encima
+      multiples.getElement().addEventListener("mouseleave", () => {
+        multiples.getElement().style.width = "30px";
+        multiples.getElement().style.height = "30px";
+        /* map.removeLayer('points')
+        map.removeSource('point')
+        map.removeImage("cat") */
+
+        map.removeLayer("gimnasio");
+        map.removeSource("gimnasio");
+      });
+
+
+
+
+
+
 
         //COE
         coordenada = [-71.22955876785723, -35.00311601562916];
