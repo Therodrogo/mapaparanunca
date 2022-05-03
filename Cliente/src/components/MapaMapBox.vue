@@ -90,21 +90,15 @@ export default {
      
 
       // marker monito
-      var pop = new mapboxgl.Popup();
-      var el = document.createElement("div");
-      el.className = "marker";
-      el.style.backgroundImage =
-        `url(` + "https://img.icons8.com/ultraviolet/344/walking.png" + `)`;
-      el.style.width = "50px";
-      el.style.height = "50px";
-      el.style.backgroundSize = "100%";
+      
+      
       //   el.style.display="inline-block";
       // el.style.position="absolute";
 
       //Marker
-      const marker_monito = new mapboxgl.Marker(el);
+      const marker_monito = new mapboxgl.Marker();
       marker_monito.setLngLat([-71.23294338288471, -35.00200300963659]);
-      marker_monito.setPopup(pop);
+      
       marker_monito.addTo(map);
 
       marker_monito.setDraggable(true);
@@ -413,9 +407,6 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
         coordenada = [-71.22886378003142, -35.002003009634954];
         var coordenada4 = coordenada;
 
-
-
-
         
             //IZQUIERDA ARRIBA
             rutaIA = [
@@ -474,7 +465,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
         agregarEventoClick(
           mecanica,
           coordenada4,
-          "Edificio de Mecánica",
+          "Edificio de Mecanica",
           "https://i.ibb.co/7tSm92s/mecanica.png",
           "Incluye a Mecatrónica",
           true,
@@ -1022,7 +1013,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
         agregarEventoClick(
           multiples,
           coordenada13,
-          "Servicios Múltiples",
+          "Servicios Multiples",
           "https://i.ibb.co/7C8VYBR/multiples.png",
           "",
           true,
@@ -1140,7 +1131,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
             "line-cap": "round",
           },
           paint: {
-            "line-color": "#FFFF00",
+            "line-color": "#FF0000", //color rojo para la ruta
             "line-width": 4,
           },
         });
@@ -1169,8 +1160,8 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
           marker.getElement().style.width = "60px";
           marker.getElement().style.height = "60px";
           marker.getElement().style.transition = "0.2s";
-          marker.getElement().style.borderRadius = "50%";
-          marker.getElement().style.border = "2px solid #313C75";
+          marker.getElement().style.borderRadius = "25%";
+          marker.getElement().style.border = "2px solid red";
         });
         //Evento de quitar el mouse de encima
         marker.getElement().addEventListener("mouseleave", () => {
@@ -1178,6 +1169,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
           marker.getElement().style.height = "30px";
           marker.getElement().style.backgroundColor = "transparent";
           marker.getElement().style.border = "none";
+          marker.getElement().style.transition = "none";
         });
 
         return marker;
@@ -1188,7 +1180,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
         var el = document.createElement("div");
         el.className = "marker";
         el.style.backgroundImage =
-          `url(` + "https://img.icons8.com/fluency/344/marker-a.png" + `)`;
+          //`url(` + "https://img.icons8.com/fluency/344/marker-a.png" + `)`;
         el.style.width = "100px";
         el.style.height = "100px";
         el.style.backgroundSize = "100%";
@@ -1203,6 +1195,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
         marker.getElement().addEventListener("mouseover", () => {
           marker.getElement().style.width = "40px";
           marker.getElement().style.height = "40px";
+          //marker.remove();
         });
         //Evento de quitar el mouse de encima
         marker.getElement().addEventListener("mouseleave", () => {
@@ -1234,7 +1227,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
           descripcion.value = e_descripcion;
           //Tiene salas o no
           if (e_salas == false) {
-            salasEdificio.value = ["---"];
+           salasEdificio.value = ["---"];
           } else {
             API.getSalasByName(palabra.value);
             salasEdificio.value = API.getSalas();
