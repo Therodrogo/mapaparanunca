@@ -4,13 +4,12 @@
         <div class="formBx">
             <div class="form singinForm">
                 <form >
-                    <h3>Iniciar sesion</h3>
+                    <h3 >Iniciar sesion</h3>
                     <input type="usuario" placeholder="Usuario" v-model="datosusuario.nombreusuario">
                     <input type="password" placeholder="Contraseña" v-model="datosusuario.contraseña">
                     <h4>¿Olvidate tu contraseña?</h4>
                     <br>
-                    <button class="iniciar" @click="validar"> Validar</button>
-                                  
+                    <p class="iniciar" @click="$emit('notifica',datosusuario)"> Validar</p>
                 </form>
             </div>
             
@@ -20,8 +19,6 @@
 </template>
 
 <script>
-import API from "@/api"
-import swal from 'sweetalert';
 
 export default {
     data() {
@@ -30,30 +27,14 @@ export default {
                 nombreusuario: null,
                 contraseña: ""
             },
-            estadoMensaje: null
         };
     },
     props: {
         estado: Boolean,
+        prueba:Boolean
     },
     methods: {
-        async validar() {
-            
-            const res = await API.validarusuario(this.datosusuario);
-         
-            this.estadoMensaje = res.msg;
-            
-            if (this.estadoMensaje) {
-                swal("Listo", "Validacion exitosa.", "success");
-            }
-            else {
-                swal("Oops", "Datos invalidos.", "error");
-            }
-        },
         notifica(){
-            const message = "hola";
-            
-            return{message}
         }
         
     },
@@ -121,6 +102,7 @@ export default {
     border: none;
     cursor: pointer;
     margin: 0 50px 0 50px;
+    text-align: center;
     width: 150px;
     padding: 10px;
     outline: none;

@@ -32,7 +32,7 @@ module.exports = class API{
         if(datos.length>0){
             const match = await bcrypt.compare(contra,datos[0].contraseña)
             if(match){
-                if(datos.carrera!="N/A"){
+                if(datos[0].carrera!="N/A"){
                     res.json(
                         {
                             "msg":true,

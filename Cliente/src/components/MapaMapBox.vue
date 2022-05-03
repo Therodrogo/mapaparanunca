@@ -144,7 +144,6 @@ function agregarMarker2(coordenada) {
         marker.getElement().addEventListener("mouseover", () => {
           marker.getElement().style.width = "40px";
           marker.getElement().style.height = "40px";
-          
          
         });
         //Evento de quitar el mouse de encima

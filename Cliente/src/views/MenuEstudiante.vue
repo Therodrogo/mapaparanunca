@@ -3,7 +3,7 @@
     
     <MenuSuperior
       nombreUsuario="Rodrigo López"
-      menuEstudiante=true
+      estadoBotonMisCursos=true
     />
     <MapaMapBox/>
   </div>

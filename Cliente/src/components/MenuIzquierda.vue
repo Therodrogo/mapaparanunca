@@ -12,6 +12,7 @@
           </div>
         </div>
       </li>
+
       <div v-for="item in salasEd" :key="item.id">
         
           <li class="list">
@@ -177,12 +178,7 @@ export default {
     line-height: 60px;
     white-space: nowrap ;
   }
-body{
 
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
 
 .select{
     position: relative;
@@ -236,7 +232,7 @@ body{
     background: white;
     box-shadow: 0 30px 30px black;
     border-radius: 10px;
-    overflow: hidden; 
+    
     display: none;
     color: #333;
 }
@@ -252,5 +248,14 @@ body{
 .select .option div:hover{
     background: #677EF5;
     color: aliceblue;
+}
+
+.option{
+  display: inline-block;
+  box-sizing: border-box;
+  max-height: 200px;
+  
+  overflow-y: scroll;
+  
 }
 </style>
