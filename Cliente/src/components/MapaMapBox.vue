@@ -53,7 +53,13 @@ export default {
         zoom: 16.67,
         //scrollZoom: false
       });
+      map.on('click', function(e) {
 
+      
+
+      console.log("["+e.lngLat.lng+","+e.lngLat.lat+"]")
+
+      })
       map.on("load", () => {
         //Ruta desde la entrada al camino principal,
         //COMPLETA EL MAPA UN POCO
@@ -96,44 +102,16 @@ export default {
       // el.style.position="absolute";
 
       //Marker
-      const marker_monito = new mapboxgl.Marker();
-      marker_monito.setLngLat([-71.23294338288471, -35.00200300963659]);
+      const marker_monito = new mapboxgl.Marker();[-71.2297088791571,-35.00274229287036]
+      marker_monito.setLngLat([-71.2297088791571,-35.00274229287036]);
       
       marker_monito.addTo(map);
 
       marker_monito.setDraggable(true);
 
       /*MIENTRAS MAS ARRIBA MAYOR ES LA LAT*/
-      function ajustarRutaARRIBA(array) {
-        var aux = array;
-        var posicionMonito = marker_monito.getLngLat().toArray();
-        for (var i = 0; i < array.length - 1; i++) {
-          //Si el monito esta mas abajo se borra
-          if (posicionMonito[1] < array[i][1]) {
-            aux.splice(1, 1);
-           // console.log(posicionMonito[1] + "ES MENOR" + array[i][1]);
-           // var a = posicionMonito[0];
-           // console.log("algo " + a);
-            i = 0;
-          }
-        }
-        return aux;
-      }
-      function ajustarRutaABAJO(array) {
-        var aux = array;
-        var posicionMonito = marker_monito.getLngLat().toArray();
-        for (var i = 0; i < array.length - 1; i++) {
-          //Si el monito esta mas abajo se borra
-          if (posicionMonito[1] > array[i][1]) {
-            aux.splice(1, 1);
-           // console.log(posicionMonito[1] + "ES MENOR" + array[i][1]);
-           // var a = posicionMonito[0];
-           // console.log("algo " + a);
-            i = 0;
-          }
-        }
-        return aux;
-      }
+      
+      
       marker_monito.getElement().addEventListener("click", () => {
         
         var posi =
@@ -144,48 +122,7 @@ export default {
           "]";
           marker_monito.getPopup().setText("" + posi);
       });
-function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
         
-        var posicionActual = marker_monito.getLngLat().toArray();
-        //IZQUIERDA ARRIBA
-        var rutaDA = ruta_da
-        //DERECHA ARRIBA
-        var rutaIA = ruta_ia
-        //IZQUIERDA BAJO
-        var rutaIB = ruta_dn
-        //DERECHA BAJO
-        var rutaDB = ruta_db
-        //Si esta mas a la izquierda menor es el 71
-        
-        //"CENTRO DEL MAPA "[-71.2301832257236, -35.00255117047007]
-        if (posicionActual[0] < -71.2301832257236) {
-          console.log(posicionActual[0]+ " < " + -71.2301832257236)
-          //IZQUIERDA ARRIBA O ABAJO
-          if (posicionActual[1] > -35.00255117047007) {
-            rutaDA = ajustarRutaARRIBA(rutaDA);
-          } else {
-            //LAS DE ABAJO NO SE AJUSTAN
-            rutaDA = ajustarRutaABAJO(rutaIB);
-          }
-        } else {
-          
-          //console.log(posi2[0] + " > " + rutaDA[1][0]);
-            
-          //DERECHA ARRIBA O ABAJO
-          if (posicionActual[1] > -35.00255117047007) {
-            
-            console.log(posicionActual[1]+ " > " + -35.00255117047007)
-              rutaDA = ajustarRutaARRIBA(rutaIA);
-            
-         
-          } else {
-            //LAS DE ABAJO NO SE AJUSTAN
-             rutaDA = ajustarRutaABAJO(rutaDB);
-          }
-        }
-        return rutaDA
-       
-}
 /* function calcularRuta(ruta_da, ruta_ia, ruta_dn) {
         
         var posicionActual = marker_monito.getLngLat().toArray();
@@ -235,59 +172,13 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
         urlFoto.value = "https://i.ibb.co/RBtgwP3/gimnacio.png";
         descripcion.value = "Solo se imparten cursos deportivos";
         salasEdificio.value = ["Cancha"];
+        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
+        crearRuta(API.setGraphInfo(palabra.value))
  //IZQUIERDA ARRIBA
        
-        var posicionMonito = marker_monito.getLngLat().toArray();
-        var rutaIA = [
-          posicionMonito,
-          [-71.23115973050183, -35.00176534945205],
-          
-          [-71.23051187712394, -35.0019471982832],
-          [-71.23052528816918, -35.00195818370616],
-          [-71.23055479246803, -35.00207462909723],
-          [-71.23054942805044, -35.00217789185287],
-          [-71.23053869921357, -35.00222622756549],
-          [-71.23034858114417, -35.002421101025526],
-          [-71.23018757073696, -35.00266818850676],
-          [-71.23005813231264, -35.00274708842888],
-          [-71.22996781644146, -35.002752625461746],
-          [-71.22996030542906, -35.00281670990734],
-          [-71.22994108857104, -35.00287023559107],
-          [-71.23001279480857, -35.00292253568179],
-        ];
-        //DERECHA ARRIBA
-        var rutaDA = [
-          posicionMonito,
-          [-71.22956377876237, -35.00169995273425],
-          [-71.22952891004485, -35.00177685089545],
-          [-71.22960023329604, -35.00230147403637],
-          [-71.22962010515259, -35.00249529593951],
-          [-71.2299542258907, -35.002742077997155],
-          [-71.22993314064648, -35.00285230588381],
-          [-71.23001279480857, -35.00292253568179],
-        ];
-        //IZQUIERDA BAJO
-        var rutaIB = [
-          posicionMonito,
-          [-71.23102747443811, -35.00329176842333],
-          [-71.23097333409589, -35.00267933397523],
-          [-71.2308924163537, -35.002425253486656],
-          [-71.23041365304353, -35.0024031594937],
-          [-71.23008998207365, -35.00267933397523],
-          [-71.22989443086256, -35.002845038216385],
-          [-71.23001279480857, -35.00292253568179],
-        ];
-        //DERECHA BAJO
-        var rutaDB = [
-          posicionMonito,
-         [-71.22992919697471, -35.00416267978806],
-          [-71.22985502237773, -35.00320712943804],
-           [-71.22974713205409, -35.00289781595132],
-          [-71.2299542258907, -35.002742077997155],
-          [-71.22993314064648, -35.00285230588381],
-          [-71.23001279480857, -35.00292253568179],
-        ];
-       crearRuta(calcularRuta(rutaIA, rutaDA, rutaIB, rutaDB))
+        
+        
+       //crearRuta(calcularRuta(rutaIA, rutaDA, rutaIB, rutaDB))
 
        
         
@@ -1206,8 +1097,12 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
 
         return marker;
       }
-
-      function agregarEventoClick(
+      
+      async function getSalas(){
+            return await API.getSalasByName(palabra.value);
+            
+          }
+      async function agregarEventoClick(
         marker,
         e_coordenada,
         e_palabra,
@@ -1225,13 +1120,20 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
           palabra.value = e_palabra;
           urlFoto.value = e_url;
           descripcion.value = e_descripcion;
+           salasEdificio.value = getSalas()
           //Tiene salas o no
           if (e_salas == false) {
            salasEdificio.value = ["---"];
           } else {
-            API.getSalasByName(palabra.value);
-            salasEdificio.value = API.getSalas();
+            getSalas(palabra.value)
           }
+          API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
+          crearRuta(API.setGraphInfo(palabra.value))
+          
+          
+          
+          
+         
 
 
         var posicionMonito2 = marker_monito.getLngLat().toArray();
@@ -1259,7 +1161,7 @@ function calcularRuta(ruta_da, ruta_ia, ruta_dn, ruta_db) {
           e_rutaDB.forEach(element => {
             rutaDB.push(element)
           });
-          crearRuta(calcularRuta(rutaDA, rutaIA, rutaIB, rutaDB))
+          //crearRuta(calcularRuta(rutaDA, rutaIA, rutaIB, rutaDB))
          
 
         });
