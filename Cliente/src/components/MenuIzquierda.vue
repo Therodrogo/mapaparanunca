@@ -36,6 +36,7 @@
 <script >
 
 import API from "@/api"
+
 export default {
     data() {
         return {
@@ -72,11 +73,9 @@ export default {
             }
         }
         
-    },
-    components: { 
-  
     }
 }
+
 </script>
 
 <style scoped>
