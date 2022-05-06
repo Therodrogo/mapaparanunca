@@ -161,45 +161,10 @@ export default {
           map.removeLayer("ruta")
           map.removeSource("ruta")
         }
-<<<<<<< HEAD
 
         //Dejamos de destacar el edificio (Recorriendo la lista)
       
         desestacarMarkers();
-
-      });
-
-      //Gimnasio (Está separado de los demas porque tiene la linea)
-      var coordenada = [-71.23020173932005, -35.00298450172138];
-      var coordenada1 = coordenada;
-      var gimnasio = agregarMarker(
-        "https://img.icons8.com/ios-filled/344/4a90e2/gum-.png",
-        coordenada
-      );
-
-      //Agregamos el Gym a la lista de Markers
-      arrayMarkers.push(gimnasio);
-
-      gimnasio.getElement().addEventListener("click", () => {
-        gimnasio = agregarMarker2(coordenada1);
-        muestrate.value = !muestrate.value;
-        palabra.value = "Gimnasio";
-        urlFoto.value = "https://i.ibb.co/RBtgwP3/gimnacio.png";
-        descripcion.value = "Solo se imparten cursos deportivos";
-        salasEdificio.value = ["Cancha"];
-        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
-        crearRuta(API.setGraphInfo(palabra.value))
- //IZQUIERDA ARRIBA
-       
-        
-        
-       //crearRuta(calcularRuta(rutaIA, rutaDA, rutaIB, rutaDB))
-=======
-
-        //Dejamos de destacar el edificio (Recorriendo la lista)
-      
-        desestacarMarkers();
->>>>>>> CorregirDestacarEdificio
 
       });
 
@@ -1189,20 +1154,7 @@ export default {
         
         edificioDestacado=false;
       }
-<<<<<<< HEAD
-      function desestacarMarkers(){
-        for (let index = 0; index < arrayMarkers.length; index++) {
-          arrayMarkers[index].getElement().style.width = "30px";
-          arrayMarkers[index].getElement().style.height = "30px";
-          arrayMarkers[index].getElement().style.backgroundColor = "transparent";
-          arrayMarkers[index].getElement().style.border = "none";
-          arrayMarkers[index].getElement().style.transition = "none";
-        }
-        
-        edificioDestacado=false;
-      }
-=======
->>>>>>> CorregirDestacarEdificio
+
       async function getSalas(){
             salasEdificio.value = await API.getSalasByName(palabra.value);
             
