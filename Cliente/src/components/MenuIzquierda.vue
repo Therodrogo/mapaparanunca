@@ -9,26 +9,34 @@
               <div v-for="item in edificios" :key="item.id">
                   <div @click="show(item)">{{item}}</div>
               </div> 
+               
           </div>
         </div>
       </li>
 
-      <!-- <div v-for="item in salasEd" :key="item.id">
+      <div v-for="item in salasEd" :key="item.id">
         
           <li class="list">
           <router-link to="/">
-            <a >
+            <a @click="mostrarMONO">
               <span class="icon"><ion-icon name="list-box"></ion-icon></span>
               <span class="titulo">{{item}}</span>
+              
             </a>
+            
           </router-link>
+           
         </li>
-      </div> -->
+        
+      </div>
+        
 
     </ul>
+     
+  
 
   </div>
-
+    
   
 
 </template>
@@ -46,11 +54,6 @@ export default {
             salasEd:[],
 
         };
-    },
-    props: {
-        nombre: String,
-    },
-    setup() {
     },
     methods: {
         escribir() {
@@ -71,15 +74,27 @@ export default {
                 dropdown.classList.toggle('active');
                
             }
+        },
+        mostrarMONO(){
+          console.log("sadaskldmsalkdmaslk "+this.nombre);
         }
         
-    }
-}
+    },
+    props: {
+        nombre: String,
+        posMonito: String,
+    },
+  
+};
+
 
 </script>
 
 <style scoped>
 
+    .blanco{
+      color: aliceblue;
+    }
    .navegacion{
   
     

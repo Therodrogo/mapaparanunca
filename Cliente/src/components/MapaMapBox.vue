@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div>
+      <MenuSuperior
+        :posicionMono="monitomonito"  
+      />
+    </div>
     <div v-if="muestrate">
       <InformacionEdifcio
         @reserve="porfaFunca"
@@ -7,9 +12,11 @@
         :urlFoto="urlFoto"
         :descripcion="descripcion"
         :salas="salasEdificio"
+        :algoalgo="monitomonito"
       />
-    </div>
 
+    </div>
+    
     <div id="map" />
   </div>
 </template>
@@ -20,16 +27,19 @@ var palabra = ref("hola");
 var urlFoto = ref("");
 var descripcion = ref("");
 var salasEdificio = ref([]);
-
+var monitomonito = ref("lalalalala");
+var posiMonito = ref("lelel");
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted, ref } from "vue";
 import InformacionEdifcio from "./InformacionEdifcio.vue";
+import MenuSuperior from "./MenuSuperior.vue";
 import API from "@/api";
 
 export default {
   components: {
     InformacionEdifcio,
+    MenuSuperior,
   },
   data() {
     return {
@@ -42,7 +52,7 @@ export default {
     porfaFunca() {
 
       muestrate.value = false;
-      console.log("funca")
+      
       
     },
   },
@@ -124,7 +134,10 @@ export default {
       //Marker
       const marker_monito = new mapboxgl.Marker();[-71.2297088791571,-35.00274229287036]
       marker_monito.setLngLat([-71.2297088791571,-35.00274229287036]);
-      
+      monitomonito.value=""+marker_monito.getLngLat();
+      posiMonito.value=""+marker_monito.getLngLat();
+      //monitomonito.value="[-71.2297088791571,-35.00274229287036]";
+
       marker_monito.addTo(map);
 
       marker_monito.setDraggable(true);
@@ -178,6 +191,12 @@ export default {
         muestrate.value = false;
       });
 
+       marker_monito.on("dragend", (e) => {
+         console.log("event type:", e.type);
+        posiMonito.value=""+marker_monito.getLngLat();
+        monitomonito.value=""+marker_monito.getLngLat();
+        console.log("damedamne "+ posiMonito.value);
+      });
 
 
       //PROBANDO NUEVOS EVENTOS
@@ -1292,6 +1311,8 @@ export default {
       urlFoto,
       descripcion,
       salasEdificio,
+      monitomonito,
+      posiMonito,
     };
 
   },

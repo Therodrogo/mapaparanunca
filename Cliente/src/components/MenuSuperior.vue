@@ -4,7 +4,7 @@
             <p>Cerrar Sesion</p>
         </div>
         <img  @click="mostrarIzquierda" class="logo" src="https://i.ibb.co/rGZ37tq/logomapablanco.png" alt=""  height="37">
-        
+       
         <button class="botoniniciar" small elevation="" @click="mostrar" >
             <img class="user" src="https://i.ibb.co/VLJ6CsC/user.png" alt="" width="40">
             
@@ -20,7 +20,7 @@
                     Gestionar Edificios
                     <ion-icon name="briefcase"></ion-icon>
                 </button>
-                <button v-if="estadoBotonAdmin" class="botonOpAdmin"> 
+                <button @click="mostrarEditarCursos"  v-if="estadoBotonAdmin" class="botonOpAdmin"> 
                     Editar Cursos
                     <ion-icon name="book"></ion-icon>
                 </button>
@@ -33,11 +33,16 @@
         </div>
 
         <div v-if="estadoIzquierda">
-            <MenuIzquierda/>
+            <MenuIzquierda
+                :nombre="posicionMono"           
+            />
         </div>
 
         <div v-if="estadoMiscursos">
             <VistaEstudiante/>
+        </div>
+        <div v-if="estadoEditarCursos">
+            <GestionarCursos/>
         </div>
         
 
@@ -52,13 +57,15 @@
 import FormularioLogin from "./MenuArriba/FormularioLogin.vue";
 import MenuIzquierda from './MenuIzquierda.vue';
 import VistaEstudiante from "./MenuArriba/VistaEstudiante.vue";
+import GestionarCursos from "./MenuArriba/GestionarCursos.vue";
 import API from "@/api"
 import swal from "sweetalert";
 export default {
     components: {
     FormularioLogin,
     MenuIzquierda,
-    VistaEstudiante
+    VistaEstudiante,
+    GestionarCursos
 },
     data(){
         return{
@@ -75,6 +82,7 @@ export default {
             estadoMensaje:false,
             mostrarLogin:false,
             nombreUsuario:"Iniciar Sesion",
+            estadoEditarCursos:false,
 
 
         }
@@ -83,15 +91,17 @@ export default {
         
         menuEstudiante: Boolean,
         menuAdministrador: Boolean,
+        posicionMono: String,
     },
     methods:{
         mostrar(){
 
-            if(this.mostrarLogin && this.estadoBotonMisCursos==false || this.mostrarLogin &&  this.estadoBotonAdmin==false){
-
+            if(this.mostrarLogin && this.estadoBotonMisCursos==false || this.mostrarLogin &&  this.estadoBotonAdmin==false || this.mostrarLogin==false && this.estadoEditarCursos ){
+            console.log("SE CERRO ESTE MENU SE SUPONE PARA ACOMDODAR EL EDITAR CURSOS")    
                 this.mostrarLogin = false;
             }
             else{
+                
                 this.mostrarLogin = true;
             }
             
@@ -108,17 +118,31 @@ export default {
         },
         mostrarMiscursos(){
             if(this.estadoMiscursos){
-
+                console.log("FUNCAAAAA3");
                 this.estadoMiscursos = false;
             }
             else{
+                console.log("FUNCAAAAA4");
                 this.estadoMiscursos = true;
+            }
+            
+        },
+        mostrarEditarCursos(){
+            if(this.estadoEditarCursos){
+                    console.log("FUNCAAAAA2");
+                this.estadoEditarCursos = false;
+            }
+            else{
+                console.log("FUNCAAAAA");
+                
+                this.estadoEditarCursos = true;
             }
             
         },
         async validar(e) {
             
             const res = await API.validarusuario(e);
+           
             console.log(res)
             this.estadoMensaje = res.msg;
             
@@ -139,6 +163,8 @@ export default {
                 this.nombreUsuario = res.nombre
                 this.estadoBotonAdmin =true
                 this.mostrarLogin=false
+                
+                
             }
         },
         cerrarSesion(){
@@ -221,13 +247,15 @@ export default {
     background: #677EF5;
 } 
 
+/*BLOQUE LITERAL DE LOS BOTONES */
 .bloqueAdmin{
     display: flex;
     float: right;
-    background: #313C75;
+    background: #da7416;
+    /* background: #313C75; */
     position: relative;
 }
-
+/*BOTONES EN LA BARRA DEL ADMIN*/
 .botonOpAdmin{
     float: right;
     width: auto;

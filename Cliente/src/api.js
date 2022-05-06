@@ -6,6 +6,7 @@ var salas =[]
 var menorIndice
 var camino =[]
 
+
 var visitados =[]
 
 import { DijkstraCalculator } from 'dijkstra-calculator';
