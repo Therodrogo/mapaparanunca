@@ -4,53 +4,42 @@
         <div class="formBx">
             <div class="form singinForm">
                 <form >
-                    <h3>Iniciar sesion</h3>
+                    <h3 >Iniciar sesion</h3>
                     <input type="usuario" placeholder="Usuario" v-model="datosusuario.nombreusuario">
                     <input type="password" placeholder="Contraseña" v-model="datosusuario.contraseña">
                     <h4>¿Olvidate tu contraseña?</h4>
                     <br>
-                    <button class="iniciar" @click="validar"> Validar</button>
+                    <p class="iniciar" @click="$emit('notifica',datosusuario)"> Validar</p>
                 </form>
             </div>
-            <div class="mensaje" v-if="estadoMensaje"></div>
-            <div class="mensaje" v-else></div>
+            
         </div>
     </div>
   
 </template>
 
 <script>
-import API from "@/api"
+
 export default {
-
-    data(){
-
+    data() {
         return {
-            datosusuario:{
+            datosusuario: {
                 nombreusuario: null,
-                contraseña:""
+                contraseña: ""
             },
-            estadoMensaje:null
-            
+        };
+    },
+    props: {
+        estado: Boolean,
+        prueba:Boolean
+    },
+    methods: {
+        notifica(){
         }
+        
     },
-    props:{
-        estado:Boolean,
-    },
-    methods:{
-        
-        async validar(){
-        
-        const res = await API.validarusuario(this.datosusuario)
-        this.estadoMensaje = res;
-        console.log(res)  
-        
+    components: {
     }
-       
-    },
-
-   
-
 }
 
 
@@ -59,56 +48,40 @@ export default {
 <style scoped>
 
 .container{
-    position: absolute;
-    top: 7.5%;
-    left: 74.5%;
-    justify-content: center;
-    z-index: 40;
-    transition: 0.5s;
-    width: 50%;
-    height: 50%;
+    float: right;
+    display: inline-block;
+    box-sizing: border-box;
+    width: auto;
+    height: 350px;
+    z-index: 50;
     transition: 0.5s;
 }
 
-.mensaje{
-    position: absolute;
-    color:#313C75;
-
-}
 .formBx{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
+    display: inline-block;
     background: rgba(255, 255, 255, 0.7);
-    z-index: 11;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    margin: 10px;
+    z-index: 32;
     transition: 0.5s;
 
-    border-radius: 3%;
-    border-color: #313C75;
-    border: 10px;
+    border-radius: 5%;
     
 }
 
 .formBx .form{
-    position: absolute;
-    left: 0;
-    width: 100%;
+
     padding: 50px;
     transition: 0.5s;
 }
 
 .formBx .form form{
-    width: 100%;
+    float: center;
     display: flex;
     flex-direction: column;
 }
 
 .formBx .form form h3{
-
     font-size: 1.5em;
     color: #313C75;
     margin-bottom: 20px;
@@ -116,7 +89,6 @@ export default {
 }
 
 .formBx .form form input{
-    width: 100%;
     margin-bottom: 20px;
     padding: 10px;
     outline: none;
@@ -128,11 +100,10 @@ export default {
 .iniciar{
     background: #313C75;
     border: none;
-    max-height: 100px;
     cursor: pointer;
-    max-width: 50%;
-     width: 100%;
-    margin-bottom: 20px;
+    margin: 0 50px 0 50px;
+    text-align: center;
+    width: 150px;
     padding: 10px;
     outline: none;
     font-size:16px;

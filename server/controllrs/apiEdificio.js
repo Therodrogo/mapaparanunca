@@ -10,13 +10,21 @@ module.exports = class API{
         .catch((err)=>res.json({message:err}))
         
     }
-
+    
     //Obtener todos con datos.
     static async getAllEdificios( req,res){
-        EdificioSchema
-        .find().populate("salasID")      
-        .then((data)=>res.json(data))
-        .catch((err)=>res.json({message:err}))
+        const nombreEdificios = []
+        try {
+            const data = await EdificioSchema.find()  
+            data.forEach(element => {
+                nombreEdificios.push(element.nombre)
+            });
+            console.log(nombreEdificios)
+            res.json(nombreEdificios)
+        } catch (error) {
+            res.json(error)
+        }
+        
     }
     static async getEdificio( req,res){
         
@@ -28,12 +36,22 @@ module.exports = class API{
     }
     //Obtener edificio mediante ID de sala 
     static async getEdificioBySalaID( req,res){
+        try {
+            const nombre = req.params.nombre
+            const data = await EdificioSchema.findOne({nombre:nombre}).populate("salasID") 
+            const salas =[]
+    
+            data.salasID.forEach(element => {
+                
+                salas.push(element.nombre)
+            }); 
+            
         
-        const id = req.params.id
-        EdificioSchema
-        .findOne({_id:id}).populate("salasID") 
-        .then((data)=>res.json(data))
-        .catch((err)=>res.json({message:err}))
+            res.json(salas)
+        } catch (error) {
+            res.json(error)
+        }
+        
     }
     //Actualizar  mediante ID
     static async putEdificio( req,res){

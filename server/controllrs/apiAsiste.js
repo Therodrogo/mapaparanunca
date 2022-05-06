@@ -1,3 +1,4 @@
+const { log } = require('console')
 const AsisteSchema = require('../models/Asiste')
 
 
@@ -39,7 +40,7 @@ module.exports = class API{
     static async getAsisteByIdEstudiante( req,res){
         
         const id = req.params.id
-        await AsisteSchema
+        const datos = await AsisteSchema
         .find({estudiantes:id}).populate(
             [
                 {
@@ -47,9 +48,26 @@ module.exports = class API{
                     select: ['nombre','dni']
                 }
             ]   
+        ).populate(
+            [
+                {
+                    path:"id_sala",
+                    select: ['nombre']
+                }
+            ]   
+
+        ).populate(
+            [
+                {
+                    path:"id_curso",
+                    select: ['nombre']
+                }
+            ]   
+
         )
-        .then((data)=>res.json(data))
-        .catch((err)=>res.json({message:err}))
+        console.log(datos[0])
+        
+        
     }
     //Descripcion: ...
     //Entradas:...

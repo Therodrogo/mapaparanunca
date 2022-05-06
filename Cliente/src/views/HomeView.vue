@@ -1,26 +1,27 @@
 
 <template>
-  <MenuSuperior/>
-  <MenuIzquierda/>
-  <MapaMapBox/>
-
+  <div>
+    <MenuSuperior
+      nombreUsuario="Iniciar Sesion"
+    />
+    <MapaMapBox/>
+    
+  </div>
   
 
 </template>
 
 <script>
 
-import MenuIzquierda from '@/components/MenuIzquierda.vue';
-import MapaMapBox from '@/components/MapaMapBox.vue';
 import MenuSuperior from '@/components/MenuSuperior.vue';
+import MapaMapBox from '@/components/MapaMapBox.vue';
 
 export default {
   
   name: 'HomeView',
   components: {
-    MapaMapBox,
-    MenuIzquierda,
     MenuSuperior,
-}
+    MapaMapBox
+  }
 }
 </script>

@@ -1,135 +1,114 @@
 <template>
-<div class="contenedor" >
-  <v-card
-    max-width="374"
-    v-if="visibleTarjeta"
-  >
+ <div class="contenedor" >
+    <div class="carta">
+        
+      <div>
 
-    <v-img
-      height="150"
-      :src="urlFoto"
-    ></v-img>
-      <div class="infoSuperior">
-        <h2>  {{texto}}</h2>
-        <div >
-          • {{texto}}.  Curico, los Niches
+        <button @click="$emit('reserve')" class="botonCerrar">X</button>
+
+        <img height="150" :src="urlFoto">
+        
+        <div class="infoSuperior">
+          <h2>{{ texto }}</h2>
+          <div>• {{ texto }}. Curico, los Niches</div>
+          <br />
+          <div>Descripcion: {{ descripcion }}</div>
         </div>
-        <br>
-        <div>Descripcion: {{descripcion}}</div>
-      </div>
-      
-      
-    
 
-    <v-divider class="mx-4"></v-divider>
+        <div v-if="salas != '---'" class="infoSala">
+          <h3>Salas</h3>
+          <div class="contButton" v-for="item in salas" :key="item.id">
+            <button>{{ item }}</button>
+          </div>
+        </div>
 
-    <v-card-title>Salas</v-card-title>
-    <div class="infoSala">
+        <br />
 
-      <div class="contButton" v-for="item in salas" :key="item.id">
-        <button>{{ item }}</button>
       </div>
 
     </div>
-    <br>
-  
-  </v-card>
+     
   </div>
+
 </template>
 
 <script>
-  export default {
-    data(){
-      return{
-        visibleTarjeta:true,
-      }
-      
-      
+export default {
+  data() {
+    return {
+      visibleTarjeta: true,
+    };
+  },
+  methods: {
+    reserve() {
+        console.log("hola")
     },
-    methods: {
-      
-      reserve(){
-        if(this.visibleTarjeta){
-          this.visibleTarjeta=false;
-          return this.visibleTarjeta;
-        }
-        else{
-          this.visibleTarjeta=true;
-        }
-        
-      },
-    },
-    props:{
-      texto: String,
-      urlFoto:String,
-      descripcion:String,
-      salas:Array,
-      
-    }
-    
-  }
-
+  },
+  props: {
+    texto: String,
+    urlFoto: String,
+    descripcion: String,
+    salas: Array,
+  },
+};
 </script>
 
 
 <style scoped>
-.contenedor {
-  position: absolute;
-  top: 7%;
-  left: 80%;
-  width: 300px;
-  height: 300px;
-  z-index: 30;
-  justify-content: center;
-  transition: 0.5s;
-}
 
-.infoSuperior{
-
-  padding: 20px;
-}
-
-.infoSala{
-  padding: 0 0 0 20px;
-}
-
-.botonCerrar{
-  text-align: center;
-  padding: 0 0 0 37%;
-  border-radius: 5%;
-}
-.botonCerrar button:hover{
-
-  background: crimson;
-  color: aliceblue;
-}
-button{
-  
+.carta{
+  float: right;
   position: relative;
-  justify-content: center;
-  padding: 7%;
-  right: 10px;
-  margin: 0 0 0 10px;
+  max-width: 300px;
+  margin: 5px 50px 0 0;
+  z-index: 30;
+  transition: 0.5s;
+  background: rgb(255, 255, 255);
+}
+
+.botonCerrar {
+  transition: 0.5s;
+  position: absolute;
+
+  margin: 0 0 0 90%;
+  width: 30px;
+  height: 30px;
+  background: #313c75;
+  color: white;
+  border-radius: 50%;
+  z-index: 60;
+}
+
+
+.contButton {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  
+  
+  padding: 10px;
+  margin: 0 2px 0 5px ;
+  
   border-radius: 50%;
   font-size: 14px;
   transition: 0.5s;
-  width: 55px;
-  background-color: #313C75;
+  width: auto;
+  background-color: #313c75;
   color: aliceblue;
 }
-button:hover{
-  background: #677EF5;
 
+.contButton:hover {
+  background: #677ef5;
 }
 
-h2{
-  color: #313C75;
+.infoSuperior {
+  padding: 10px;
+  color: #313c75;
 }
-.contButton{
-  display: inline-block;
-  position: relative;
+
+h3{
+  padding: 10px;
+  color: #313c75;
 }
+
 </style>
-
-
-
