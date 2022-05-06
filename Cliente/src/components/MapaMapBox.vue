@@ -93,7 +93,13 @@ export default {
         });
       });
 
-     
+    // Variable para indicar si un edifico se encuentra destacado
+    var edificioDestacado=false;
+    //Variable para indentificar el numero del edificioDestacado
+    var nroDestacado;
+    //Array de los markers de edicios
+    var arrayMarkers = [];
+
 
       // marker monito
       
@@ -151,10 +157,15 @@ export default {
       marker_monito.on("dragstart", (e) => {
         console.log("event type:", e.type);
 
-         if(map.getSource("ruta")!==undefined){
+        if(map.getSource("ruta")!==undefined){
           map.removeLayer("ruta")
           map.removeSource("ruta")
         }
+
+        //Dejamos de destacar el edificio (Recorriendo la lista)
+      
+        desestacarMarkers();
+
       });
 
       //Gimnasio (Está separado de los demas porque tiene la linea)
@@ -164,6 +175,9 @@ export default {
         "https://img.icons8.com/ios-filled/344/4a90e2/gum-.png",
         coordenada
       );
+
+      //Agregamos el Gym a la lista de Markers
+      arrayMarkers.push(gimnasio);
 
       gimnasio.getElement().addEventListener("click", () => {
         gimnasio = agregarMarker2(coordenada1);
@@ -1053,16 +1067,37 @@ export default {
           marker.getElement().style.transition = "0.2s";
           marker.getElement().style.borderRadius = "25%";
           marker.getElement().style.border = "2px solid red";
+          
+    
         });
         //Evento de quitar el mouse de encima
         marker.getElement().addEventListener("mouseleave", () => {
-          marker.getElement().style.width = "30px";
-          marker.getElement().style.height = "30px";
-          marker.getElement().style.backgroundColor = "transparent";
-          marker.getElement().style.border = "none";
-          marker.getElement().style.transition = "none";
-        });
+          //Si el edificio no se encuentra destacado (No se le ha echo click) este vuelve a su estado natural.
+          if (!edificioDestacado) {
+            
+            marker.getElement().style.width = "30px";
+            marker.getElement().style.height = "30px";
+            marker.getElement().style.backgroundColor = "transparent";
+            marker.getElement().style.border = "none";
+            marker.getElement().style.transition = "none";
+          }else{
+            //Si existe un edifico destacado, hacemos que deje de destacarse si no es el ya destacado.
+       
+            if (arrayMarkers[nroDestacado]!=marker) {
+                marker.getElement().style.width = "30px";
+                marker.getElement().style.height = "30px";
+                marker.getElement().style.backgroundColor = "transparent";
+                marker.getElement().style.border = "none";
+                marker.getElement().style.transition = "none";
+            }
+              
+          
+          }
 
+        });
+        //Lo agregmos a la lista de markers
+        //Agregamos el Gym a la lista de Markers
+        arrayMarkers.push(marker);
         return marker;
       }
 
@@ -1097,7 +1132,17 @@ export default {
 
         return marker;
       }
-      
+      function desestacarMarkers(){
+        for (let index = 0; index < arrayMarkers.length; index++) {
+          arrayMarkers[index].getElement().style.width = "30px";
+          arrayMarkers[index].getElement().style.height = "30px";
+          arrayMarkers[index].getElement().style.backgroundColor = "transparent";
+          arrayMarkers[index].getElement().style.border = "none";
+          arrayMarkers[index].getElement().style.transition = "none";
+        }
+        
+        edificioDestacado=false;
+      }
       async function getSalas(){
             salasEdificio.value = await API.getSalasByName(palabra.value);
             
@@ -1115,12 +1160,45 @@ export default {
         e_rutaDB,
       ) {
         marker.getElement().addEventListener("click", () => {
-          marker = agregarMarker2(e_coordenada);
+         // marker = agregarMarker2(e_coordenada);
           muestrate.value = !muestrate.value;
           palabra.value = e_palabra;
           urlFoto.value = e_url;
           descripcion.value = e_descripcion;
            salasEdificio.value = getSalas()
+
+
+          //Desestacamos todos los edificos
+          desestacarMarkers();
+          //Se destaca el edifico
+
+          if (edificioDestacado) {
+            marker.getElement().style.width = "30px";
+            marker.getElement().style.height = "30px";
+            marker.getElement().style.backgroundColor = "transparent";
+            marker.getElement().style.border = "none";
+            marker.getElement().style.transition = "none";
+            edificioDestacado=false;
+           
+            
+          }else{
+            marker.getElement().style.width = "60px";
+            marker.getElement().style.height = "60px";
+            marker.getElement().style.transition = "0.2s";
+            marker.getElement().style.borderRadius = "25%";
+            marker.getElement().style.border = "2px solid red";
+            edificioDestacado=true;
+            
+          }
+          //Se indica que nro de edicio fue destacado
+          for (let index = 0; index < arrayMarkers.length; index++) {
+            if (arrayMarkers[index]==marker) {
+              nroDestacado=index;
+              console.log("Edifico destacado nro: "+nroDestacado);
+            }
+            
+          }
+          
           //Tiene salas o no
           if (e_salas == false) {
            salasEdificio.value = ["---"];
