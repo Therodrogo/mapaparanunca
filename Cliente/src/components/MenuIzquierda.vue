@@ -13,7 +13,7 @@
         </div>
       </li>
 
-      <div v-for="item in salasEd" :key="item.id">
+      <!-- <div v-for="item in salasEd" :key="item.id">
         
           <li class="list">
           <router-link to="/">
@@ -23,7 +23,7 @@
             </a>
           </router-link>
         </li>
-      </div>
+      </div> -->
 
     </ul>
 

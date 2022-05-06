@@ -1099,7 +1099,7 @@ export default {
       }
       
       async function getSalas(){
-            return await API.getSalasByName(palabra.value);
+            salasEdificio.value = await API.getSalasByName(palabra.value);
             
           }
       async function agregarEventoClick(
