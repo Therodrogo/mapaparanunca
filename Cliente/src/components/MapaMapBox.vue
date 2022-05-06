@@ -20,6 +20,7 @@ var palabra = ref("hola");
 var urlFoto = ref("");
 var descripcion = ref("");
 var salasEdificio = ref([]);
+
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted, ref } from "vue";
@@ -37,8 +38,12 @@ export default {
     };
   },
   methods: {
+    
     porfaFunca() {
+
       muestrate.value = false;
+      console.log("funca")
+      
     },
   },
 
@@ -54,8 +59,6 @@ export default {
         //scrollZoom: false
       });
       map.on('click', function(e) {
-
-      
 
       console.log("["+e.lngLat.lng+","+e.lngLat.lat+"]")
 
@@ -92,13 +95,24 @@ export default {
           },
         });
       });
+      map.on('dblclick', (e) => {
+        e.preventDefault();
+      });
+      map.on('mouseover', () => {
 
-    // Variable para indicar si un edifico se encuentra destacado
-    var edificioDestacado=false;
-    //Variable para indentificar el numero del edificioDestacado
-    var nroDestacado;
-    //Array de los markers de edicios
-    var arrayMarkers = [];
+        if (muestrate.value == false) {
+            borrarRuta();
+            desestacarMarkers();
+          }
+
+      })
+      
+      // Variable para indicar si un edifico se encuentra destacado
+      var edificioDestacado=false;
+      //Variable para indentificar el numero del edificioDestacado
+      var nroDestacado;
+      //Array de los markers de edicios
+      var arrayMarkers = [];
 
 
       // marker monito
@@ -156,16 +170,12 @@ export default {
 } */
       marker_monito.on("dragstart", (e) => {
         console.log("event type:", e.type);
-
-        if(map.getSource("ruta")!==undefined){
-          map.removeLayer("ruta")
-          map.removeSource("ruta")
-        }
-
+        //Borramos la ruta cuando mueva el monito
+        borrarRuta();
         //Dejamos de destacar el edificio (Recorriendo la lista)
-      
         desestacarMarkers();
-
+        //Cerramos la ventana del edifico
+        muestrate.value = false;
       });
 
 
@@ -1052,6 +1062,13 @@ export default {
           },
         });
       }
+      function borrarRuta() {
+         if(map.getSource("ruta")!==undefined){
+          map.removeLayer("ruta")
+          map.removeSource("ruta")
+        }
+      }
+     
       // Funcion que agrega un Marker al mapa, se le entrega el icono, la coordenada y un popup.
       function agregarMarker(icono, coordenada, popup) {
         //Elemento
@@ -1172,12 +1189,23 @@ export default {
         e_rutaDB,
       ) {
         marker.getElement().addEventListener("click", () => {
+          //Si la ventana está oculta la mostramos
+          if (!muestrate.value) {
+            muestrate.value = !muestrate.value;
+            palabra.value = e_palabra;
+            urlFoto.value = e_url;
+            descripcion.value = e_descripcion;
+            salasEdificio.value = getSalas()
+          }else{
+            //Si no está oculta actualizamos sus datos
+            palabra.value = e_palabra;
+            urlFoto.value = e_url;
+            descripcion.value = e_descripcion;
+            salasEdificio.value = getSalas()
+          }
          // marker = agregarMarker2(e_coordenada);
-          muestrate.value = !muestrate.value;
-          palabra.value = e_palabra;
-          urlFoto.value = e_url;
-          descripcion.value = e_descripcion;
-           salasEdificio.value = getSalas()
+          
+         
 
 
           //Desestacamos todos los edificos
@@ -1257,6 +1285,7 @@ export default {
         });
       }
     });
+    
     return {
       muestrate,
       palabra,
@@ -1264,7 +1293,9 @@ export default {
       descripcion,
       salasEdificio,
     };
+
   },
+
 };
 </script>
 
