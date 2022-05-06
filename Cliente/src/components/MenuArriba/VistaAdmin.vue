@@ -1,12 +1,12 @@
 <template>
 
     <div class="container">
-        <div class="editarEdificios">
+        <div onload=""   class="editarEdificios" >
             
             <div v-for="item in cursos" :key="item.id">
                 <div class="inforEdificios">
                     <button class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
-                    {{ item.nombre }}
+                    {{ item }}
                     
                 </div>              
             </div>
@@ -15,52 +15,21 @@
 </template>
 
 <script>
+import API from "@/api";
 export default {
 
     data(){
         return{
-            cursos:{
-                curso:{
-                    nombre:"Minas",
-                   
-                },
-                curso2:{
-                    nombre:"Electrica",
-                
-                },
-                curso3:{
-                    nombre:"Servicios Multiples",
-                    
-                },
-                curso4:{
-                    nombre:"Laboratorios",
-                   
-                },
-                curso5:{
-                    nombre:"Bienestar Estudiantil",
-                   
-                },
-                curso6:{
-                    nombre:"Salas S",
-                    
-                },
-                curso7:{
-                    nombre:"Mecanica",
-                   
-                },
-                curso8:{
-                    nombre:"Construccion",
-                   
-                },
-                curso9:{
-                    nombre:"Salas de Madera",
-                    
-                }
-
-                
-            },
+            cursos:[ ]
         }
-    }
+    },methods: {
+        async getEdificios(){
+            this.cursos = await API.getEdificios()   
+        }
+    },beforeMount() {
+        this.getEdificios()
+       
+    },
 
 }
 </script>

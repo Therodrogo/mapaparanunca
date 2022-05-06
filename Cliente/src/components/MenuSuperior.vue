@@ -67,7 +67,7 @@ export default {
     FormularioLogin,
     MenuIzquierda,
     VistaEstudiante,
-    GestionarCursos
+    GestionarCursos,
     VistaAdmin
 },
     data(){
