@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import API from "@/api";
 export default {
 
     data(){
@@ -77,8 +78,11 @@ export default {
         }
     },
     methods: {
-        editarCurso(){
-            console.log("lala")
+        async editarCurso(){
+            console.log("lala ")
+            var res = await API.getAllAsistes();
+            console.log(res);
+             console.log("CURSO 1: ID: "+res[0]._id+" Sección "+res[0].seccion+" Sala "+res[0].id_sala.nombre +" hora_final "+ res[0].hora_final + " hora_inicio "+res[0].hora_inicio);
         }
         
     },
