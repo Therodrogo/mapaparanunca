@@ -168,35 +168,7 @@ export default {
 
       });
 
-      //Gimnasio (Está separado de los demas porque tiene la linea)
-      var coordenada = [-71.23020173932005, -35.00298450172138];
-      var coordenada1 = coordenada;
-      var gimnasio = agregarMarker(
-        "https://img.icons8.com/ios-filled/344/4a90e2/gum-.png",
-        coordenada
-      );
 
-      //Agregamos el Gym a la lista de Markers
-      arrayMarkers.push(gimnasio);
-
-      gimnasio.getElement().addEventListener("click", () => {
-        gimnasio = agregarMarker2(coordenada1);
-        muestrate.value = !muestrate.value;
-        palabra.value = "Gimnasio";
-        urlFoto.value = "https://i.ibb.co/RBtgwP3/gimnacio.png";
-        descripcion.value = "Solo se imparten cursos deportivos";
-        salasEdificio.value = ["Cancha"];
-        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
-        crearRuta(API.setGraphInfo(palabra.value))
- //IZQUIERDA ARRIBA
-       
-        
-        
-       //crearRuta(calcularRuta(rutaIA, rutaDA, rutaIB, rutaDB))
-
-       
-        
-      });
 
       //PROBANDO NUEVOS EVENTOS
 /*       gimnasio.getElement().addEventListener("mouseover", () => {
@@ -229,8 +201,47 @@ export default {
 
       //Creación de Markers
       function crearMarkersEdificios() {
+        //Gimnasio (Está separado de los demas porque tiene la linea)
+        var coordenada = [-71.23020173932005, -35.00298450172138];
+        var coordenada1 = coordenada;
+        var gimnasio = agregarMarker(
+          "https://img.icons8.com/ios-filled/344/4a90e2/gum-.png",
+          coordenada
+        );
+        agregarEventoClick(
+                gimnasio,
+                coordenada1,
+                "Gimnasio",
+                "https://i.ibb.co/RBtgwP3/gimnacio.png",
+                "Solo se imparten cursos deportivos",
+                false
+        );
+
+             
+        //Agregamos el Gym a la lista de Markers
+        arrayMarkers.push(gimnasio);
+
+        // gimnasio.getElement().addEventListener("click", () => {
+        //   gimnasio = agregarMarker2(coordenada1);
+        //   muestrate.value = !muestrate.value;
+        //   palabra.value = "Gimnasio";
+        //   urlFoto.value = "https://i.ibb.co/RBtgwP3/gimnacio.png";
+        //   descripcion.value = "Solo se imparten cursos deportivos";
+        //   salasEdificio.value = ["Cancha"];
+        //   API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
+        //   crearRuta(API.setGraphInfo(palabra.value))
+        //IZQUIERDA ARRIBA
+        
+          
+          
+        //crearRuta(calcularRuta(rutaIA, rutaDA, rutaIB, rutaDB))
+
+        
+          
+        // });
+
         //ENTRADA
-        var coordenada = [-71.229743, -35.001366];
+        coordenada = [-71.229743, -35.001366];
         var entrada = agregarMarker(
           "https://img.icons8.com/external-flatarticons-blue-flatarticons/344/external-entrance-usa-flatarticons-blue-flatarticons-2.png",
           coordenada
@@ -1101,37 +1112,37 @@ export default {
         return marker;
       }
 
-      function agregarMarker2(coordenada) {
-        //Elemento
-        var el = document.createElement("div");
-        el.className = "marker";
-        el.style.backgroundImage =
-          //`url(` + "https://img.icons8.com/fluency/344/marker-a.png" + `)`;
-        el.style.width = "100px";
-        el.style.height = "100px";
-        el.style.backgroundSize = "100%";
+      // function agregarMarker2(coordenada) {
+      //   //Elemento
+      //   var el = document.createElement("div");
+      //   el.className = "marker";
+      //   el.style.backgroundImage =
+      //     //`url(` + "https://img.icons8.com/fluency/344/marker-a.png" + `)`;
+      //   el.style.width = "100px";
+      //   el.style.height = "100px";
+      //   el.style.backgroundSize = "100%";
 
-        //Marker
-        const marker = new mapboxgl.Marker(el);
-        marker.setLngLat(coordenada);
-        marker.addTo(map);
+      //   //Marker
+      //   const marker = new mapboxgl.Marker(el);
+      //   marker.setLngLat(coordenada);
+      //   marker.addTo(map);
 
-        //Eventos Marker
-        //Evento de pasar el mouse por encima
-        marker.getElement().addEventListener("mouseover", () => {
-          marker.getElement().style.width = "40px";
-          marker.getElement().style.height = "40px";
-          //marker.remove();
-        });
-        //Evento de quitar el mouse de encima
-        marker.getElement().addEventListener("mouseleave", () => {
-          marker.getElement().style.width = "80px";
-          marker.getElement().style.height = "80px";
-          marker.remove();
-        });
+      //   //Eventos Marker
+      //   //Evento de pasar el mouse por encima
+      //   marker.getElement().addEventListener("mouseover", () => {
+      //     marker.getElement().style.width = "40px";
+      //     marker.getElement().style.height = "40px";
+      //     //marker.remove();
+      //   });
+      //   //Evento de quitar el mouse de encima
+      //   marker.getElement().addEventListener("mouseleave", () => {
+      //     marker.getElement().style.width = "80px";
+      //     marker.getElement().style.height = "80px";
+      //     marker.remove();
+      //   });
 
-        return marker;
-      }
+      //   return marker;
+      // }
       function desestacarMarkers(){
         for (let index = 0; index < arrayMarkers.length; index++) {
           arrayMarkers[index].getElement().style.width = "30px";
