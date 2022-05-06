@@ -19,7 +19,23 @@ module.exports = class API{
     //Salidas: JSON con todas las instancias de Asiste
     static async getAllAsistes( req,res){
         AsisteSchema
-        .find()    
+        .find().populate(
+            [
+                {
+                    path:"id_sala",
+                    select: ['nombre']
+                }
+            ]   
+ 
+        ).populate(
+            [
+                {
+                    path:"id_curso",
+                    select: ['nombre']
+                }
+            ]   
+ 
+        )        
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }

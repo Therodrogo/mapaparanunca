@@ -209,7 +209,7 @@ var MapaDatos =({
         },{
             //25
             coordenadas:[-71.22927687673246,-35.00202755513493],
-            vecinos:[24]
+            vecinos:[24,28]
         },{
             //26
             coordenadas:[-71.22918212536254,-35.00236405020594],
@@ -325,9 +325,9 @@ var MapaDatos =({
         },{
             //54
             coordenadas:[-71.23016561350855,-35.00258825427132],
-            vecinos:[20]
+            vecinos:[20,45]
         },{
-            //55
+            //55    
             coordenadas:[-71.22995038136769,-35.00273285676767],
             vecinos:[54]
         },{
@@ -346,6 +346,14 @@ var MapaDatos =({
             //59
             coordenadas:[-71.2295505129698,-35.00306755704641],
             vecinos:[38,33]
+        },{
+            //60
+            coordenadas:[-71.22963429815131,-35.00250238913921],
+            vecinos:[23,48]
+        },{
+            //61
+            coordenadas:[-71.22939824345772,-35.00233694569128],
+            vecinos:[26,23]
         }
         
         
@@ -457,7 +465,10 @@ export default class API{
         return salas
     }
     
-    
+    static async getAllAsistes(){
+        const res = await axios.get("/api/Asiste")
+        return res.data
+    }
 
 
     static getMapaDatos(){
