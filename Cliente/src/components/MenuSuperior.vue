@@ -15,8 +15,8 @@
                 Mis Cursos 
                 <ion-icon name="add-circle-outline"></ion-icon>
             </button>
-            <div class="bloqueAdmin">
-                <button v-if="estadoBotonAdmin" class="botonOpAdmin"> 
+            <div @click="mostrar2" class="bloqueAdmin">
+                <button @click="mostrarEdificios"  v-if="estadoBotonAdmin" class="botonOpAdmin"> 
                     Gestionar Edificios
                     <ion-icon name="briefcase"></ion-icon>
                 </button>
@@ -39,14 +39,11 @@
         <div v-if="estadoMiscursos">
             <VistaEstudiante/>
         </div>
-        
+        <div v-if="estadoMisEdificios">
+            <VistaAdmin/>
+        </div>
 
     </div>
-    
-
-
-
-
 
 
      
@@ -58,11 +55,13 @@ import MenuIzquierda from './MenuIzquierda.vue';
 import VistaEstudiante from "./MenuArriba/VistaEstudiante.vue";
 import API from "@/api"
 import swal from "sweetalert";
+import VistaAdmin from "./MenuArriba/VistaAdmin.vue";
 export default {
     components: {
     FormularioLogin,
     MenuIzquierda,
-    VistaEstudiante
+    VistaEstudiante,
+    VistaAdmin
 },
     data(){
         return{
@@ -73,6 +72,7 @@ export default {
             estado: false,
             estadoIzquierda: false,
             estadoMiscursos: false,
+            estadoMisEdificios:false,
             estadoValidar:null,
             estadoBotonMisCursos:false,
             estadoBotonAdmin:false,
@@ -100,6 +100,19 @@ export default {
             }
             
         },
+
+        mostrar2(){
+
+            if(this.mostrarLogin && this.estadoBotonMisCursos==false || this.mostrarLogin &&  this.estadoBotonAdmin==false){
+
+                this.mostrarLogin = false;
+            }
+            else{
+                this.mostrarLogin = true;
+            }
+            
+        },
+
         mostrarIzquierda(){
             if(this.estadoIzquierda){
 
@@ -120,6 +133,20 @@ export default {
             }
             
         },
+
+            mostrarEdificios(){
+            if(this.estadoMisEdificios){
+
+                this.estadoMisEdificios = false;
+            }
+            else{
+                this.estadoMisEdificios = true;
+            }
+            
+        },
+
+
+        
         async validar(e) {
             
             const res = await API.validarusuario(e);
@@ -152,6 +179,7 @@ export default {
             this.estado= false;
             this.estadoIzquierda= false;
             this.estadoMiscursos= false;
+            this.estadoMisEdificios=false;
             this.estadoValidar=null;
             this.estadoBotonMisCursos=false;
             this.estadoBotonAdmin=false;
