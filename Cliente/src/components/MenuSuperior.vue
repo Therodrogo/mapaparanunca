@@ -207,6 +207,7 @@ export default {
                 this.nombreUsuario = res.nombre
                 this.estadoBotonAdmin =true
                 this.mostrarLogin=false
+                this.estadoIzquierda= true
                 
                 
             }
