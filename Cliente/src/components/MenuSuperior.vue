@@ -50,7 +50,7 @@
         <div v-if="estadoMisEdificios">
             <VistaAdmin/>
         </div>
-
+        
         
     </div>
     
@@ -227,11 +227,15 @@ export default {
             this.nombreUsuario="Iniciar Sesion";
 
             swal("Sesion cerrada", "Cierre de sesion exitoso.", "success");
+            
         },
-        rutasMisCursos(nombreEdificioMisCursos){
-            swal(nombreEdificioMisCursos)
+        rutasMisCursos(e){
+            
+            
 
-            this.nombreEdificioMisCursos = nombreEdificioMisCursos;
+            this.nombreEdificioMisCursos = e;
+            swal(this.nombreEdificioMisCursos)
+            
         }
     },
 }

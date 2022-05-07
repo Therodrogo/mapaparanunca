@@ -13,12 +13,16 @@
     </div>
     
     <div id="map" />
+    <div class="prueba">
+      {{nombreEdificioCurso}}
+    </div>
   </div>
 </template>
 
 <script>
 var muestrate = ref(false);
 var palabra = ref("hola");
+
 var urlFoto = ref("");
 var descripcion = ref("");
 var salasEdificio = ref([]);
@@ -48,6 +52,7 @@ export default {
       
       
     },
+    
   },
   props:{
     nombreEdificioCurso:String
@@ -55,6 +60,7 @@ export default {
 
   setup() {
     onMounted(() => {
+      
       mapboxgl.accessToken =
         "pk.eyJ1IjoidGhlcm9kcm9nbyIsImEiOiJjbDIxYTNlMG4xNGlyM2puM3JuemU5ZThvIn0.JNkviaRn-Zb2qdTue-L4VQ";
       const map = new mapboxgl.Map({
@@ -69,6 +75,7 @@ export default {
       console.log("["+e.lngLat.lng+","+e.lngLat.lat+"]")
 
       })
+      
       map.on("load", () => {
         //Ruta desde la entrada al camino principal,
         //COMPLETA EL MAPA UN POCO
@@ -1045,7 +1052,7 @@ export default {
         map.setMinZoom(16.39);
         map.setMaxZoom(18);
       }
-
+     
       function crearRuta(coordenadas) {
 
         if(map.getSource("ruta")!==undefined){
@@ -1262,7 +1269,7 @@ export default {
           }
           API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
           crearRuta(API.setGraphInfo(palabra.value))
-          
+         
           
           
           
@@ -1323,5 +1330,11 @@ export default {
   height: 100%;
   bottom: 1px;
   z-index: 9;
+}
+.prueba{
+  position: absolute;
+  z-index: 100000;
+  width: 200px;
+  height: 100px;
 }
 </style>
