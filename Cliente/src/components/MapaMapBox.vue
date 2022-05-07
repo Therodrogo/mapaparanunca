@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div>
-      <MenuSuperior
-        :posicionMono="monitomonito"  
-      />
-    </div>
     <div v-if="muestrate">
       <InformacionEdifcio
         @reserve="porfaFunca"
@@ -27,38 +22,45 @@ var palabra = ref("");
 var urlFoto = ref("");
 var descripcion = ref("");
 var salasEdificio = ref([]);
-var monitomonito = ref("");
-var posiMonito = ref("");
+var monitomonito = ref("lalalalala");
+var posiMonito = ref("lelel");
+
+
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted, ref } from "vue";
 import InformacionEdifcio from "./InformacionEdifcio.vue";
-import MenuSuperior from "./MenuSuperior.vue";
 import API from "@/api";
+import { toRef } from 'vue'
 
 export default {
   components: {
     InformacionEdifcio,
-    MenuSuperior,
   },
   data() {
     return {
       estado: false,
       salas2: [],
-    };
+      hola: "hola soy yo"
+    }
   },
   methods: {
-    
-    porfaFunca() {
+    escribir(){
+      console.log(this.hola)
+    }
+      
+  },
+  created(){
+    this.escribir()
 
-      muestrate.value = false;
-      
-      
-    },
+  },
+  props:{
+    nombreEdificioCurso:String,
   },
 
-  setup() {
+  setup(props) {
     onMounted(() => {
+      console.log("algo")
       mapboxgl.accessToken =
         "pk.eyJ1IjoidGhlcm9kcm9nbyIsImEiOiJjbDIxYTNlMG4xNGlyM2puM3JuemU5ZThvIn0.JNkviaRn-Zb2qdTue-L4VQ";
       const map = new mapboxgl.Map({
@@ -68,11 +70,7 @@ export default {
         zoom: 16.67,
         //scrollZoom: false
       });
-      map.on('click', function(e) {
-
-      console.log("["+e.lngLat.lng+","+e.lngLat.lat+"]")
-
-      })
+     
       map.on("load", () => {
         //Ruta desde la entrada al camino principal,
         //COMPLETA EL MAPA UN POCO
@@ -141,46 +139,24 @@ export default {
       marker_monito.addTo(map);
 
       marker_monito.setDraggable(true);
+      
 
       /*MIENTRAS MAS ARRIBA MAYOR ES LA LAT*/
-      
-      
       marker_monito.getElement().addEventListener("click", () => {
+         console.log("lalalalalalalala")
+
+        const title = toRef(props, 'nombreEdificioCurso')
         
-        var posi =
-          "[" +
-          marker_monito.getLngLat().lng +
-          ", " +
-          marker_monito.getLngLat().lat +
-          "]";
-          marker_monito.getPopup().setText("" + posi);
-      });
+        const nombre = title.value
+        console.log(nombre)
+
+        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
+        crearRuta(API.setGraphInfo(nombre))
+         
+
+      }); 
         
-/* function calcularRuta(ruta_da, ruta_ia, ruta_dn) {
-        
-        var posicionActual = marker_monito.getLngLat().toArray();
-        //DERECHA ARRIBA
-        var rutaDA = ruta_da
-        //IZQUIERDA ARRIBA
-        var rutaIA = ruta_ia
-        //DERECHA BAJO
-        var rutaDB = ruta_dn
-        //Si esta mas a la izquierda menor es el 71
-        if (posicionActual[0] < rutaDA[1][0]) {
-          //console.log(posi2[0]+ " < " +rutaCACA[1][0])
-          //DERECHA ARRIBA O ABAJO
-          if (posicionActual[1] > -35.00241952772635) {
-            rutaDA = ajustarRuta(rutaDA);
-          } else {
-            rutaDA = rutaDB;
-          }
-        } else {
-          //console.log(posi2[0] + " > " + rutaDA[1][0]);
-          rutaDA = ajustarRuta(rutaIA);
-        }
-        return rutaDA
-       
-} */
+
       marker_monito.on("dragstart", (e) => {
         console.log("event type:", e.type);
         //Borramos la ruta cuando mueva el monito
@@ -196,6 +172,7 @@ export default {
         posiMonito.value=""+marker_monito.getLngLat();
         monitomonito.value=""+marker_monito.getLngLat();
         console.log("damedamne "+ posiMonito.value);
+        
       });
 
 
@@ -1264,15 +1241,11 @@ export default {
           } else {
             getSalas(palabra.value)
           }
+          
+
           API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
           crearRuta(API.setGraphInfo(palabra.value))
           
-          
-          
-          
-         
-
-
         var posicionMonito2 = marker_monito.getLngLat().toArray();
         var rutaDA = [
           posicionMonito2,

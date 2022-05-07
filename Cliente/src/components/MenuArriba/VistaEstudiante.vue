@@ -2,23 +2,21 @@
 
     <div class="container">
         <div class="cursos">
-            <div class="dia">Lunes</div>
-            <div class="dia">Martes</div>
-            <div class="dia">Miercoles</div>
-            <div class="dia">Jueves</div>
-            <div class="dia">Viernes</div>
-            <div class="dia">Sabado</div>
+            <div @click="mostrarInfo('Lunes')" class="dia">Lunes</div>
+            <div @click="mostrarInfo('Martes')" class="dia">Martes</div>
+            <div @click="mostrarInfo('Miercoles')" class="dia">Miercoles</div>
+            <div @click="mostrarInfo('Jueves')" class="dia">Jueves</div>
+            <div @click="mostrarInfo('Viernes')" class="dia">Viernes</div>
+            <div @click="mostrarInfo('Sabado')" class="dia">Sabado</div>
 
-            <div v-for="item in cursos" :key="item.id">
+            <div v-for="item in dia" :key="item.id">
                 <div class="inforCurso">
-                    <button class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
+                    <button @click="$emit('generarRutaMisCursos',item.edificio)" class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
                     {{ item.nombre }} <br>
                     {{ item.sala }} <br>
-                    {{item.horario}}
+                    {{ item.horario}}
+                    
                 </div>
-                
-
-                
             </div>
         </div>
 
@@ -26,60 +24,47 @@
 </template>
 
 <script>
+import API from "@/api"
 export default {
 
     data(){
         return{
-            cursos:{
-                curso:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso2:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso3:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso4:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso5:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso6:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso7:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso8:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso9:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                }
-
-                
-            },
+            diaCurso:"",
+            dia:[],
         }
+    },
+    props:{
+        idUsuario:String
+
+    },methods: {
+        async mostrarInfo(text){
+            console.log(text)
+            this.dia= []
+            this.diaCurso =text
+            var res = await API.getAsisteById(this.idUsuario)
+            res.forEach(element => {
+                var curso={
+                    nombre:"",
+                    sala:"Sala: ", 
+                    horario:"Horario: ",
+                    edificio:"Edificio de Mecanica"
+                }
+                if(this.diaCurso==element.dia){
+                    curso.nombre = element.id_curso.nombre
+                    curso.sala = curso.sala + element.id_sala.nombre
+                    curso.horario =curso.horario + element.hora_inicio +" "+ element.hora_final
+                    
+                    //curso.edificio = 
+                    this.dia.push(curso)
+                }
+                
+            });
+
+        },
+        generarRutaMisCursos(){
+
+        }
+
     }
 
 }

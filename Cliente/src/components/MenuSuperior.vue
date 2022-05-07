@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="contenedor">
         <div @click="cerrarSesion" class="cerrarSesion" v-if="mostrarLogin && estadoMensaje">
             <p>Cerrar Sesion</p>
@@ -39,7 +40,10 @@
         </div>
 
         <div v-if="estadoMiscursos">
-            <VistaEstudiante/>
+            <VistaEstudiante
+            :idUsuario="idUsuario"
+            @generarRutaMisCursos="rutasMisCursos"
+            />
         </div>
         <div v-if="estadoEditarCursos">
             <GestionarCursos/>
@@ -48,8 +52,16 @@
             <VistaAdmin/>
         </div>
 
+        
     </div>
+    <div>
+        <MapaMapBox
+        :nombreEdificioCurso = "nombreEdificioMisCursos"
+        
+        />
+        </div>
 
+</div>
 
      
 </template>
@@ -62,13 +74,15 @@ import GestionarCursos from "./MenuArriba/GestionarCursos.vue";
 import API from "@/api"
 import swal from "sweetalert";
 import VistaAdmin from "./MenuArriba/VistaAdmin.vue";
+import MapaMapBox from "./MapaMapBox.vue";
 export default {
     components: {
     FormularioLogin,
     MenuIzquierda,
     VistaEstudiante,
     GestionarCursos,
-    VistaAdmin
+    VistaAdmin,
+    MapaMapBox
 },
     data(){
         return{
@@ -87,6 +101,8 @@ export default {
             mostrarLogin:false,
             nombreUsuario:"Iniciar Sesion",
             estadoEditarCursos:false,
+            idUsuario:"",
+            nombreEdificioMisCursos:""
 
 
         }
@@ -96,6 +112,7 @@ export default {
         menuEstudiante: Boolean,
         menuAdministrador: Boolean,
         posicionMono: String,
+        
     },
     methods:{
         mostrar(){
@@ -179,6 +196,7 @@ export default {
                 this.nombreUsuario = res.nombre
                 this.estadoBotonMisCursos = true
                 this.mostrarLogin=false
+                this.idUsuario=res.idUsuario
             }
             if(res.tipoUsuario=='Administrador'){
                 this.nombreUsuario = res.nombre
@@ -204,6 +222,13 @@ export default {
             this.nombreUsuario="Iniciar Sesion";
 
             swal("Sesion cerrada", "Cierre de sesion exitoso.", "success");
+        },
+        rutasMisCursos(nombreEdificioMisCursos){
+            swal(nombreEdificioMisCursos)
+
+            this.nombreEdificioMisCursos = nombreEdificioMisCursos;
+            
+
         }
     },
 }
@@ -286,7 +311,7 @@ export default {
 .cerrarSesion{
     float: right;
     position: absolute;
-    z-index: 34;
+    z-index: 6000;
     cursor: pointer;
     top: 52px;
     right: 0;
@@ -294,7 +319,7 @@ export default {
 }
 .cerrarSesion p{
     
-    background: white;
+    background: rgba(255, 255, 255, 0.666);
     padding: 5px;
     border-radius: 5%;
     border: 2px solid #313C75;

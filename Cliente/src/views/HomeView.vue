@@ -1,10 +1,7 @@
 
 <template>
   <div>
-    <MenuSuperior
-      nombreUsuario="Iniciar Sesion"
-    />
-    <MapaMapBox/>
+    <MenuSuperior/>
     
   </div>
   
@@ -13,15 +10,15 @@
 
 <script>
 
-// import MenuSuperior from '@/components/MenuSuperior.vue';
-import MapaMapBox from '@/components/MapaMapBox.vue';
+import MenuSuperior from '@/components/MenuSuperior.vue';
+
 
 export default {
   
   name: 'HomeView',
   components: {
-    // MenuSuperior,
-    MapaMapBox
+    MenuSuperior,
+
   }
 }
 </script>
