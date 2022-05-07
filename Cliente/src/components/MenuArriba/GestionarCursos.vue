@@ -9,8 +9,6 @@
                      <!-- {{index }} : {{ item.nombre }} - Sección {{ item.seccion }} -->
                        {{ item.nombre }} - Sección {{ item.seccion }}
                     
-                   
-                    
                 </div>              
             </div>
             <div>
@@ -169,7 +167,6 @@ export default {
             //Guardamos el curso seleccionado
             this.indexCursoSeleccionado=cursoSeleccionado;
 
-            //console.log("BANDERA<3 CURSONOSELECCIONADO:" +this.cursoNoSeleccionado)
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
             this.cursoSeleccionado=!this.cursoSeleccionado;
             idCursoSeleccionado.value=cursoSeleccionado;
@@ -197,9 +194,9 @@ export default {
             console.log(this.hora_ini_nueva);
             console.log(this.hora_fin_nueva);
             console.log(this.sala_nueva);
-                           /* Hora_Inicio = */ this.cursos[this.indexCursoSeleccionado].hora_inicio=this.hora_ini_nueva;
-               /* Hora_Final = */ this.cursos[this.indexCursoSeleccionado].hora_final=this.hora_fin_nueva;
-               /* Sala = */ this.cursos[this.indexCursoSeleccionado].id_sala.nombre=this.sala_nueva;
+            /* Hora_Inicio = */ this.cursos[this.indexCursoSeleccionado].hora_inicio=this.hora_ini_nueva;
+            /* Hora_Final = */ this.cursos[this.indexCursoSeleccionado].hora_final=this.hora_fin_nueva;
+            /* Sala = */ this.cursos[this.indexCursoSeleccionado].id_sala.nombre=this.sala_nueva;
         },
 
     },beforeMount() {
