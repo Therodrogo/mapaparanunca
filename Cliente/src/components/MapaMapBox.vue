@@ -23,12 +23,12 @@
 
 <script>
 var muestrate = ref(false);
-var palabra = ref("hola");
+var palabra = ref("");
 var urlFoto = ref("");
 var descripcion = ref("");
 var salasEdificio = ref([]);
-var monitomonito = ref("lalalalala");
-var posiMonito = ref("lelel");
+var monitomonito = ref("");
+var posiMonito = ref("");
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted, ref } from "vue";

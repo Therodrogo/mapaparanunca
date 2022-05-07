@@ -15,7 +15,7 @@
                 Mis Cursos 
                 <ion-icon name="add-circle-outline"></ion-icon>
             </button>
-            <div @click="mostrar2" class="bloqueAdmin">
+            <div class="bloqueAdmin">
                 <button @click="mostrarEdificios"  v-if="estadoBotonAdmin" class="botonOpAdmin"> 
                     Gestionar Edificios
                     <ion-icon name="briefcase"></ion-icon>
@@ -111,18 +111,6 @@ export default {
             
         },
 
-        mostrar2(){
-
-            if(this.mostrarLogin && this.estadoBotonMisCursos==false || this.mostrarLogin &&  this.estadoBotonAdmin==false){
-
-                this.mostrarLogin = false;
-            }
-            else{
-                this.mostrarLogin = true;
-            }
-            
-        },
-
         mostrarIzquierda(){
             if(this.estadoIzquierda){
 
@@ -146,23 +134,29 @@ export default {
         },
         mostrarEditarCursos(){
             if(this.estadoEditarCursos){
-                    console.log("FUNCAAAAA2");
+                console.log("OCULTAR CURSOS");
                 this.estadoEditarCursos = false;
+               
             }
             else{
-                console.log("FUNCAAAAA");
+                console.log("MOSTRAR CURSOS");
                 
                 this.estadoEditarCursos = true;
+                
+                this.estadoMisEdificios = false;
             }
             
         },
             mostrarEdificios(){
             if(this.estadoMisEdificios){
+                 console.log("OCULTAR EDIFICIOS");
                 this.estadoMisEdificios = false;
-
+                
             }
             else{
+                console.log("MOSTRAR EDIFICIOS");
                 this.estadoMisEdificios = true;
+                this.estadoEditarCursos = false;
             }
             
         },
