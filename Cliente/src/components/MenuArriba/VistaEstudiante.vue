@@ -47,12 +47,13 @@ export default {
                     nombre:"",
                     sala:"Sala: ", 
                     horario:"Horario: ",
-                    edificio:"Prueba"
+                    edificio:"Edificio de Mecanica"
                 }
                 if(this.diaCurso==element.dia){
                     curso.nombre = element.id_curso.nombre
                     curso.sala = curso.sala + element.id_sala.nombre
                     curso.horario =curso.horario + element.hora_inicio +" "+ element.hora_final
+                    
                     //curso.edificio = 
                     this.dia.push(curso)
                 }

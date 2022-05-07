@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="contenedor">
         <div @click="cerrarSesion" class="cerrarSesion" v-if="mostrarLogin && estadoMensaje">
             <p>Cerrar Sesion</p>
@@ -53,14 +54,14 @@
 
         
     </div>
-    
     <div>
         <MapaMapBox
         :nombreEdificioCurso = "nombreEdificioMisCursos"
+        
         />
-    </div>
-    
+        </div>
 
+</div>
 
      
 </template>
@@ -232,6 +233,8 @@ export default {
             swal(nombreEdificioMisCursos)
 
             this.nombreEdificioMisCursos = nombreEdificioMisCursos;
+            
+
         }
     },
 }
