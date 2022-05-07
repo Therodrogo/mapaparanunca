@@ -4,7 +4,7 @@
             <p>Cerrar Sesion</p>
         </div>
         <img  @click="mostrarIzquierda" class="logo" src="https://i.ibb.co/rGZ37tq/logomapablanco.png" alt=""  height="37">
-        
+       
         <button class="botoniniciar" small elevation="" @click="mostrar" >
             <img class="user" src="https://i.ibb.co/VLJ6CsC/user.png" alt="" width="40">
             
@@ -16,11 +16,11 @@
                 <ion-icon name="add-circle-outline"></ion-icon>
             </button>
             <div class="bloqueAdmin">
-                <button v-if="estadoBotonAdmin" class="botonOpAdmin"> 
+                <button @click="mostrarEdificios"  v-if="estadoBotonAdmin" class="botonOpAdmin"> 
                     Gestionar Edificios
                     <ion-icon name="briefcase"></ion-icon>
                 </button>
-                <button v-if="estadoBotonAdmin" class="botonOpAdmin"> 
+                <button @click="mostrarEditarCursos"  v-if="estadoBotonAdmin" class="botonOpAdmin"> 
                     Editar Cursos
                     <ion-icon name="book"></ion-icon>
                 </button>
@@ -33,18 +33,24 @@
         </div>
 
         <div v-if="estadoIzquierda">
-            <MenuIzquierda/>
+            <MenuIzquierda
+                :nombre="posicionMono"           
+            />
         </div>
 
         <div v-if="estadoMiscursos">
             <VistaEstudiante/>
         </div>
-        
+        <div v-if="estadoEditarCursos">
+            <GestionarCursos/>
+        </div>
+        <div v-if="estadoMisEdificios">
+            <VistaAdmin/>
+        </div>
 
     </div>
-    
-   
-          
+
+
      
 </template>
 
@@ -52,13 +58,17 @@
 import FormularioLogin from "./MenuArriba/FormularioLogin.vue";
 import MenuIzquierda from './MenuIzquierda.vue';
 import VistaEstudiante from "./MenuArriba/VistaEstudiante.vue";
+import GestionarCursos from "./MenuArriba/GestionarCursos.vue";
 import API from "@/api"
 import swal from "sweetalert";
+import VistaAdmin from "./MenuArriba/VistaAdmin.vue";
 export default {
     components: {
     FormularioLogin,
     MenuIzquierda,
-    VistaEstudiante
+    VistaEstudiante,
+    GestionarCursos,
+    VistaAdmin
 },
     data(){
         return{
@@ -69,12 +79,14 @@ export default {
             estado: false,
             estadoIzquierda: false,
             estadoMiscursos: false,
+            estadoMisEdificios:false,
             estadoValidar:null,
             estadoBotonMisCursos:false,
             estadoBotonAdmin:false,
             estadoMensaje:false,
             mostrarLogin:false,
             nombreUsuario:"Iniciar Sesion",
+            estadoEditarCursos:false,
 
 
         }
@@ -83,19 +95,22 @@ export default {
         
         menuEstudiante: Boolean,
         menuAdministrador: Boolean,
+        posicionMono: String,
     },
     methods:{
         mostrar(){
 
-            if(this.mostrarLogin && this.estadoBotonMisCursos==false || this.mostrarLogin &&  this.estadoBotonAdmin==false){
-
+            if(this.mostrarLogin && this.estadoBotonMisCursos==false || this.mostrarLogin &&  this.estadoBotonAdmin==false || this.mostrarLogin==false && this.estadoEditarCursos ){
+            console.log("SE CERRO ESTE MENU SE SUPONE PARA ACOMDODAR EL EDITAR CURSOS")    
                 this.mostrarLogin = false;
             }
             else{
+                
                 this.mostrarLogin = true;
             }
             
         },
+
         mostrarIzquierda(){
             if(this.estadoIzquierda){
 
@@ -108,17 +123,47 @@ export default {
         },
         mostrarMiscursos(){
             if(this.estadoMiscursos){
-
+                console.log("FUNCAAAAA3");
                 this.estadoMiscursos = false;
             }
             else{
+                console.log("FUNCAAAAA4");
                 this.estadoMiscursos = true;
+            }
+            
+        },
+        mostrarEditarCursos(){
+            if(this.estadoEditarCursos){
+                console.log("OCULTAR CURSOS");
+                this.estadoEditarCursos = false;
+               
+            }
+            else{
+                console.log("MOSTRAR CURSOS");
+                
+                this.estadoEditarCursos = true;
+                
+                this.estadoMisEdificios = false;
+            }
+            
+        },
+            mostrarEdificios(){
+            if(this.estadoMisEdificios){
+                 console.log("OCULTAR EDIFICIOS");
+                this.estadoMisEdificios = false;
+                
+            }
+            else{
+                console.log("MOSTRAR EDIFICIOS");
+                this.estadoMisEdificios = true;
+                this.estadoEditarCursos = false;
             }
             
         },
         async validar(e) {
             
             const res = await API.validarusuario(e);
+           
             console.log(res)
             this.estadoMensaje = res.msg;
             
@@ -139,6 +184,8 @@ export default {
                 this.nombreUsuario = res.nombre
                 this.estadoBotonAdmin =true
                 this.mostrarLogin=false
+                
+                
             }
         },
         cerrarSesion(){
@@ -148,6 +195,7 @@ export default {
             this.estado= false;
             this.estadoIzquierda= false;
             this.estadoMiscursos= false;
+            this.estadoMisEdificios=false;
             this.estadoValidar=null;
             this.estadoBotonMisCursos=false;
             this.estadoBotonAdmin=false;
@@ -221,13 +269,15 @@ export default {
     background: #677EF5;
 } 
 
+/*BLOQUE LITERAL DE LOS BOTONES */
 .bloqueAdmin{
     display: flex;
     float: right;
-    background: #313C75;
+    background: #da7416;
+    /* background: #313C75; */
     position: relative;
 }
-
+/*BOTONES EN LA BARRA DEL ADMIN*/
 .botonOpAdmin{
     float: right;
     width: auto;
