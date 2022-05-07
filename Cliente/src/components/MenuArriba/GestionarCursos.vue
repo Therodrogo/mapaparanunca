@@ -1,21 +1,17 @@
-<template>
+ <template>
 
     <div class="container">
-        <div v-if="mostrarCursos" class="cursos">
-
-            <div v-for="item in cursos" :key="item.id">
-                <div class="inforCurso">
-                    <button class="botonIr" @click="editarCurso"><ion-icon name="arrow-forward"></ion-icon></button>
-                    {{ item.nombre }} <br>
-                    {{ item.sala }} <br>
-                    {{item.horario}}
-                </div>
-                
-
-                
+        <div class="editarEdificios" >
+            
+            <div v-for="item in salas" :key="item.id">
+                <div class="inforEdificios">
+                    <button class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
+                    Sala {{ item }}
+                    
+                    
+                </div>              
             </div>
         </div>
-
     </div>
 </template>
 
@@ -25,83 +21,37 @@ export default {
 
     data(){
         return{
-            cursos:{
-                curso:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso2:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso3:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso4:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso5:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso6:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso7:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso8:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                },
-                curso9:{
-                    nombre:"Redes de computadores",
-                    sala:"Sala: T-1", 
-                    horario:"Horario: 8:30-9:30  10:40-11:40"
-                }
-
-                
-            },
-            mostrarCursos:true,
+            cursos:[ ],
+            salas: [ ]
         }
-    },
-    methods: {
-        async editarCurso(){
-            console.log("lala ")
-            var res = await API.getAllAsistes();
-            console.log(res);
-             console.log("CURSO 1: ID: "+res[0]._id+" Sección "+res[0].seccion+" Sala "+res[0].id_sala.nombre +" hora_final "+ res[0].hora_final + " hora_inicio "+res[0].hora_inicio);
+    },methods: {
+        async getEdificios(){
+            this.cursos = await API.getAllAsistes()   
+            this.cursos.forEach(element => {
+                this.salas.push(element.id_sala.nombre)
+            });
+            console.log(this.cursos[0].id_sala.nombre)
         }
-        
+    },beforeMount() {
+        this.getEdificios()
+       
     },
 
 }
-</script>
+</script> 
 
 <style scoped>
 
 .container{
-    float: right; 
+    float: right;
     display: inline-block;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     margin: 10px 0 0 0;
     width: 400px;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
     transition: 0.5s;
 }
-.cursos{
+.editarEdificios{
     position: relative;
     color: aliceblue;
     width: auto;
@@ -112,7 +62,7 @@ export default {
     transition: 0.5s;
     background: rgba(255, 255, 255, 0.292);
 }
-.inforCurso{
+.inforEdificios{
     
     color: aliceblue;
     background: #313C75;
@@ -123,9 +73,9 @@ export default {
 }
 
 .botonIr{
-    position: absolute;
+    position: relative;
     width: 30px;
-    height: 70px;
+    height: 60px;
     left: 86%;
     background: #313C75;
     transition: 0.5s;
@@ -133,22 +83,5 @@ export default {
 .botonIr:hover{
     background: #677EF5;
 }
-.dia{
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
-    font-size: 12px;
-    position: relative;
-    left: 2%;
-   
-    padding: 5px 5px;
-    margin: 0 0 0 3px;
-    border-color: white;
-    background: #0751DE;
-    border-radius: 25%;
-}
-.dia:hover{
-    background: #0684D4;
 
-}
 </style>
