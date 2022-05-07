@@ -470,7 +470,12 @@ export default class API{
         const res = await axios.get("/api/Asiste")
         return res.data
     }
-
+    static async getAsisteById(id){
+   
+        const res = await axios.get("/api/Asiste-Estudiante/"+id)
+        
+        return res.data
+    }
 
     static getMapaDatos(){
         console.log(MapaDatos)
@@ -508,7 +513,7 @@ export default class API{
         console.log(menorIndice)
         return menorIndice   
     }
-
+    
 
 
     static inArray(array,buscado){

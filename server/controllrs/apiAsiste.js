@@ -80,8 +80,9 @@ module.exports = class API{
                 }
             ]   
 
-        )
-        console.log(datos[0])
+        ).then((data)=>res.json(data))
+        .catch((err)=>res.json({message:err}))
+        
         
         
     }

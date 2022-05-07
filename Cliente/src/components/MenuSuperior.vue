@@ -39,7 +39,9 @@
         </div>
 
         <div v-if="estadoMiscursos">
-            <VistaEstudiante/>
+            <VistaEstudiante
+            :idUsuario="idUsuario"
+            />
         </div>
         <div v-if="estadoEditarCursos">
             <GestionarCursos/>
@@ -87,6 +89,7 @@ export default {
             mostrarLogin:false,
             nombreUsuario:"Iniciar Sesion",
             estadoEditarCursos:false,
+            idUsuario:""
 
 
         }
@@ -96,6 +99,7 @@ export default {
         menuEstudiante: Boolean,
         menuAdministrador: Boolean,
         posicionMono: String,
+        
     },
     methods:{
         mostrar(){
@@ -185,6 +189,7 @@ export default {
                 this.nombreUsuario = res.nombre
                 this.estadoBotonMisCursos = true
                 this.mostrarLogin=false
+                this.idUsuario=res.idUsuario
             }
             if(res.tipoUsuario=='Administrador'){
                 this.nombreUsuario = res.nombre

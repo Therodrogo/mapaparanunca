@@ -11,10 +11,11 @@
 
             <div v-for="item in cursos" :key="item.id">
                 <div class="inforCurso">
-                    <button class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
+                    <button @click="mostrarInfo" class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
                     {{ item.nombre }} <br>
                     {{ item.sala }} <br>
                     {{item.horario}}
+                    
                 </div>
                 
 
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import API from "@/api"
 export default {
 
     data(){
@@ -80,7 +82,17 @@ export default {
                 
             },
         }
-    }
+    },props:{
+        idUsuario:String
+    },methods: {
+        async mostrarInfo(){
+            var res = await API.getAsisteById(this.idUsuario)
+            console.log(res)
+        }
+    },beforeMount() {
+        this.mostrarInfo()
+       
+    },
 
 }
 </script>
