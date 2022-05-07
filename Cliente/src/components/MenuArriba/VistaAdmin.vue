@@ -26,11 +26,12 @@
           <div class="option">
               <div v-for="item in cursos" :key="item.id">
 
-
-                  <div class="inforEdificios">
+                  <div  @click="ir"  class="inforEdificios">
+                      
                     <button class="botonIr"  > <ion-icon name="add-circle"></ion-icon></button>
                    
                     <div @click="show(item)">{{item}}</div>
+                    
                 </div> 
                   
 
@@ -197,7 +198,7 @@ export default {
     color: rgb(38, 64, 87);
     width: 250px;
     height: 93.7vh;
-    background: #753131;
+    background: #0b1a9b;
     overflow-x: hidden;
     transition: 0.5s;
 
