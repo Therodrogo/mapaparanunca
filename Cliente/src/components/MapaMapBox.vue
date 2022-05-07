@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div>
-      <MenuSuperior
-        :posicionMono="monitomonito"  
-      />
-    </div>
     <div v-if="muestrate">
       <InformacionEdifcio
         @reserve="porfaFunca"
@@ -33,13 +28,11 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { onMounted, ref } from "vue";
 import InformacionEdifcio from "./InformacionEdifcio.vue";
-import MenuSuperior from "./MenuSuperior.vue";
 import API from "@/api";
 
 export default {
   components: {
     InformacionEdifcio,
-    MenuSuperior,
   },
   data() {
     return {
@@ -55,6 +48,9 @@ export default {
       
       
     },
+  },
+  props:{
+    nombreEdificioCurso:String
   },
 
   setup() {
