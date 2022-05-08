@@ -6,6 +6,7 @@ const router = express.Router();
 router.post('/Edificio', API.createEdificio)
 router.get('/Edificio', API.getAllEdificios)
 router.get('/Edificio-sala/:nombre', API.getEdificioBySalaID)
+router.get('/Edificio-salanombre/:nombre', API.getEdificioBySalaNombre)
 router.get('/Edificio/:id', API.getEdificio)
 router.put('/Edificio/:id', API.putEdificio)
 router.delete('/Edificio/:id', API.deleteEdificio)
