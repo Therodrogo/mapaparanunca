@@ -386,49 +386,54 @@ export default class API{
     }
     static setGraphInfo(edef){
         var datos =this.buscarEntradas(edef)
-       
-        
-        const graph = new DijkstraCalculator();
         
         
-        MapaDatos.punto.push(datos)
-        for (let index = 0; index < MapaDatos.punto.length; index++) {
-            graph.addVertex(index+"")
+        if(datos!==undefined){
+                const graph = new DijkstraCalculator();
             
+            
+                MapaDatos.punto.push(datos)
+                for (let index = 0; index < MapaDatos.punto.length; index++) {
+                    graph.addVertex(index+"")
+                    
+                }
+                
+                var i=0
+                MapaDatos.punto.forEach(element => {
+                element.vecinos.forEach(element2 => {
+                        var corX1 = MapaDatos.punto[i].coordenadas[0]
+                        var corY1= MapaDatos.punto[i].coordenadas[1]
+                        var corX2 = MapaDatos.punto[element2].coordenadas[0]
+                        var corY2 = MapaDatos.punto[element2].coordenadas[1]
+                        
+                        var dis =this.distancia(corX1,corY1,corX2,corY2)
+                        
+        
+                        
+                        graph.addEdge(i+"",element2+"",dis)
+                    
+                            
+                    
+                    
+                });
+                i++
+            });
+            
+            const path = graph.calculateShortestPath(menorIndice+"",MapaDatos.punto.length-1+"");
+        
+            
+            path.forEach(element => {
+                camino.push(MapaDatos.punto[element].coordenadas)
+            });
+                
+                MapaDatos.punto.pop()
+                return camino
+        }else{
+            return false
         }
         
-        var i=0
-        MapaDatos.punto.forEach(element => {
-           element.vecinos.forEach(element2 => {
-                var corX1 = MapaDatos.punto[i].coordenadas[0]
-                var corY1= MapaDatos.punto[i].coordenadas[1]
-                var corX2 = MapaDatos.punto[element2].coordenadas[0]
-                var corY2 = MapaDatos.punto[element2].coordenadas[1]
-                
-                var dis =this.distancia(corX1,corY1,corX2,corY2)
-                
-
-                
-                graph.addEdge(i+"",element2+"",dis)
-               
-                    
-               
-               
-           });
-           i++
-       });
-     
-       const path = graph.calculateShortestPath(menorIndice+"",MapaDatos.punto.length-1+"");
-
+        
        
-       path.forEach(element => {
-           camino.push(MapaDatos.punto[element].coordenadas)
-       });
-        
-        MapaDatos.punto.pop()
-        
-        
-       return camino
         
        
        

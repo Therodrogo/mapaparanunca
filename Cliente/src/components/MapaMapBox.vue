@@ -147,8 +147,11 @@ export default {
         const nombre = title.value
         console.log(nombre)
 
-        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
-        crearRuta(API.setGraphInfo(nombre))
+        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)  
+        const  res = API.setGraphInfo(nombre)      
+        if(res!=false){
+          crearRuta( res)
+        }
          
 
       }); 
