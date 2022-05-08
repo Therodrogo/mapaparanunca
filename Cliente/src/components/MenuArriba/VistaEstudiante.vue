@@ -25,6 +25,8 @@
 
 <script>
 import API from "@/api"
+
+
 export default {
 
     data(){
@@ -38,23 +40,24 @@ export default {
 
     },methods: {
         async mostrarInfo(text){
-            console.log(text)
+
+            
+            var res = await API.getAsisteById(this.idUsuario)
             this.dia= []
             this.diaCurso =text
-            var res = await API.getAsisteById(this.idUsuario)
-            res.forEach(element => {
+            res.forEach(async element => {
                 var curso={
                     nombre:"",
                     sala:"Sala: ", 
                     horario:"Horario: ",
-                    edificio:"Edificio de Mecanica"
+                    edificio:"asd"
                 }
+
                 if(this.diaCurso==element.dia){
                     curso.nombre = element.id_curso.nombre
                     curso.sala = curso.sala + element.id_sala.nombre
                     curso.horario =curso.horario + element.hora_inicio +" "+ element.hora_final
-                    
-                    //curso.edificio = 
+                    curso.edificio= await getEdificio(element.id_sala.nombre)
                     this.dia.push(curso)
                 }
                 
@@ -64,10 +67,17 @@ export default {
         generarRutaMisCursos(){
 
         }
+        
 
     }
 
 }
+async function getEdificio(sala){
+    const res = await API.getEdificioByNombreSala(sala)
+    return res
+
+}
+
 </script>
 
 <style scoped>

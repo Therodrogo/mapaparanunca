@@ -20,10 +20,6 @@
           <div class="contButton" v-for="item in salas" :key="item.id">
             <button>{{ item }}</button>
           </div>
-           <div>
-            
-            <h5>{{ algoalgo }}</h5>
-          </div>
           
         </div>
       
@@ -55,7 +51,6 @@ export default {
     urlFoto: String,
     descripcion: String,
     salas: Array,
-    algoalgo: String,
     
   },
 };
