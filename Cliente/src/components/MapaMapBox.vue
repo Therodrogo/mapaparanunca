@@ -59,7 +59,7 @@ export default {
     nombreEdificioCurso:String
   },
   mounted() {
-      
+      console.log("fin")
       mapboxgl.accessToken =
         "pk.eyJ1IjoidGhlcm9kcm9nbyIsImEiOiJjbDIxYTNlMG4xNGlyM2puM3JuemU5ZThvIn0.JNkviaRn-Zb2qdTue-L4VQ";
       const map = new mapboxgl.Map({
