@@ -1,18 +1,51 @@
 <template>
 
     <div class="container">
-        <div onload=""   class="editarEdificios" >
+        <div class="editarEdificios" >
             
-            <div v-for="item in cursos" :key="item.id">
-                <div class="inforEdificios">
-                    <button class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
-                    {{ item }}
+            <div v-for="(item) in cursos" :key="item.id">
+                <div @click="botonIr(item)" v-if="cursoNoSeleccionado" class="infoCursos">
+                    
+                     <!-- {{index }} : {{ item.nombre }} - Sección {{ item.seccion }} -->
+                       {{ item }}
                     
                 </div>              
+            </div>
+            <div>
+                <div v-if="cursoSeleccionado" class="infoCursoSeleccionado">
+                    <button @click="botonIr()"><ion-icon name="md-arrow-round-back"></ion-icon></button>
+                
+                   
+                    <div class="formularioEditar">
+                                         
+                    <v-list-item>
+                        <v-list-item-content class="justify-center">
+                            <v-list-item-title  class="formularioEditar"> {{ EdificioSeleccionado}}   </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                        <v-select 
+                            
+                                
+                                autowidth
+                                :items="salas"
+                                label="Sala(s)"
+                                outlined
+                                dense
+                                
+                        >
+                        </v-select>
+                  
+              
+                       
+                     </div>
+                        
+                </div>              
+            
             </div>
         </div>
     </div>
 </template>
+
 
 <script>
 import API from "@/api";
@@ -20,14 +53,48 @@ export default {
 
     data(){
         return{
-            cursos:[ ]
+            
+            cursoNoSeleccionado: true,
+            cursoSeleccionado:false,
+            indexCursoSeleccionado:0,
+            cursos:[ ],   
+            salas:[],
+            EdificioSeleccionado: ""
+           
         }
     },methods: {
+
+
         async getEdificios(){
-            this.cursos = await API.getEdificios()   
-        }
+            
+            this.cursos = await API.getEdificios() 
+            console.log(this.cursos)
+           
+        },      
+
+        async botonIr(cursoSeleccionado){
+            //Guardamos el curso seleccionado
+            
+           console.log(cursoSeleccionado);
+            this.EdificioSeleccionado=cursoSeleccionado;
+        //    this.salas= await API.getSalasByName(this.EdificioSeleccionado);
+         //  console.log("Holaaaa" + this.salas);
+            this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
+            this.cursoSeleccionado=!this.cursoSeleccionado;
+         
+            //this.idCursoSeleccionado=cursoSeleccionado;
+
+            
+          
+            //QUITAMOS DUPLICADOS EN LAS SALAS
+          
+            
+            //Guardamos los valores antiguos de las salas
+           
+        },
     },beforeMount() {
         this.getEdificios()
+  
        
     },
 
@@ -67,6 +134,33 @@ export default {
     margin: 5px;
     
     cursor: pointer;
+}
+
+.infoCursoSeleccionado{
+    
+    color: aliceblue;
+    background: #313C75;
+    padding: 5px;
+    margin: 5px;
+    width: 350px;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.infoCursos{
+    
+    color: aliceblue;
+    background: #313C75;
+    padding: 10px;
+    
+    
+    cursor: pointer;
+}
+.infoCursos:hover{
+    
+    
+    background: #5163bb;
+    
 }
 
 .botonIr{
