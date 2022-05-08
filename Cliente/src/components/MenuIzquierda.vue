@@ -18,7 +18,7 @@
         
           <li class="list">
           <router-link to="/">
-            <a @click="mostrarMONO">
+            <a @click="$emit('generarRutaMisCursos',this.EdificioSeleccionado)">
               <span class="icon"><ion-icon name="list-box"></ion-icon></span>
               <span class="titulo">{{item}}</span>
               
@@ -52,6 +52,7 @@ export default {
 
             edificios: [],
             salasEd:[],
+            EdificioSeleccionado:""
 
         };
     },
@@ -60,9 +61,9 @@ export default {
             alert("hola");
         },
         async show(anything){
-            const EdificioSeleccionado=document.querySelector('.textBox').value = anything;
+            this.EdificioSeleccionado=document.querySelector('.textBox').value = anything;
             
-            this.salasEd= await API.getSalasByName(EdificioSeleccionado)
+            this.salasEd= await API.getSalasByName(this.EdificioSeleccionado)
             console.log(this.salasEd)
         },
         async select(){
@@ -75,8 +76,8 @@ export default {
                
             }
         },
-        mostrarMONO(){
-          console.log("sadaskldmsalkdmaslk "+this.nombre);
+        generarRutaMisCursos(){
+
         }
         
     },

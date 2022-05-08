@@ -35,7 +35,8 @@
 
         <div v-if="estadoIzquierda">
             <MenuIzquierda
-                :nombre="posicionMono"           
+                :nombre="posicionMono"
+                @generarRutaMisCursos="rutasMisCursos"          
             />
         </div>
 
