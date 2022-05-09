@@ -450,6 +450,11 @@ export default class API{
             
         
     }
+    static async getEdificioByNombreSala(nombresala){
+        const res = await axios.get("/api/Edificio-salanombre/"+nombresala)
+        
+        return res.data
+    }
     static async validarusuario(datos){
         const res = await axios.post(url+'/login',datos)
      

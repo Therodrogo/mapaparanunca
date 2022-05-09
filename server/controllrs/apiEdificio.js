@@ -52,7 +52,33 @@ module.exports = class API{
             res.json(error)
         }
         
+    }static async getEdificioBySalaNombre( req,res){
+        const nombre = req.params.nombre
+       
+        try {
+            const nombre = req.params.nombre
+            const data = await EdificioSchema.find().populate("salasID") 
+            
+            data.forEach(element => {
+                
+                const nombreEdicio = element.nombre
+
+                element.salasID.forEach(element2 => {
+                    if(nombre==element2.nombre){
+                        
+                        return res.json(nombreEdicio)
+                    }
+                });
+            });
+            
+        
+            
+        } catch (error) {
+            return res.json(error)
+        }
+        
     }
+    
     //Actualizar  mediante ID
     static async putEdificio( req,res){
         const {id} =req.params;
