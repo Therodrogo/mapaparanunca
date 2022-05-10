@@ -7,11 +7,11 @@
             <div @click="mostrarInfo('Miercoles')" class="dia">Miercoles</div>
             <div @click="mostrarInfo('Jueves')" class="dia">Jueves</div>
             <div @click="mostrarInfo('Viernes')" class="dia">Viernes</div>
-            <div @click="mostrarInfo('Sabado')" class="dia">Sabado</div>
+            <div @click="obtenerDia" class="dia">Sabado</div>
 
             <div v-for="item in dia" :key="item.id">
                 <div class="inforCurso">
-                    <button @click="$emit('generarRutaMisCursos',item.edificio)" class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
+                    <button @click="$emit('generarRutaMisCursos',item.edificio,menu)" class="botonIr"><ion-icon name="arrow-forward"></ion-icon></button>
                     {{ item.nombre }} <br>
                     {{ item.sala }} <br>
                     {{ item.horario}}
@@ -33,6 +33,7 @@ export default {
         return{
             diaCurso:"",
             dia:[],
+            menu:"vistaEstudiante"
         }
     },
     props:{
@@ -40,7 +41,6 @@ export default {
 
     },methods: {
         async mostrarInfo(text){
-
             
             var res = await API.getAsisteById(this.idUsuario)
             this.dia= []
@@ -66,6 +66,15 @@ export default {
         },
         generarRutaMisCursos(){
 
+        },
+        obtenerDia(){
+            const tiempoTranscurrido = Date.now();
+            const hoy = new Date(tiempoTranscurrido);
+            const fecha = hoy.toDateString()
+
+            const diaText = fecha.split(" ")
+            
+            console.log(diaText[0])
         }
         
 

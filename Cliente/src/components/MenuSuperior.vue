@@ -4,7 +4,9 @@
         <div @click="cerrarSesion" class="cerrarSesion" v-if="mostrarLogin && estadoMensaje">
             <p>Cerrar Sesion</p>
         </div>
-        <img  @click="mostrarIzquierda" class="logo" src="https://i.ibb.co/rGZ37tq/logomapablanco.png" alt=""  height="37">
+        <img  @click="mostrarIzquierda" class="menu" src="https://i.ibb.co/BBJKGTk/menu.png" alt=""  height="37">
+        
+        <img  class="logo" src="https://i.ibb.co/rGZ37tq/logomapablanco.png" alt=""  height="37">
        
         <button class="botoniniciar" small elevation="" @click="mostrar" >
             <img class="user" src="https://i.ibb.co/VLJ6CsC/user.png" alt="" width="40">
@@ -13,15 +15,17 @@
 
         <div @click="mostrar"  class="textIniciar">{{nombreUsuario}}</div>
             <button @click="mostrarMiscursos" v-if="estadoBotonMisCursos" class="botonMisCursos"> 
-                Mis Cursos 
+                Cursos 
                 <ion-icon name="add-circle-outline"></ion-icon>
             </button>
             <div class="bloqueAdmin">
-                <button @click="mostrarEdificios"  v-if="estadoBotonAdmin" class="botonOpAdmin"> 
+                <button @click="mostrarEdificios"  v-if="estadoBotonAdmin" class="botonMisCursos">
+                    
                     Gestionar Edificios
                     <ion-icon name="briefcase"></ion-icon>
                 </button>
-                <button @click="mostrarEditarCursos"  v-if="estadoBotonAdmin" class="botonOpAdmin"> 
+                <button @click="mostrarEditarCursos"  v-if="estadoBotonAdmin" class="botonMisCursos">
+                    
                     Editar Cursos
                     <ion-icon name="book"></ion-icon>
                 </button>
@@ -74,6 +78,7 @@ import VistaEstudiante from "./MenuArriba/VistaEstudiante.vue";
 import GestionarCursos from "./MenuArriba/GestionarCursos.vue";
 import API from "@/api"
 import swal from "sweetalert";
+import Swal from "sweetalert2"
 import VistaAdmin from "./MenuArriba/VistaAdmin.vue";
 import MapaMapBox from "./MapaMapBox.vue";
 export default {
@@ -224,10 +229,26 @@ export default {
 
             swal("Sesion cerrada", "Cierre de sesion exitoso.", "success");
         },
-        rutasMisCursos(nombreEdificioMisCursos){
-            swal(nombreEdificioMisCursos)
+        rutasMisCursos(nombreEdificioMisCursos,nombre){
+            console.log(nombre)
+            Swal.fire({
+                icon: 'info',
+                title: 'Edificio Selecionado...',
+                text: 'Ahora puedes mover y precionar el popup rojo para generar la ruta de la posicion que tu elijas.',
+            })
+            //swal("Edificio Marcado", "Ahora preciona el popup del mapa para generar tu ruta. ", "info");
 
             this.nombreEdificioMisCursos = nombreEdificioMisCursos;
+
+            if(nombre==="menuIzquierda"){
+                console.log("menuIzquierda")
+                this.mostrarIzquierda()
+            }
+            if(nombre==="vistaEstudiante"){
+                console.log("vistaEstudiante")
+                this.mostrarMiscursos()
+            }
+            
             
 
         }
@@ -254,7 +275,21 @@ export default {
     margin: 5px;
     position: relative;
     z-index: 7;
+}
+.menu{
+    margin: 5px;
+    position: relative;
+    z-index: 7;
     cursor: pointer;
+    transition: 0.5s;
+}
+.menu:hover{
+    margin: 5px;
+    position: relative;
+    z-index: 7;
+    cursor: pointer;
+    background: #677EF5;
+    transition: 0.5s;
 }
 .botoniniciar{
     float: right;
@@ -291,6 +326,11 @@ export default {
     margin: 12px 50px 0 0;
     
 }
+.botonMisCursos ion-icon{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+} 
 .botonMisCursos:hover ion-icon{
     background: #677EF5;
 } 
@@ -299,16 +339,9 @@ export default {
 .bloqueAdmin{
     display: flex;
     float: right;
-    background: #da7416;
-    /* background: #313C75; */
     position: relative;
 }
-/*BOTONES EN LA BARRA DEL ADMIN*/
-.botonOpAdmin{
-    float: right;
-    width: auto;
-    margin: 12px 50px 12px 10px;
-}
+
 .cerrarSesion{
     float: right;
     position: absolute;
@@ -326,7 +359,6 @@ export default {
     border: 2px solid #313C75;
     color: #313C75;
 }
-
 
 ion-icon{
     position: absolute;

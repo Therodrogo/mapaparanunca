@@ -108,61 +108,73 @@ export default {
 
 .container{
     float: right;
-    display: inline-block;
-    box-sizing: border-box;
     margin: 10px 0 0 0;
     width: 400px;
+    max-height: 600px;
     color: rgb(255, 255, 255);
     transition: 0.5s;
+    border-radius: 2%;
+    overflow-y: auto;
+
 }
 .editarEdificios{
-    position: relative;
     color: aliceblue;
-    width: auto;
-    max-height: 600px;
+    height: 600px;
     z-index: 90;
     transition: 0.5s;
-    overflow-y: scroll;
+    overflow-y: auto;
     transition: 0.5s;
     background: rgba(255, 255, 255, 0.292);
+    border-radius: 2%;
+    overflow-x: hidden;
 }
-.inforEdificios{
-    
+.infoCursos{
     color: aliceblue;
     background: #313C75;
-    padding: 5px;
-    margin: 5px;
-    
+    padding: 10px;
+    border-top: 1px solid #ffffff;
     cursor: pointer;
+    border-radius: 2%;
+    
+    transition: 0.5s;
 }
-
+.infoCursos:hover{
+    background: #5163bb;
+    
+}
 .infoCursoSeleccionado{
     
     color: aliceblue;
     background: #313C75;
-    padding: 5px;
-    margin: 5px;
-    width: 350px;
-    cursor: pointer;
+    width: 400px;
     font-size: 25px;
+    border-radius: 2%;
+    transition: 0.5s;
 }
-
 .infoCursos{
-    
     color: aliceblue;
     background: #313C75;
     padding: 10px;
-    
-    
+    border-top: 1px solid #ffffff;
     cursor: pointer;
+    border-radius: 2%;
+    
+    transition: 0.5s;
 }
 .infoCursos:hover{
-    
-    
     background: #5163bb;
     
 }
+.infoCursoSeleccionado ion-icon{
 
+    margin: 5px;
+    transition: 0.5s;
+}
+.infoCursoSeleccionado ion-icon:hover{
+
+    background: #677EF5;
+    border-radius: 50%;
+}
 .botonIr{
     position: relative;
     width: 30px;
@@ -173,6 +185,11 @@ export default {
 }
 .botonIr:hover{
     background: #677EF5;
+}
+
+.v-select{
+    width: 350px;
+    padding: 0 0 0 25px;
 }
 
 </style>
