@@ -3,7 +3,10 @@ FROM node:16-alpine
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN apk add –no-cache make gcc g++ python && \
+npm install && \
+npm rebuild bcrypt –build-from-source && \
+apk del make gcc g++ python
 
 COPY . .
 
