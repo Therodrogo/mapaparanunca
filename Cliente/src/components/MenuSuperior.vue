@@ -233,10 +233,9 @@ export default {
             console.log(nombre)
             Swal.fire({
                 icon: 'info',
-                title: 'Edificio Selecionado...',
+                title: 'Edificio Seleccionado',
                 text: 'Ahora puedes mover y precionar el popup rojo para generar la ruta de la posicion que tu elijas.',
             })
-            //swal("Edificio Marcado", "Ahora preciona el popup del mapa para generar tu ruta. ", "info");
 
             this.nombreEdificioMisCursos = nombreEdificioMisCursos;
 

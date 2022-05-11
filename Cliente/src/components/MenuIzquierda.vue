@@ -71,11 +71,8 @@ export default {
             this.edificios = await API.getEdificios()
             
             var dropdown = document.querySelector('.select');
+            dropdown.classList.toggle('active');
             
-            dropdown.onclick = function (){
-                dropdown.classList.toggle('active');
-               
-            }
         },
         generarRutaMisCursos(){
 

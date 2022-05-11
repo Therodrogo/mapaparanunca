@@ -7,7 +7,7 @@
                     <h3 >Iniciar sesion</h3>
                     <input type="usuario" placeholder="Usuario" v-model="datosusuario.nombreusuario">
                     <input type="password" placeholder="Contraseña" v-model="datosusuario.contraseña">
-                    <h4>¿Olvidate tu contraseña?</h4>
+                    <h4>¿Olvidaste tu contraseña?</h4>
                     <br>
                     <p class="iniciar" @click="$emit('notifica',datosusuario)"> Validar</p>
                 </form>
