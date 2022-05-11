@@ -119,9 +119,7 @@ export default {
     display: block;
   }
   
-  .list{
-    display: none;
-  }
+  
   .list:hover{
     
     color: aliceblue;
