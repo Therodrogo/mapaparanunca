@@ -18,7 +18,7 @@
         
           <li class="list">
           <router-link to="/">
-            <a @click="$emit('generarRutaMisCursos',this.EdificioSeleccionado)">
+            <a @click="$emit('generarRutaMisCursos',this.EdificioSeleccionado,menu)">
               <span class="icon"><ion-icon name="list-box"></ion-icon></span>
               <span class="titulo">{{item}}</span>
               
@@ -52,7 +52,8 @@ export default {
 
             edificios: [],
             salasEd:[],
-            EdificioSeleccionado:""
+            EdificioSeleccionado:"",
+            menu:"menuIzquierda"
 
         };
     },
@@ -70,11 +71,8 @@ export default {
             this.edificios = await API.getEdificios()
             
             var dropdown = document.querySelector('.select');
+            dropdown.classList.toggle('active');
             
-            dropdown.onclick = function (){
-                dropdown.classList.toggle('active');
-               
-            }
         },
         generarRutaMisCursos(){
 
@@ -97,16 +95,15 @@ export default {
       color: aliceblue;
     }
    .navegacion{
-  
-    
     font-family: 'Poppins', sans-serif;
     position: absolute;
     color: rgb(38, 64, 87);
-    width: 70px;
+    width: 250px;
     height: 93.7vh;
     background: #313C75;
     overflow-x: hidden ;
     transition: 0.5s;
+    z-index: 120;
 
     
   }
@@ -121,16 +118,8 @@ export default {
     
     display: block;
   }
-  .navegacion:hover .selectMenu{
-    display: block
-  }
-  .selectMenu{
-    display: none;
-  }
-
-  .list{
-    display: none;
-  }
+  
+  
   .list:hover{
     
     color: aliceblue;

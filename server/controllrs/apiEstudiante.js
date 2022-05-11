@@ -1,5 +1,5 @@
 const EstudianteSchema = require('../models/Estudiante')
-const bcrypt = require('Bcrypt')
+const bcrypt = require('bcryptjs')
 
 module.exports = class API{
     // Descripcion:Crea usuario y encripta su contraseña, para asi poder tener un poco mas de seguridad.

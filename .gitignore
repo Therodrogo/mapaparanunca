@@ -24,3 +24,4 @@ hs_err_pid*
 
 server/node_modules/
 cliente/node_modules/
+.env

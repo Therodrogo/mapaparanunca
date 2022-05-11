@@ -112,7 +112,7 @@ export default {
       });
       map.on('mouseover', () => {
         if (muestrate.value == false) {
-            borrarRuta();
+            //borrarRuta();
             desestacarMarkers();
         }
 
@@ -124,10 +124,18 @@ export default {
       var nroDestacado;
       //Array de los markers de edicios
       var arrayMarkers = [];
+      var disMonito = document.createElement("div");
+      disMonito.className = "marker";
+      disMonito.style.backgroundImage = "url('https://i.ibb.co/ySgwGTJ/monito.png')";
+      disMonito.style.width = "60px";
+      disMonito.style.height = "60px";
+      disMonito.style.backgroundSize = "35px";
+      disMonito.style.zIndex = "50";
 
+      
 
       //Marker
-      const marker_monito = new mapboxgl.Marker();[-71.2297088791571,-35.00274229287036]
+      const marker_monito = new mapboxgl.Marker(disMonito);[-71.2297088791571,-35.00274229287036]
       marker_monito.setLngLat([-71.2297088791571,-35.00274229287036]);
       monitomonito.value=""+marker_monito.getLngLat();
       posiMonito.value=""+marker_monito.getLngLat();
@@ -140,8 +148,6 @@ export default {
 
       /*MIENTRAS MAS ARRIBA MAYOR ES LA LAT*/
       marker_monito.getElement().addEventListener("click", () => {
-         console.log("lalalalalalalala")
-
         const title = toRef(props, 'nombreEdificioCurso')
         
         const nombre = title.value
@@ -168,7 +174,7 @@ export default {
       });
 
        marker_monito.on("dragend", (e) => {
-         console.log("event type:", e.type);
+        console.log("event type:", e.type);
         posiMonito.value=""+marker_monito.getLngLat();
         monitomonito.value=""+marker_monito.getLngLat();
         console.log("damedamne "+ posiMonito.value);
@@ -428,7 +434,7 @@ export default {
             "line-cap": "round",
           },
           paint: {
-            "line-color": "#FF0000", //color rojo para la ruta
+            "line-color": "#ED0C60", //color rojo para la ruta
             "line-width": 4,
           },
         });
@@ -464,8 +470,8 @@ export default {
           marker.getElement().style.width = "60px";
           marker.getElement().style.height = "60px";
           marker.getElement().style.transition = "0.2s";
-          marker.getElement().style.borderRadius = "25%";
-          marker.getElement().style.border = "2px solid red";
+          marker.getElement().style.borderRadius = "15%";
+          marker.getElement().style.border = "2px solid #ED0C60";
           
     
         });
@@ -556,8 +562,8 @@ export default {
               marker.getElement().style.width = "60px";
               marker.getElement().style.height = "60px";
               marker.getElement().style.transition = "0.2s";
-              marker.getElement().style.borderRadius = "25%";
-              marker.getElement().style.border = "2px solid red";
+              marker.getElement().style.borderRadius = "15%";
+              marker.getElement().style.border = "2px solid #ED0C60";
               edificioDestacado=true;
               
             }

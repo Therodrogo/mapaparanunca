@@ -23,6 +23,7 @@
     "mapbox-gl": "^2.8.1",
     "roboto-fontface": "*",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.4.13",
     "vue": "^3.2.33",
     "vue-mapbox-ts": "^0.8.0",
     "vue-router": "^4.0.3",
