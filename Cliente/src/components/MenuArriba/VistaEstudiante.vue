@@ -110,6 +110,7 @@ export default {
     mounted(){
         this.obtenerDia()
         this.mostrarInfo(this.diaHoy)
+        console.log("")
     }
 
 }
