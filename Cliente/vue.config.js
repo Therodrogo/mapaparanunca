@@ -8,6 +8,6 @@ module.exports = defineConfig({
 		},
     
   },devServer:{
-    proxy:"http://localhost:3000"
+    proxy:"https://mapa-backend-bfdcub5llq-uc.a.run.app"
   }
 })
