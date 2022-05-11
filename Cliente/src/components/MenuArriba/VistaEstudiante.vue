@@ -33,34 +33,43 @@ import API from "@/api"
 export default {
     data: () => ({
         diaCurso: "",
-        dia: [],
+        Lunesdia: [],
+        Martesdia: [],
+        Miercolesdia: [],
+        Juevesdia: [],
+        Viernesdia: [],
+        Sabadodia: [],
         menu: "vistaEstudiante",
-        diaHoy:""
+        diaHoy:"",
+        datos:[],
+        dia:[]
     }),
     props: {
         idUsuario: String
     },
     methods: {
-        async mostrarInfo(text) {
+        mostrarInfo(text) {
             this.cambiarColor(text)
-            var res = await API.getAsisteById(this.idUsuario);
-            this.dia = [];
+            this.dia=[]
+           
+            if(text=="Lunes"){
+                this.dia=this.Lunesdia
+            }
+            else if(text=="Martes"){
+                this.dia=this.Martesdia
+            }else if(text=="Miercoles"){
+                this.dia=this.Miercolesdia
+            }else if(text=="Jueves"){
+                this.dia=this.Juevesdia
+            }else if(text=="Viernes"){
+                this.dia=this.Viernesdia
+            }else if(text=="Sabado"){
+                this.dia=this.Sabadodia
+            }
+            
             this.diaCurso = text;
-            res.forEach(async (element) => {
-                var curso = {
-                    nombre: "",
-                    sala: "Sala: ",
-                    horario: "Horario: ",
-                    edificio: "asd"
-                };
-                if (this.diaCurso == element.dia) {
-                    curso.nombre = element.id_curso.nombre;
-                    curso.sala = curso.sala + element.id_sala.nombre;
-                    curso.horario = curso.horario + element.hora_inicio + " " + element.hora_final;
-                    curso.edificio = await getEdificio(element.id_sala.nombre);
-                    this.dia.push(curso);
-                }
-            });
+            
+            
         },
         generarRutaMisCursos() {
         },
@@ -88,6 +97,9 @@ export default {
             if(diaText[0]=="Sat"){
                 this.diaHoy = "Sabado"
             }
+
+         
+            
         },
         cambiarColor(text){
             const dias = ['.Lunes','.Martes','.Miercoles','.Jueves','.Viernes','.Sabado']
@@ -107,10 +119,43 @@ export default {
             
         },
     },
-    mounted(){
+    async mounted(){
+        this.datos = await API.getAsisteById(this.idUsuario);
+        this.datos.forEach(async (element) => {
+                var curso = {
+                    nombre: "",
+                    sala: "Sala: ",
+                    horario: "Horario: ",
+                    edificio: "asd"
+                };
+               
+                    curso.nombre = element.id_curso.nombre;
+                    curso.sala = curso.sala + element.id_sala.nombre;
+                    curso.horario = curso.horario + element.hora_inicio + " " + element.hora_final;
+                    curso.edificio = await getEdificio(element.id_sala.nombre) 
+                    if(element.dia=="Lunes")  {
+                        this.Lunesdia.push(curso)
+                    }else if(element.dia=="Martes")  {
+                        this.Martesdia.push(curso)
+                    }else if(element.dia=="Miercoles")  {
+                        this.Miercolesdia.push(curso)
+                    }else if(element.dia=="Jueves")  {
+                        this.Juevesdia.push(curso)
+                    }else if(element.dia=="Viernes")  {
+                        this.Viernesdia.push(curso)
+                    }else if(element.dia=="Sabado")  {
+                        this.Sabadodia.push(curso)
+                    }
+
+             
+            });
         this.obtenerDia()
         this.mostrarInfo(this.diaHoy)
+        
+        
         console.log("")
+    },created(){
+        
     }
 
 }
