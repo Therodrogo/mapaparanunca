@@ -35,7 +35,12 @@
                         >
                         </v-select>
                   
-              
+                    <v-list-item class="justify-center">
+                        <v-list-item-content>
+                                <button class="botonGuardar" @click="guardarSala()">Guardar</button>
+                                
+                        </v-list-item-content>
+                    </v-list-item>
                        
                      </div>
                         
@@ -77,7 +82,7 @@ export default {
             
            console.log(cursoSeleccionado);
             this.EdificioSeleccionado=cursoSeleccionado;
-        //    this.salas= await API.getSalasByName(this.EdificioSeleccionado);
+             this.salas= await API.getSalasByName(this.EdificioSeleccionado);
          //  console.log("Holaaaa" + this.salas);
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
             this.cursoSeleccionado=!this.cursoSeleccionado;
@@ -190,6 +195,20 @@ export default {
 .v-select{
     width: 350px;
     padding: 0 0 0 25px;
+}
+
+
+.botonGuardar{
+    transition: 0.5s;
+    margin: 0 0 0 50px;
+    padding: 5px;
+    
+
+}
+.botonGuardar:hover{
+    background: #677EF5;
+    
+    border-radius: 15%;
 }
 
 </style>
