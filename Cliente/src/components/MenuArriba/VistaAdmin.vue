@@ -34,8 +34,24 @@
                                 
                         >
                         </v-select>
-                  
-              
+
+                  <div id="Sala">
+                     <h3> Nueva Sala:  
+                         <input class="caja" type="text" name="nombre" size="10"
+                    placeholder="Nombre sala" v-model="nombreSala">
+                     </h3>
+                    
+                     <v-list-item class="justify-center">
+                        <v-list-item-content>
+                                <button class="botonGuardar" @click="guardarSala()">Guardar</button>
+                                
+                        </v-list-item-content>
+                    </v-list-item>
+                    
+                    </div>
+                 
+
+
                        
                      </div>
                         
@@ -49,9 +65,13 @@
 
 <script>
 import API from "@/api";
+import swal from "sweetalert";
 export default {
 
     data(){
+
+       
+
         return{
             
             cursoNoSeleccionado: true,
@@ -59,26 +79,37 @@ export default {
             indexCursoSeleccionado:0,
             cursos:[ ],   
             salas:[],
-            EdificioSeleccionado: ""
+            EdificioSeleccionado: "",
+            nombreSala: "",
+
+          
            
-        }
+        };
+
+       
+
     },methods: {
 
 
+        
+        
         async getEdificios(){
             
             this.cursos = await API.getEdificios() 
-            console.log(this.cursos)
+          //  console.log(this.cursos)
+            
            
         },      
 
         async botonIr(cursoSeleccionado){
             //Guardamos el curso seleccionado
             
-           console.log(cursoSeleccionado);
+          // console.log(cursoSeleccionado);
             this.EdificioSeleccionado=cursoSeleccionado;
-        //    this.salas= await API.getSalasByName(this.EdificioSeleccionado);
-         //  console.log("Holaaaa" + this.salas);
+             this.salas= await API.getSalasByName(this.EdificioSeleccionado);
+             
+          //  console.log("Holaaaa" + this.salas);
+        
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
             this.cursoSeleccionado=!this.cursoSeleccionado;
          
@@ -92,6 +123,49 @@ export default {
             //Guardamos los valores antiguos de las salas
            
         },
+
+        
+
+ async guardarSala(){
+
+
+
+        if(this.nombreSala==""){
+            swal("Campo vacío", "Sala no fue creada", "error");
+        }
+        else{
+           
+            var flag = false;
+            var todas = await API.getAllSalas()
+
+
+            todas.forEach(element => {
+            
+                if(element.nombre==this.nombreSala){
+                    flag=true;
+                }
+
+            });
+
+     
+
+            if(flag==true){
+                swal("Nombre de sala ya existe", "Sala no fue creada", "error");
+                
+
+            }
+            else{
+                swal("Listo", "Sala Creada con éxito", "success");
+                
+                var res = await API.postSala(this.nombreSala,this.EdificioSeleccionado)
+                this.salas.push(this.nombreSala)
+                console.log(res)
+            }
+        }
+          
+        },
+
+
     },beforeMount() {
         this.getEdificios()
   
@@ -191,5 +265,27 @@ export default {
     width: 350px;
     padding: 0 0 0 25px;
 }
+
+
+.botonGuardar{
+    transition: 0.5s;
+    margin: 0 0 0 50px;
+    padding: 5px;
+    
+
+}
+.botonGuardar:hover{
+    background: #677EF5;
+    
+    border-radius: 15%;
+}
+
+
+.caja{
+
+    background: #eeedf4;
+}
+
+
 
 </style>

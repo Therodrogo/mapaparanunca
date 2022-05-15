@@ -1,3 +1,4 @@
+const { log } = require('console')
 const SalaSchema = require('../models/Sala')
 
 
@@ -6,7 +7,10 @@ module.exports = class API{
     //Entradas: JSON con la informacion de Sala.
     //Salidas: JSON con la informacion ingresada.
     static async createSala( req,res){
+        
         const sala = SalaSchema(req.body)
+        
+        
         sala.save()
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))

@@ -461,6 +461,25 @@ export default class API{
         console.log(res.data)
         return res.data
     }
+    static async postSala(datos,edificio){
+       
+        const res = await axios.post("/api/Sala",{
+            nombre:datos
+        }
+       
+        
+        )
+        await axios.put("/api/Edificio-actualizar",{
+            idSala: res.data._id,
+            nombreEdificio:edificio
+        })
+        
+       
+        
+        return res.data
+    }
+
+    
     static async getSalasByName(nombre){
         const res = await axios.get("/api/Edificio-sala/"+nombre)
         salas = res.data
@@ -471,6 +490,14 @@ export default class API{
       
         return res.data
     }
+
+    static async getAllSalas(){
+        const res = await axios.get("/api/Sala/")
+      
+        return res.data
+    }
+
+
     static getSalas(){
         return salas
     }

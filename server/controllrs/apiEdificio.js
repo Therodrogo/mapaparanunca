@@ -88,6 +88,19 @@ module.exports = class API{
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
+    static async actualizarSalas(req,res){
+        
+        const nombre =req.body.nombreEdificio
+        const edificio = await EdificioSchema.findOne({nombre:nombre})
+        
+        
+       
+       await EdificioSchema.updateOne({_id:edificio._id},{$push:{"salasID":req.body.idSala}})
+       .then((data)=>res.json(data))
+        .catch((err)=>res.json({message:err}))
+        
+    }
+
     //Eliminar  mediante ID
     static async deleteEdificio( req,res){
         const {id} = req.params;
