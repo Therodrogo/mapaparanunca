@@ -128,6 +128,11 @@ export default {
  async guardarSala(){
 
 
+
+        if(this.nombreSala==""){
+            swal("Campo vacío", "Sala no fue creada", "error");
+        }
+        else{
            
          var flag = false;
         var todas = await API.getAllSalas()
@@ -154,7 +159,7 @@ export default {
         else{
             swal("Listo", "Sala Creada con éxito", "success");
         }
-
+        }
           //console.log(await API.getAllSalas());
           
           
