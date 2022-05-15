@@ -4,28 +4,22 @@
       <div class="select-box">
         <div class="options-container">
 
-          <div class="option">
-            <input type="radio" class="radio" id="tutorials" name="category" />
-            <label for="tutorials">Tutorials</label>
-          </div>
+          <div v-for="(item , index ) in listaCursos" :key="item.id">
+            <div @click="options(item.nombre)" class="option">
+              <input type="radio" class="radio" id="curso" name="category" />
+              <label for="tutorials"> {{item.nombre}} </label>
+              <p class="index">{{index}}</p>
+            </div>
 
-          <div class="option">
-            <input type="radio" class="radio" id="auto" name="category" />
-            <label for="tutorials">Auto</label>
-          </div>
-
-          <div class="option">
-            <input type="radio" class="radio" id="auto" name="category" />
-            <label for="tutorials">Casa</label>
           </div>
 
         </div>
 
         <div @click="seleccionar" class="selected">
-          Selecciona Curso
+          {{seleccion}}
         </div>
 
-        <div class="search-box">
+        <div @keyup="buscar" class="search-box">
           <input type="text" placeholder="Buscar" />
         </div>
 
@@ -36,65 +30,72 @@
 
 <script >
 var optionsContainer;
-var selected;
 var searchBox;
-var filterList;
 var optionsList;
-
 export default{
     data(){
         return{
-            seleccion:""
+            seleccion:"Seleccionar Curso",
+            index:0
         }
     },
     methods:{
         seleccionar(){
-                   
+            optionsContainer = document.querySelector(".options-container");
+            searchBox = document.querySelector(".search-box input");
+
             optionsContainer.classList.toggle("active");
             searchBox.value = "";
-            filterList("");
+            //this.filtro("")
             if (optionsContainer.classList.contains("active")) {
                 searchBox.focus();
             }
 
         },
-        notifica(){
+        options(nombre){
 
-        }
+          optionsList = document.querySelectorAll(".option");
+          
+            optionsList.forEach(o => {
 
-    },
-    mounted(){
-        optionsContainer = document.querySelector(".options-container");
-        searchBox = document.querySelector(".search-box input");
-        selected = document.querySelector(".selected");
-        optionsList = document.querySelectorAll(".option");
-
-        optionsList.forEach(o => {
-            o.addEventListener("click", () => {
-                selected.innerHTML = o.querySelector("label").innerHTML;
-                this.seleccion = selected.innerHTML;
+              if(nombre == o.querySelector("label").innerHTML){
+                
+                this.seleccion = o.querySelector("label").innerHTML;
                 optionsContainer.classList.remove("active");
-                this.$emit('notifica',this.seleccion)
-
+                const index = o.querySelector("p").innerHTML;
+                console.log(index)
+                this.$emit('notifica',index)
+              }
+                
             });
-        });
+          
+        },
+        buscar(e){
+          optionsList = document.querySelectorAll(".option");
 
-        searchBox.addEventListener("keyup", function(e) {
-            filterList(e.target.value);
-        });
-        filterList = searchTerm => {
+          this.filtro(e.target.value)
+        },
+        filtro(searchTerm){
+            
             searchTerm = searchTerm.toLowerCase();
             optionsList.forEach(option => {
                 let label = option.firstElementChild.nextElementSibling.innerText.toLowerCase();
-               
+              
                 if (label.indexOf(searchTerm) != -1) {
                     option.style.display = "block";
                 } else {
                     option.style.display = "none";
                 }
             });
-        };
-    }
+        },
+        notifica(){
+        }
+
+    },
+    props:{
+      listaCursos:[]
+    },
+    
 }
 
 
@@ -105,11 +106,9 @@ export default{
 .contenedor {
   z-index: 1000;
   overflow-y: auto;
-  height: 500px;
-  background: #f5f6fab0;
   border-radius: 2%;
-  margin:  5px 0 0 0;
-  overflow-x: none;
+  overflow: hidden;
+  
 }
 
 .select-box {
@@ -117,6 +116,8 @@ export default{
   display: flex;
   width: 375px;
   flex-direction: column;
+  
+  overflow: none;
 }
 
 .select-box .options-container {
@@ -129,6 +130,7 @@ export default{
   border-radius: 8px;
   overflow: hidden;
   order: 1;
+  
 }
 
 .selected {
@@ -222,5 +224,9 @@ export default{
 .select-box .options-container.active ~ .search-box input {
   opacity: 1;
   pointer-events: auto;
+}
+
+.index{
+  display: none;
 }
 </style>

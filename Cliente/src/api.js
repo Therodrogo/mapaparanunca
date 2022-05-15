@@ -491,13 +491,6 @@ export default class API{
         return res.data
     }
 
-    static async getAllSalas(){
-        const res = await axios.get("/api/Sala/")
-      
-        return res.data
-    }
-
-
     static getSalas(){
         return salas
     }

@@ -24,29 +24,24 @@
                         </v-list-item-content>
                     </v-list-item>
                         <v-select 
-                            
-                                
-                                autowidth
-                                :items="salas"
-                                label="Sala(s)"
-                                outlined
-                                dense
-                                
+                        
+                            autowidth
+                            :items="salas"
+                            label="Sala(s)"
+                            outlined
+                            dense
                         >
                         </v-select>
 
-                  <div id="Sala">
-                     <h3> Nueva Sala:  
-                         <input class="caja" type="text" name="nombre" size="10"
-                    placeholder="Nombre sala" v-model="nombreSala">
-                     </h3>
-                    
-                     <v-list-item class="justify-center">
-                        <v-list-item-content>
-                                <button class="botonGuardar" @click="guardarSala()">Guardar</button>
+                    <div class="nuevaSala">
+                        <h3> Nueva Sala:  
+                            
+                        </h3>
+                        <input class="caja" type="text" name="nombre" size="10" placeholder="Nombre sala" v-model="nombreSala">
                                 
-                        </v-list-item-content>
-                    </v-list-item>
+                      
+                        <button @click="guardarSala()">Guardar</button>
+                      
                     
                     </div>
                  
@@ -224,6 +219,7 @@ export default {
     font-size: 25px;
     border-radius: 2%;
     transition: 0.5s;
+    height: auto;
 }
 .infoCursos{
     color: aliceblue;
@@ -262,8 +258,8 @@ export default {
 }
 
 .v-select{
-    width: 350px;
-    padding: 0 0 0 25px;
+    width: 320px;
+    margin: 0 0 0 25px;
 }
 
 
@@ -274,11 +270,6 @@ export default {
     
 
 }
-.botonGuardar:hover{
-    background: #677EF5;
-    
-    border-radius: 15%;
-}
 
 
 .caja{
@@ -286,6 +277,33 @@ export default {
     background: #eeedf4;
 }
 
+.nuevaSala{
+    margin: 0 0 0 20px ;
+    padding: 10px;
+    font-size: 16px;
+}
 
+.nuevaSala h3{
+    font-size: 18px;
+}
+.nuevaSala input{
+    width: 150px;
+    background: white;
+    padding: 5px;
+    border-radius: 5%;
+
+}
+.nuevaSala button{
+    transition: 0.5s;
+    margin: 0 0 0  20px;
+    padding: 5px;
+    border: 1px solid white;
+}
+.nuevaSala button:hover{
+    
+    transition: 0.5s;
+    
+    background: #677EF5;
+}
 
 </style>
