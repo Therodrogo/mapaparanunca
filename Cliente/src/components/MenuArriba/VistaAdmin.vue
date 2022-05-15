@@ -36,9 +36,9 @@
                         </v-select>
 
                   <div id="Sala">
-                     <h3> Nueva Sala  
+                     <h3> Nueva Sala:  
                          <input class="caja" type="text" name="nombre" size="10"
-                    placeholder="Nombre sala">
+                    placeholder="Nombre sala" v-model="nombreSala">
                      </h3>
                     
                      <v-list-item class="justify-center">
@@ -80,6 +80,7 @@ export default {
             cursos:[ ],   
             salas:[],
             EdificioSeleccionado: "",
+            nombreSala: "",
 
           
            
@@ -89,10 +90,13 @@ export default {
 
     },methods: {
 
+
+        
+        
         async getEdificios(){
             
             this.cursos = await API.getEdificios() 
-            console.log(this.cursos)
+          //  console.log(this.cursos)
             
            
         },      
@@ -100,11 +104,11 @@ export default {
         async botonIr(cursoSeleccionado){
             //Guardamos el curso seleccionado
             
-           console.log(cursoSeleccionado);
+          // console.log(cursoSeleccionado);
             this.EdificioSeleccionado=cursoSeleccionado;
              this.salas= await API.getSalasByName(this.EdificioSeleccionado);
-            console.log("Holaaaa" + this.salas);
-            console.log("Chaooooo "+this.nombreusuario)
+          //  console.log("Holaaaa" + this.salas);
+        
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
             this.cursoSeleccionado=!this.cursoSeleccionado;
          
@@ -121,9 +125,39 @@ export default {
 
         
 
-        guardarSala(){
+ async guardarSala(){
 
-          swal("Listo", "Sala Creada con éxito", "success");
+
+           
+         var flag = false;
+        var todas = await API.getAllSalas()
+
+
+        todas.forEach(element => {
+          
+            if(element.nombre==this.nombreSala){
+                flag=true;
+            }
+
+        });
+    
+     /*    for (var index in todas) {
+            if(index!=this.nombreSala){
+                flag=true;
+            }
+        console.log(todas[index]);
+        } */
+
+        if(flag==true){
+            swal("Nombre de sala ya existe", "Sala no fue creada", "error");
+        }
+        else{
+            swal("Listo", "Sala Creada con éxito", "success");
+        }
+
+          //console.log(await API.getAllSalas());
+          
+          
           //  this.cursoNoSeleccionado= true;
           //  this.cursoSeleccionado=false;
            //// console.log(this.hora_ini_nueva);
