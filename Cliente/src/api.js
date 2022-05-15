@@ -461,7 +461,6 @@ export default class API{
         console.log(res.data)
         return res.data
     }
-    
     static async getSalasByName(nombre){
         const res = await axios.get("/api/Edificio-sala/"+nombre)
         salas = res.data
@@ -475,9 +474,12 @@ export default class API{
     static getSalas(){
         return salas
     }
-    
     static async getAllAsistes(){
         const res = await axios.get("/api/Asiste")
+        return res.data
+    }
+    static async getAllCursos(){
+        const res = await axios.get("/api/Curso")
         return res.data
     }
     static async getAsisteById(id){
@@ -486,9 +488,13 @@ export default class API{
         
         return res.data
     }
-
     static getMapaDatos(){
         console.log(MapaDatos)
+    }
+    static async getAllSalas(){
+        const res = await axios.get("/api/Sala/")
+
+        return res.data
     }
     static distancia(fromlng,fromlat,tolng,tolat){
         var from = turf.point([fromlng,fromlat]);
