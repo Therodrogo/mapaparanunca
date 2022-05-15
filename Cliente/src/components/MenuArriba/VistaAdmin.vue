@@ -107,6 +107,7 @@ export default {
           // console.log(cursoSeleccionado);
             this.EdificioSeleccionado=cursoSeleccionado;
              this.salas= await API.getSalasByName(this.EdificioSeleccionado);
+             
           //  console.log("Holaaaa" + this.salas);
         
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
@@ -134,43 +135,34 @@ export default {
         }
         else{
            
-         var flag = false;
-        var todas = await API.getAllSalas()
+            var flag = false;
+            var todas = await API.getAllSalas()
 
 
-        todas.forEach(element => {
-          
-            if(element.nombre==this.nombreSala){
-                flag=true;
+            todas.forEach(element => {
+            
+                if(element.nombre==this.nombreSala){
+                    flag=true;
+                }
+
+            });
+
+     
+
+            if(flag==true){
+                swal("Nombre de sala ya existe", "Sala no fue creada", "error");
+                
+
             }
-
-        });
-    
-     /*    for (var index in todas) {
-            if(index!=this.nombreSala){
-                flag=true;
+            else{
+                swal("Listo", "Sala Creada con éxito", "success");
+                
+                var res = await API.postSala(this.nombreSala,this.EdificioSeleccionado)
+                this.salas.push(this.nombreSala)
+                console.log(res)
             }
-        console.log(todas[index]);
-        } */
-
-        if(flag==true){
-            swal("Nombre de sala ya existe", "Sala no fue creada", "error");
         }
-        else{
-            swal("Listo", "Sala Creada con éxito", "success");
-        }
-        }
-          //console.log(await API.getAllSalas());
           
-          
-          //  this.cursoNoSeleccionado= true;
-          //  this.cursoSeleccionado=false;
-           //// console.log(this.hora_ini_nueva);
-          //  console.log(this.hora_fin_nueva);
-          //  console.log(this.sala_nueva);
-        //    /* Hora_Inicio = */ this.cursos[this.indexCursoSeleccionado].hora_inicio=this.hora_ini_nueva;
-        //    /* Hora_Final = */ this.cursos[this.indexCursoSeleccionado].hora_final=this.hora_fin_nueva;
-          //  /* Sala = */ this.cursos[this.indexCursoSeleccionado].id_sala.nombre=this.sala_nueva;
         },
 
 
@@ -295,44 +287,5 @@ export default {
 }
 
 
-.formBx{
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.7);
-    position: relative;
-    margin: 10px;
-    z-index: 32;
-    transition: 0.5s;
 
-    border-radius: 5%;
-    
-}
-
-.formBx .form{
-
-    padding: 50px;
-    transition: 0.5s;
-}
-
-.formBx .form form{
-    float: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.formBx .form form h3{
-    font-size: 1.5em;
-    color: #313C75;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-.formBx .form form input{
-    margin-bottom: 20px;
-    padding: 10px;
-    outline: none;
-    font-size:16px;
-    border: 1px solid #313C75;
-    color:#313C75;
-    
-}
 </style>
