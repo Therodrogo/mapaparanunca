@@ -480,6 +480,10 @@ export default class API{
         const res = await axios.get("/api/Asiste")
         return res.data
     }
+    static async getAllCursos(){
+        const res = await axios.get("/api/Curso")
+        return res.data
+    }
     static async getAsisteById(id){
    
         const res = await axios.get("/api/Asiste-Estudiante/"+id)
