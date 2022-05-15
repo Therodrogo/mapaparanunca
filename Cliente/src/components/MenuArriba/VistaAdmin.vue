@@ -35,6 +35,10 @@
                         >
                         </v-select>
                   
+                    <p>Nombre Sala Nueva: <input class="caja" type="text" name="nombre" size="6"/></p>
+
+
+
                     <v-list-item class="justify-center">
                         <v-list-item-content>
                                 <button class="botonGuardar" @click="guardarSala()">Guardar</button>
@@ -211,4 +215,9 @@ export default {
     border-radius: 15%;
 }
 
+
+.caja{
+
+    background: #cdf567;
+}
 </style>
