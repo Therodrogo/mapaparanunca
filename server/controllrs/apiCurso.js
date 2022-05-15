@@ -1,3 +1,4 @@
+const { populate } = require('../models/Curso')
 const CursoSchema = require('../models/Curso')
 
 
@@ -21,7 +22,10 @@ module.exports = class API{
         .find().populate(
             [
                 {
-                    path:"asisteID"
+                    path:"asisteID",
+                    populate:{
+                        path:"id_sala"
+                    }
                     
                 }
             ]   
