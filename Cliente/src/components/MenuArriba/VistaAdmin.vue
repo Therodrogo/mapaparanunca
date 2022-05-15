@@ -34,17 +34,24 @@
                                 
                         >
                         </v-select>
-                  
-                    <p>Nombre Sala Nueva: <input class="caja" type="text" name="nombre" size="6"/></p>
 
-
-
-                    <v-list-item class="justify-center">
+                  <div id="Sala">
+                     <h3> Nueva Sala  
+                         <input class="caja" type="text" name="nombre" size="10"
+                    placeholder="Nombre sala">
+                     </h3>
+                    
+                     <v-list-item class="justify-center">
                         <v-list-item-content>
                                 <button class="botonGuardar" @click="guardarSala()">Guardar</button>
                                 
                         </v-list-item-content>
                     </v-list-item>
+                    
+                    </div>
+                 
+
+
                        
                      </div>
                         
@@ -58,9 +65,13 @@
 
 <script>
 import API from "@/api";
+import swal from "sweetalert";
 export default {
 
     data(){
+
+       
+
         return{
             
             cursoNoSeleccionado: true,
@@ -68,16 +79,21 @@ export default {
             indexCursoSeleccionado:0,
             cursos:[ ],   
             salas:[],
-            EdificioSeleccionado: ""
-           
-        }
-    },methods: {
+            EdificioSeleccionado: "",
 
+          
+           
+        };
+
+       
+
+    },methods: {
 
         async getEdificios(){
             
             this.cursos = await API.getEdificios() 
             console.log(this.cursos)
+            
            
         },      
 
@@ -87,7 +103,8 @@ export default {
            console.log(cursoSeleccionado);
             this.EdificioSeleccionado=cursoSeleccionado;
              this.salas= await API.getSalasByName(this.EdificioSeleccionado);
-         //  console.log("Holaaaa" + this.salas);
+            console.log("Holaaaa" + this.salas);
+            console.log("Chaooooo "+this.nombreusuario)
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
             this.cursoSeleccionado=!this.cursoSeleccionado;
          
@@ -101,6 +118,23 @@ export default {
             //Guardamos los valores antiguos de las salas
            
         },
+
+        
+
+        guardarSala(){
+
+          swal("Listo", "Sala Creada con éxito", "success");
+          //  this.cursoNoSeleccionado= true;
+          //  this.cursoSeleccionado=false;
+           //// console.log(this.hora_ini_nueva);
+          //  console.log(this.hora_fin_nueva);
+          //  console.log(this.sala_nueva);
+        //    /* Hora_Inicio = */ this.cursos[this.indexCursoSeleccionado].hora_inicio=this.hora_ini_nueva;
+        //    /* Hora_Final = */ this.cursos[this.indexCursoSeleccionado].hora_final=this.hora_fin_nueva;
+          //  /* Sala = */ this.cursos[this.indexCursoSeleccionado].id_sala.nombre=this.sala_nueva;
+        },
+
+
     },beforeMount() {
         this.getEdificios()
   
@@ -218,6 +252,48 @@ export default {
 
 .caja{
 
-    background: #cdf567;
+    background: #eeedf4;
+}
+
+
+.formBx{
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+    position: relative;
+    margin: 10px;
+    z-index: 32;
+    transition: 0.5s;
+
+    border-radius: 5%;
+    
+}
+
+.formBx .form{
+
+    padding: 50px;
+    transition: 0.5s;
+}
+
+.formBx .form form{
+    float: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.formBx .form form h3{
+    font-size: 1.5em;
+    color: #313C75;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.formBx .form form input{
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+    font-size:16px;
+    border: 1px solid #313C75;
+    color:#313C75;
+    
 }
 </style>
