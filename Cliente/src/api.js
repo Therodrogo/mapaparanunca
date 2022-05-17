@@ -469,14 +469,32 @@ export default class API{
        
         
         )
-        await axios.put("/api/Edificio-actualizar",{
+        const res2 = await axios.put("/api/Edificio-actualizar",{
             idSala: res.data._id,
             nombreEdificio:edificio
         })
         
-       
+        console.log(res2.data)
         
         return res.data
+    }
+    static async actualizarSala(idAsiste,horaini,horafin,sala,dia){
+       
+        console.log("AsisteID: "+idAsiste)
+        const res = await axios.put("/api/Asiste",{
+            _id:idAsiste,
+            horaini:horaini,
+            horafin:horafin,
+            sala:sala,
+            dia:dia
+          
+        })
+
+        console.log(res.data)
+        
+       
+        
+       
     }
 
     

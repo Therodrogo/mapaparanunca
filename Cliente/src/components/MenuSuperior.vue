@@ -108,7 +108,8 @@ export default {
             nombreUsuario:"Iniciar Sesion",
             estadoEditarCursos:false,
             idUsuario:"",
-            nombreEdificioMisCursos:""
+            nombreEdificioMisCursos:"",
+            mostrarAviso:true
 
 
         }
@@ -231,12 +232,37 @@ export default {
         },
         rutasMisCursos(nombreEdificioMisCursos,nombre){
             console.log(nombre)
-            Swal.fire({
+            /* Swal.fire({
                 icon: 'info',
                 title: 'Edificio Seleccionado',
                 text: 'Ahora puedes mover y precionar el popup rojo para generar la ruta de la posicion que tu elijas.',
-            })
+            }) */
+            if(this.mostrarAviso==true){
+                Swal.fire({
+                    icon: 'info',
+                title: 'Edificio Seleccionado',
+                text: 'Ahora puedes mover y presionar el popup rojo para generar la ruta de la posición que tu elijas.',
+                    showDenyButton: true,
+                    confirmButtonText: 'Seguir recordando',
+                    denyButtonText: `No mostrar más`,
+                    showCancelButton: true,
+                    confirmButtonColor: '#313C75',
+                     denyButtonColor: '#677EF5',
+                    toast: true,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
 
+                        /* Swal.fire('Saved!', '', 'success') */
+                        
+                    } else if (result.isDenied) {
+                       /*  Swal.fire('Changes are not saved', '', 'info') */
+                        this.mostrarAviso=false
+                        
+                        
+                    }
+                })
+            }
             this.nombreEdificioMisCursos = nombreEdificioMisCursos;
 
             if(nombre==="menuIzquierda"){

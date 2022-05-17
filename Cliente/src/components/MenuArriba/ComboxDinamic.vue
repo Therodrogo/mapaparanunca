@@ -171,16 +171,7 @@ export default{
   top: -6px;
 }
 
-.select-box .options-container::-webkit-scrollbar {
-  width: 8px;
-  background: #313C75;
-  border-radius: 0 8px 8px 0;
-}
 
-.select-box .options-container::-webkit-scrollbar-thumb {
-  background: #313C75;
-  border-radius: 0 8px 8px 0;
-}
 
 .select-box .option,
 .selected {

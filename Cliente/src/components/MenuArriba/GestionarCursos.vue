@@ -62,7 +62,7 @@
                                 </button>
                                       <div class="formularioEditar">
                                             
-                                            <v-list-item-title  > Hora_Inicio Actual: <b>{{ hora_iniActual}} </b> </v-list-item-title>
+                                            <v-list-item-title  > Hora de Inicio Actual: <b>{{ hora_iniActual}} </b> </v-list-item-title>
 
                                             <v-select             
                                                 v-model="hora_ini_nueva"
@@ -72,7 +72,7 @@
                                                 dense
                                             >
                                             </v-select>
-                                                    <v-list-item-title >Hora_Final Actual: <b>{{ hora_finActual}}</b> </v-list-item-title>
+                                                    <v-list-item-title >Hora de Termino Actual: <b>{{ hora_finActual}}</b> </v-list-item-title>
                                             <v-select 
                                                 
                                                 v-model="hora_fin_nueva"
@@ -220,15 +220,17 @@ export default {
                 //console.log(element.nombre)
                 this.cursosActivos.push({
                     nombre: element.nombre,
+                    
                 });
             });
-            this.secciones.forEach(element => {
+            /* this.secciones.forEach(element => {
                 // console.log(element.nombre)
                 this.cursosActivos.push({
                     nombre: element.nombre,
                     asiste: element.asisteID,
+                    
                 });
-            });
+            }); */
             var instanciaSalas = await API.getAllSalas();
             instanciaSalas.forEach(element => {
                 // console.log(element.nombre)
@@ -327,24 +329,48 @@ export default {
             this.seccionSeleccionada = !this.seccionSeleccionada;
             console.log("SECCION  SELECCIONADA: " + this.seccionSeleccionada);
         },
-        guardarSala() {
+        async guardarSala() {
             swal("Listo", "Sala Editada.", "success");
-            this.m_mostrarCursos();
-            console.log(this.hora_ini_nueva);
-            console.log(this.hora_fin_nueva);
-            console.log(this.sala_nueva);
-            console.log(this.dia_nueva);
-            this.bloques[this.indexBloqueSeleccionado].hora_final = this.hora_fin_nueva;
-            this.bloques[this.indexBloqueSeleccionado].hora_inicio = this.hora_ini_nueva;
-            this.bloques[this.indexBloqueSeleccionado].dia = this.dia_nueva;
-            this.bloques[this.indexBloqueSeleccionado].id_sala.nombre = this.sala_nueva;
-            this.hora_iniActual = this.hora_ini_nueva;
-            this.hora_finActual = this.hora_fin_nueva;
-            this.sala_Actual = this.sala_nueva;
-            this.dia_Actual = this.dia_nueva;
-            /* Hora_Inicio =  this.cursoEditado.hora_inicio=this.hora_ini_nueva;*/
-            /* Hora_Final =  this.cursos[this.indexCursoSeleccionado].hora_final=this.hora_fin_nueva;*/
-            /* Sala = this.cursos[this.indexCursoSeleccionado].id_sala.nombre=this.sala_nueva; */
+            this.m_mostrarCursos()
+            if (this.hora_fin_nueva!=null) {
+                this.bloques[this.indexBloqueSeleccionado].hora_final= this.hora_fin_nueva;
+                this.hora_finActual=this.hora_fin_nueva;
+                 
+            }else{
+                this.hora_fin_nueva=this.hora_finActual;
+            }
+            if (this.hora_ini_nueva!=null) {
+                this.bloques[this.indexBloqueSeleccionado].hora_inicio= this.hora_ini_nueva;
+                this.hora_iniActual=this.hora_ini_nueva;
+            }else{
+                this.hora_ini_nueva=this.hora_iniActual;
+            }
+            if (this.dia_nueva!="") {
+                this.bloques[this.indexBloqueSeleccionado].dia= this.dia_nueva;
+                this.dia_Actual=this.bloques[this.indexBloqueSeleccionado].dia;
+            }else{
+                this.dia_nueva=this.dia_Actual;
+            }
+            if (this.sala_nueva!="") {
+                this.bloques[this.indexBloqueSeleccionado].id_sala.nombre=this.sala_nueva;
+                this.sala_Actual=this.sala_nueva;
+            }else{
+                this.sala_nueva=this.bloques[this.indexBloqueSeleccionado].id_sala.nombre;
+            }
+            //COSAS PAL PABLO
+            console.log("ID del assite: "+this.bloques[this.indexBloqueSeleccionado]._id)
+            console.log("nueva hora ini del assite: "+this.hora_ini_nueva);
+            console.log("nueva hora fin del assite: "+this.hora_fin_nueva);
+            console.log("nueva sala del assite: "+this.sala_nueva);
+            console.log("nuevo dia del assite: "+this.dia_nueva);
+            
+            await API.actualizarSala(
+                this.bloques[this.indexBloqueSeleccionado]._id,
+                this.hora_ini_nueva,
+                this.hora_fin_nueva,
+                this.sala_nueva,
+                this.dia_nueva
+                )
         },
     },
     beforeMount() {

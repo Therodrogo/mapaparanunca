@@ -179,6 +179,7 @@ export default {
         monitomonito.value=""+marker_monito.getLngLat();
         console.log("damedamne "+ posiMonito.value);
         
+        
       });
 
       //Crea todos los edificios, la cree para podere minimizar el codigo de abajo :9
