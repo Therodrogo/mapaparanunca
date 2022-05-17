@@ -211,6 +211,7 @@ export default {
     methods: {
         obtenerIndex(e){
             this.botonIr(e)
+            console.log("")
         },
         async getEdificios() {
             //Para sacar los cursos activos
