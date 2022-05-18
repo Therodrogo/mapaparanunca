@@ -24,7 +24,7 @@ var descripcion = ref("");
 var salasEdificio = ref([]);
 var monitomonito = ref("lalalalala");
 var posiMonito = ref("lelel");
-
+var rutaOpcion=ref();
 
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -152,7 +152,7 @@ export default {
       /*MIENTRAS MAS ARRIBA MAYOR ES LA LAT*/
       marker_monito.getElement().addEventListener("click", () => {
         const title = toRef(props, 'nombreEdificioCurso')
-        
+        rutaOpcion.value=false
         const nombre = title.value
         console.log(nombre)
 
@@ -171,7 +171,7 @@ export default {
           }
         }
         if(markerRON!=null){
-          console.log("INNNNN coordenadas "+markerRON.getLngLat())
+        
           arrayMarkers[indexOP+1].getElement().style.width = "60px";
           arrayMarkers[indexOP+1].getElement().style.height = "60px";
           arrayMarkers[indexOP+1].getElement().style.transition = "0.2s";
@@ -182,12 +182,12 @@ export default {
         muestrate.value=false;
             
         edificioDestacado=true;
-        console.log("motivafoo nombremarker "+nombre+" igual a"+nombreArrayMarkers[indexOP])
+        
       }); 
         
 
       marker_monito.on("dragstart", (e) => {
-        console.log("event type:", e.type);
+        console.log(e)
         //Borramos la ruta cuando mueva el monito
         borrarRuta();
         //Dejamos de destacar el edificio (Recorriendo la lista)
@@ -197,13 +197,30 @@ export default {
       });
 
        marker_monito.on("dragend", (e) => {
-        console.log("event type:", e.type);
+       
         posiMonito.value=""+marker_monito.getLngLat();
         monitomonito.value=""+marker_monito.getLngLat();
-        console.log("damedamne "+ posiMonito.value);
+        console.log(e)
+       if(rutaOpcion.value){
+          
+          API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
+          crearRuta(API.setGraphInfo(palabra.value))
+       }else{
+          const title = toRef(props, 'nombreEdificioCurso')
+          
+          const nombre = title.value
+          console.log(nombre)
+
+          API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)  
+          const  res = API.setGraphInfo(nombre)      
+          if(res!=false){
+            crearRuta( res)
+            
+          }
+       }
+       
         
-        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
-        crearRuta(API.setGraphInfo(palabra.value))
+
       });
 
       //Crea todos los edificios, la cree para podere minimizar el codigo de abajo :9
@@ -561,6 +578,7 @@ nombreArrayMarkers.push("Servicios Multiples");
       ){
           marker.getElement().addEventListener("click", () => {
             //Si la ventana está oculta la mostramos
+            rutaOpcion.value=true
             if (!muestrate.value) {
               muestrate.value = !muestrate.value;
               palabra.value = e_palabra;
