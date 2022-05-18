@@ -382,6 +382,8 @@ export default {
             this.sala_nueva= this.cursos[cursoSeleccionado].id_sala.nombre;
         },
         botonVolver(){
+
+            
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
             this.cursoSeleccionado=!this.cursoSeleccionado;
             this.seccionNoSeleccionada=!this.seccionNoSeleccionada;
