@@ -113,7 +113,7 @@ export default {
       map.on('mouseover', () => {
         if (muestrate.value == false) {
             //borrarRuta();
-            desestacarMarkers();
+            //desestacarMarkers();
         }
 
       })
@@ -124,6 +124,9 @@ export default {
       var nroDestacado;
       //Array de los markers de edicios
       var arrayMarkers = [];
+      //Array marker
+      var nombreArrayMarkers = [];
+
       var disMonito = document.createElement("div");
       disMonito.className = "marker";
       disMonito.style.backgroundImage = "url('https://i.ibb.co/ySgwGTJ/monito.png')";
@@ -157,9 +160,29 @@ export default {
         const  res = API.setGraphInfo(nombre)      
         if(res!=false){
           crearRuta( res)
+          desestacarMarkers();
         }
-         
-
+        var indexOP;
+        for (let index = 0; index < nombreArrayMarkers.length; index++) {
+          console.log("LALALALALALAL "+nombreArrayMarkers[index])
+          if (nombre==nombreArrayMarkers[index]) {
+            var markerRON = arrayMarkers[index];
+            indexOP=index;
+          }
+        }
+        if(markerRON!=null){
+          console.log("INNNNN coordenadas "+markerRON.getLngLat())
+          arrayMarkers[indexOP+1].getElement().style.width = "60px";
+          arrayMarkers[indexOP+1].getElement().style.height = "60px";
+          arrayMarkers[indexOP+1].getElement().style.transition = "0.2s";
+          arrayMarkers[indexOP+1].getElement().style.borderRadius = "15%";
+          arrayMarkers[indexOP+1].getElement().style.border = "2px solid #ED0C60";
+        }
+         //Si la ventana está oculta la mostramos
+        muestrate.value=false;
+            
+        edificioDestacado=true;
+        console.log("motivafoo nombremarker "+nombre+" igual a"+nombreArrayMarkers[indexOP])
       }); 
         
 
@@ -168,9 +191,9 @@ export default {
         //Borramos la ruta cuando mueva el monito
         borrarRuta();
         //Dejamos de destacar el edificio (Recorriendo la lista)
-        desestacarMarkers();
+        //desestacarMarkers();
         //Cerramos la ventana del edifico
-        muestrate.value = false;
+        //muestrate.value = false;
       });
 
        marker_monito.on("dragend", (e) => {
@@ -179,7 +202,8 @@ export default {
         monitomonito.value=""+marker_monito.getLngLat();
         console.log("damedamne "+ posiMonito.value);
         
-        
+        API.CercanoUsuario(marker_monito.getLngLat().lng,marker_monito.getLngLat().lat)         
+        crearRuta(API.setGraphInfo(palabra.value))
       });
 
       //Crea todos los edificios, la cree para podere minimizar el codigo de abajo :9
@@ -200,7 +224,7 @@ export default {
                 "Solo se imparten cursos deportivos",
                 false
         );
-
+        nombreArrayMarkers.push("Gimnasio");
              
         //Agregamos el Gym a la lista de Markers
         arrayMarkers.push(gimnasio);
@@ -220,7 +244,7 @@ export default {
           "Entrada Principal Paradero",
           false
         );
-
+nombreArrayMarkers.push("Entrada");
         //MINAS
         coordenada = [-71.23095415504667, -35.00135123097902];
         var minas = agregarMarker(
@@ -234,7 +258,7 @@ export default {
           "",
           true,
         );
-
+nombreArrayMarkers.push("Edificio Minas");
         //MECANICA
         coordenada = [-71.22886378003142, -35.002003009634954];
 
@@ -250,7 +274,7 @@ export default {
           true,
 
         );
-
+nombreArrayMarkers.push("Edificio de Mecanica");
         //CONSTRUCCION
         coordenada = [-71.2291604784214, -35.003168465316016];
 
@@ -265,6 +289,7 @@ export default {
           "Incluye a Obras Civiles",
           true,
         );
+        nombreArrayMarkers.push("Edificio Construccion");
 
         //AUDITORIO
         coordenada = [-71.22915475374442, -35.00365484351161];
@@ -280,7 +305,7 @@ export default {
           true,
 
         );
-
+nombreArrayMarkers.push("Edificio I+D");
         //EDIFICIO AZUL
         coordenada = [-71.22979433407157, -35.0017047386893];
                 
@@ -296,7 +321,7 @@ export default {
           false,
 
         );
-
+nombreArrayMarkers.push("Facultad de Ingeniería");
         //EDIFICIO VERDE
         coordenada = [-71.22999896811982, -35.002471304966534];
 
@@ -312,7 +337,7 @@ export default {
           true,
 
         );
-
+nombreArrayMarkers.push("Edificios Laboratorios");
         //Bienestar Estudiantil
         coordenada = [-71.22980662330485, -35.0020445830408];
  
@@ -328,7 +353,7 @@ export default {
           true,
 
         );
-
+nombreArrayMarkers.push("Edificio Estudiantil");
         //Biblioteca
        
         coordenada =[-71.22894013559387, -35.002824873000314];
@@ -345,7 +370,7 @@ export default {
           true,
   
         );
-
+nombreArrayMarkers.push("Biblioteca");
         //Electrica
         coordenada = [-71.23129613592188, -35.0020916923508];
         var electrica = agregarMarker(
@@ -359,6 +384,7 @@ export default {
           "No se imparten cursos en este edificio por el momento",
           false
         );
+        nombreArrayMarkers.push("Eléctrica");
 
         //CABAÑA MADERA
         coordenada = [-71.22897841350172, -35.002423278615076];
@@ -374,7 +400,7 @@ export default {
           true,
 
         );
-
+nombreArrayMarkers.push("Salas de Madera");
         //SERVICIOS MULTIPLES
         coordenada = [-71.2302405610473, -35.00213003797558];
         var multiples = agregarMarker(
@@ -388,7 +414,7 @@ export default {
           "",
           true,
         );
-
+nombreArrayMarkers.push("Servicios Multiples");
         //COE
         coordenada = [-71.22955876785723, -35.00311601562916];
         var coe = agregarMarker(
@@ -402,6 +428,7 @@ export default {
           "",
           true,
         );
+        nombreArrayMarkers.push("Edificio Salas S");
 
         const navegacionControl = new mapboxgl.NavigationControl();
         map.addControl(navegacionControl, "bottom-right");
@@ -464,7 +491,7 @@ export default {
         marker.setLngLat(coordenada);
         marker.setPopup(popup);
         marker.addTo(map);
-
+      
         //Eventos Marker
         //Evento de pasar el mouse por encima
         marker.getElement().addEventListener("mouseover", () => {
@@ -504,6 +531,8 @@ export default {
         //Lo agregmos a la lista de markers
         //Agregamos el Gym a la lista de Markers
         arrayMarkers.push(marker);
+
+        
         return marker;
       }
 
@@ -545,6 +574,7 @@ export default {
               descripcion.value = e_descripcion;
               salasEdificio.value = getSalas()
             }
+           
           
             //"Desestacamos" todos los edificos
             desestacarMarkers();
