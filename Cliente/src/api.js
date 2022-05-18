@@ -461,6 +461,42 @@ export default class API{
         console.log(res.data)
         return res.data
     }
+    static async postSala(datos,edificio){
+       
+        const res = await axios.post("/api/Sala",{
+            nombre:datos
+        }
+       
+        
+        )
+        const res2 = await axios.put("/api/Edificio-actualizar",{
+            idSala: res.data._id,
+            nombreEdificio:edificio
+        })
+        
+        console.log(res2.data)
+        
+        return res.data
+    }
+    static async actualizarSala(idAsiste,horaini,horafin,sala,dia){
+       
+        console.log("AsisteID: "+idAsiste)
+        const res = await axios.put("/api/Asiste",{
+            _id:idAsiste,
+            horaini:horaini,
+            horafin:horafin,
+            sala:sala,
+            dia:dia
+          
+        })
+
+        console.log(res.data)
+        
+       
+        
+       
+    }
+
     
     static async getSalasByName(nombre){
         const res = await axios.get("/api/Edificio-sala/"+nombre)
@@ -472,12 +508,16 @@ export default class API{
       
         return res.data
     }
+
     static getSalas(){
         return salas
     }
-    
     static async getAllAsistes(){
         const res = await axios.get("/api/Asiste")
+        return res.data
+    }
+    static async getAllCursos(){
+        const res = await axios.get("/api/Curso")
         return res.data
     }
     static async getAsisteById(id){
@@ -486,9 +526,13 @@ export default class API{
         
         return res.data
     }
-
     static getMapaDatos(){
         console.log(MapaDatos)
+    }
+    static async getAllSalas(){
+        const res = await axios.get("/api/Sala/")
+
+        return res.data
     }
     static distancia(fromlng,fromlat,tolng,tolat){
         var from = turf.point([fromlng,fromlat]);

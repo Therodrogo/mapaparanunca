@@ -1,6 +1,6 @@
 const { log } = require('console')
 const AsisteSchema = require('../models/Asiste')
-
+const SalaSchema = require('../models/Sala')
 
 module.exports = class API{
     //Descripcion: Crea una instancia de Asiste y la agrega a la DB
@@ -89,13 +89,28 @@ module.exports = class API{
     //Descripcion: ...
     //Entradas:...
     //Salidas:...
-    static async putAsiste( req,res){
-        const {id} =req.params;
-        const{nombre} = req.body
-        AsisteSchema
-        .updateOne({_id:id},{$set:{nombre}})    
-        .then((data)=>res.json(data))
-        .catch((err)=>res.json({message:err}))
+    static async actualizarAsiste(req,res){
+        
+       
+
+       
+        const sala = await SalaSchema.find({nombre:req.body.sala}) 
+            
+        
+        await AsisteSchema.updateOne({_id:req.body._id},
+            {$set: 
+                { 
+                    "hora_inicio" : req.body.horaini,
+                    "hora_final":req.body.horafin,
+                    "dia":req.body.dia,
+                    "id_sala":sala[0]
+                }
+            }
+        ).
+        then((data)=>res.json(data))
+        .catch((err)=>res.json({message:err})) 
+       
+        
     }
     //Descripcion:..
     //Entradas:..

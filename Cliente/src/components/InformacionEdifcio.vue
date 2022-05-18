@@ -92,16 +92,18 @@ export default {
   padding: 10px;
   margin: 0 2px 0 5px ;
   
-  border-radius: 50%;
+  
   font-size: 14px;
   transition: 0.5s;
   width: auto;
-  background-color: #313c75;
-  color: aliceblue;
+
+  color: #313c75;
 }
 
 .contButton:hover {
-  background: #677ef5;
+ 
+  font-size:17px;
+  font-weight: bold;
 }
 
 .infoSuperior {

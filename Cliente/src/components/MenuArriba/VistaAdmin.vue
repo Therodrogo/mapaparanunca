@@ -24,18 +24,29 @@
                         </v-list-item-content>
                     </v-list-item>
                         <v-select 
-                            
-                                
-                                autowidth
-                                :items="salas"
-                                label="Sala(s)"
-                                outlined
-                                dense
-                                
+                        
+                            autowidth
+                            :items="salas"
+                            label="Sala(s)"
+                            outlined
+                            dense
                         >
                         </v-select>
-                  
-              
+
+                    <div class="nuevaSala">
+                        <h3> Nueva Sala:  
+                            
+                        </h3>
+                        <input class="caja" type="text" name="nombre" size="10" placeholder="Nombre sala" v-model="nombreSala">
+                                
+                      
+                        <button @click="guardarSala()">Guardar</button>
+                      
+                    
+                    </div>
+                 
+
+
                        
                      </div>
                         
@@ -49,9 +60,13 @@
 
 <script>
 import API from "@/api";
+import swal from "sweetalert";
 export default {
 
     data(){
+
+       
+
         return{
             
             cursoNoSeleccionado: true,
@@ -59,26 +74,37 @@ export default {
             indexCursoSeleccionado:0,
             cursos:[ ],   
             salas:[],
-            EdificioSeleccionado: ""
+            EdificioSeleccionado: "",
+            nombreSala: "",
+
+          
            
-        }
+        };
+
+       
+
     },methods: {
 
 
+        
+        
         async getEdificios(){
             
             this.cursos = await API.getEdificios() 
-            console.log(this.cursos)
+          //  console.log(this.cursos)
+            
            
         },      
 
         async botonIr(cursoSeleccionado){
             //Guardamos el curso seleccionado
             
-           console.log(cursoSeleccionado);
+          // console.log(cursoSeleccionado);
             this.EdificioSeleccionado=cursoSeleccionado;
-        //    this.salas= await API.getSalasByName(this.EdificioSeleccionado);
-         //  console.log("Holaaaa" + this.salas);
+             this.salas= await API.getSalasByName(this.EdificioSeleccionado);
+             
+          //  console.log("Holaaaa" + this.salas);
+        
             this.cursoNoSeleccionado=!this.cursoNoSeleccionado;
             this.cursoSeleccionado=!this.cursoSeleccionado;
          
@@ -92,6 +118,49 @@ export default {
             //Guardamos los valores antiguos de las salas
            
         },
+
+        
+
+ async guardarSala(){
+
+
+
+        if(this.nombreSala==""){
+            swal("Campo vacío", "Sala no fue creada", "error");
+        }
+        else{
+           
+            var flag = false;
+            var todas = await API.getAllSalas()
+
+
+            todas.forEach(element => {
+            
+                if(element.nombre==this.nombreSala){
+                    flag=true;
+                }
+
+            });
+
+     
+
+            if(flag==true){
+                swal("Nombre de sala ya existe", "Sala no fue creada", "error");
+                
+
+            }
+            else{
+                swal("Listo", "Sala Creada con éxito", "success");
+                
+                var res = await API.postSala(this.nombreSala,this.EdificioSeleccionado)
+                this.salas.push(this.nombreSala)
+                console.log(res)
+            }
+        }
+          
+        },
+
+
     },beforeMount() {
         this.getEdificios()
   
@@ -150,6 +219,7 @@ export default {
     font-size: 25px;
     border-radius: 2%;
     transition: 0.5s;
+    height: auto;
 }
 .infoCursos{
     color: aliceblue;
@@ -188,8 +258,52 @@ export default {
 }
 
 .v-select{
-    width: 350px;
-    padding: 0 0 0 25px;
+    width: 320px;
+    margin: 0 0 0 25px;
+}
+
+
+.botonGuardar{
+    transition: 0.5s;
+    margin: 0 0 0 50px;
+    padding: 5px;
+    
+
+}
+
+
+.caja{
+
+    background: #eeedf4;
+}
+
+.nuevaSala{
+    margin: 0 0 0 20px ;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.nuevaSala h3{
+    font-size: 18px;
+}
+.nuevaSala input{
+    width: 150px;
+    background: white;
+    padding: 5px;
+    border-radius: 5%;
+
+}
+.nuevaSala button{
+    transition: 0.5s;
+    margin: 0 0 0  20px;
+    padding: 5px;
+    border: 1px solid white;
+}
+.nuevaSala button:hover{
+    
+    transition: 0.5s;
+    
+    background: #677EF5;
 }
 
 </style>

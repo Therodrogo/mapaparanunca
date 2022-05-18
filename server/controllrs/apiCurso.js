@@ -1,3 +1,4 @@
+const { populate } = require('../models/Curso')
 const CursoSchema = require('../models/Curso')
 
 
@@ -18,7 +19,17 @@ module.exports = class API{
     //Salidas: JSON con la informacion ingresada.
     static async getAllCursos( req,res){
         CursoSchema
-        .find()    
+        .find().populate(
+            [
+                {
+                    path:"asisteID",
+                    populate:{
+                        path:"id_sala"
+                    }
+                    
+                }
+            ]   
+        )    
         .then((data)=>res.json(data))
         .catch((err)=>res.json({message:err}))
     }
