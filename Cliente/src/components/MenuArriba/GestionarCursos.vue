@@ -204,7 +204,6 @@ export default {
                 "Jueves",
                 "Viernes",
                 "Sabado",
-                "Domingo",
             ]
         };
     },
