@@ -8,6 +8,6 @@ module.exports = defineConfig({
 		},
     
   },devServer:{
-    proxy:"http://localhost:3000"
+    proxy:"https://mapaparanuncabasedata.herokuapp.com/"
   }
 })

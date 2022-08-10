@@ -19,7 +19,7 @@
     "dijkstra-calculator": "^1.0.8",
     "dijkstra-floydwarshall-graph": "^1.2.2",
     "dijkstra-short-path": "^1.0.3",
-    "firebase": "^9.6.11",
+    "firebase": "^9.9.2",
     "mapbox-gl": "^2.8.1",
     "roboto-fontface": "*",
     "sweetalert": "^2.1.2",

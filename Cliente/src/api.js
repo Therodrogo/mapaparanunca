@@ -6,6 +6,8 @@ var salas =[]
 var menorIndice
 var camino =[]
 
+axios.defaults.baseURL = 'https://mapaparanuncabasedata.herokuapp.com/';
+
 
 var visitados =[]
 
